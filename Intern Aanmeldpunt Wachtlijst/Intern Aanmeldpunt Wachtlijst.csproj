@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{89FDA84A-EAAC-4B6D-9B2D-4681B6E78252}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Intern_Aanmeldpunt_Wachtlijst</RootNamespace>
+    <AssemblyName>Intern Aanmeldpunt Wachtlijst</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\Controller\Controller.cs" />
+    <Compile Include="Classes\Database\DbQueries.cs" />
+    <Compile Include="Classes\Model\Aanmeldpunt.cs" />
+    <Compile Include="Classes\Model\Consulent.cs" />
+    <Compile Include="Classes\Model\ConsulentDienst.cs" />
+    <Compile Include="Classes\Model\Dienst.cs" />
+    <Compile Include="Classes\Model\Minderjarige.cs" />
+    <Compile Include="Classes\Model\MinderjarigeAanmeldpunt.cs" />
+    <Compile Include="Classes\Model\Observer.cs" />
+    <Compile Include="Classes\UI\FrmConsulent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Classes\UI\FrmConsulent.Designer.cs">
+      <DependentUpon>FrmConsulent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\UI\FrmDienst.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Classes\UI\FrmDienst.Designer.cs">
+      <DependentUpon>FrmDienst.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\UI\FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Classes\UI\FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\UI\FrmMinderjarige.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Classes\UI\FrmMinderjarige.Designer.cs">
+      <DependentUpon>FrmMinderjarige.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\UI\FrmVoorziening.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Classes\UI\FrmVoorziening.Designer.cs">
+      <DependentUpon>FrmVoorziening.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\UI\FrmVoorzieningAanpassen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Classes\UI\FrmVoorzieningAanpassen.Designer.cs">
+      <DependentUpon>FrmVoorzieningAanpassen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Classes\UI\FrmConsulent.resx">
+      <DependentUpon>FrmConsulent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Classes\UI\FrmDienst.resx">
+      <DependentUpon>FrmDienst.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Classes\UI\FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Classes\UI\FrmMinderjarige.resx">
+      <DependentUpon>FrmMinderjarige.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Classes\UI\FrmVoorziening.resx">
+      <DependentUpon>FrmVoorziening.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Classes\UI\FrmVoorzieningAanpassen.resx">
+      <DependentUpon>FrmVoorzieningAanpassen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Connected.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Disconnected.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
