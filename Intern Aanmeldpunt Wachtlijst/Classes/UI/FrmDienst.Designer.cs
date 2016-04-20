@@ -36,11 +36,13 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnOpenMinderjarige = new System.Windows.Forms.Button();
-            this.btnEditAanmelding = new System.Windows.Forms.Button();
             this.btnOpenVoorziening = new System.Windows.Forms.Button();
             this.btnOpenConsulent = new System.Windows.Forms.Button();
             this.lblAantalAanmeldingen = new System.Windows.Forms.Label();
             this.lblAverageWachttijd = new System.Windows.Forms.Label();
+            this.btnSetActiveAanmelding = new System.Windows.Forms.Button();
+            this.btnDeleteAanmelding = new System.Windows.Forms.Button();
+            this.clmWachttijd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // lblOverzicht
@@ -61,16 +63,18 @@
             this.ClmAanmelder,
             this.ClmVoorziening,
             this.columnHeader1,
-            this.columnHeader2});
+            this.columnHeader2,
+            this.clmWachttijd});
             this.lsvDienstOverzicht.FullRowSelect = true;
             this.lsvDienstOverzicht.GridLines = true;
             this.lsvDienstOverzicht.Location = new System.Drawing.Point(12, 80);
             this.lsvDienstOverzicht.MultiSelect = false;
             this.lsvDienstOverzicht.Name = "lsvDienstOverzicht";
-            this.lsvDienstOverzicht.Size = new System.Drawing.Size(678, 327);
+            this.lsvDienstOverzicht.Size = new System.Drawing.Size(814, 327);
             this.lsvDienstOverzicht.TabIndex = 1;
             this.lsvDienstOverzicht.UseCompatibleStateImageBehavior = false;
             this.lsvDienstOverzicht.View = System.Windows.Forms.View.Details;
+            this.lsvDienstOverzicht.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lsvDienstOverzicht_ColumnClick);
             this.lsvDienstOverzicht.DoubleClick += new System.EventHandler(this.lsvDienstOverzicht_DoubleClick);
             // 
             // clmMinderjarige
@@ -100,25 +104,17 @@
             // 
             // btnOpenMinderjarige
             // 
-            this.btnOpenMinderjarige.Location = new System.Drawing.Point(12, 51);
+            this.btnOpenMinderjarige.Location = new System.Drawing.Point(689, 22);
             this.btnOpenMinderjarige.Name = "btnOpenMinderjarige";
-            this.btnOpenMinderjarige.Size = new System.Drawing.Size(131, 23);
+            this.btnOpenMinderjarige.Size = new System.Drawing.Size(137, 23);
             this.btnOpenMinderjarige.TabIndex = 2;
             this.btnOpenMinderjarige.Text = "Overzicht minderjarige";
             this.btnOpenMinderjarige.UseVisualStyleBackColor = true;
-            // 
-            // btnEditAanmelding
-            // 
-            this.btnEditAanmelding.Location = new System.Drawing.Point(149, 51);
-            this.btnEditAanmelding.Name = "btnEditAanmelding";
-            this.btnEditAanmelding.Size = new System.Drawing.Size(147, 23);
-            this.btnEditAanmelding.TabIndex = 3;
-            this.btnEditAanmelding.Text = "Aanmelding bewerken";
-            this.btnEditAanmelding.UseVisualStyleBackColor = true;
+            this.btnOpenMinderjarige.Click += new System.EventHandler(this.btnOpenMinderjarige_Click);
             // 
             // btnOpenVoorziening
             // 
-            this.btnOpenVoorziening.Location = new System.Drawing.Point(415, 51);
+            this.btnOpenVoorziening.Location = new System.Drawing.Point(551, 51);
             this.btnOpenVoorziening.Name = "btnOpenVoorziening";
             this.btnOpenVoorziening.Size = new System.Drawing.Size(132, 23);
             this.btnOpenVoorziening.TabIndex = 4;
@@ -128,7 +124,7 @@
             // 
             // btnOpenConsulent
             // 
-            this.btnOpenConsulent.Location = new System.Drawing.Point(553, 51);
+            this.btnOpenConsulent.Location = new System.Drawing.Point(689, 51);
             this.btnOpenConsulent.Name = "btnOpenConsulent";
             this.btnOpenConsulent.Size = new System.Drawing.Size(137, 23);
             this.btnOpenConsulent.TabIndex = 5;
@@ -154,16 +150,42 @@
             this.lblAverageWachttijd.TabIndex = 7;
             this.lblAverageWachttijd.Text = "Gemiddelde wachttijd: ";
             // 
+            // btnSetActiveAanmelding
+            // 
+            this.btnSetActiveAanmelding.Location = new System.Drawing.Point(145, 51);
+            this.btnSetActiveAanmelding.Name = "btnSetActiveAanmelding";
+            this.btnSetActiveAanmelding.Size = new System.Drawing.Size(138, 23);
+            this.btnSetActiveAanmelding.TabIndex = 10;
+            this.btnSetActiveAanmelding.Text = "Aanmelding actief/inactief";
+            this.btnSetActiveAanmelding.UseVisualStyleBackColor = true;
+            this.btnSetActiveAanmelding.Click += new System.EventHandler(this.btnSetActiveAanmelding_Click);
+            // 
+            // btnDeleteAanmelding
+            // 
+            this.btnDeleteAanmelding.Location = new System.Drawing.Point(12, 51);
+            this.btnDeleteAanmelding.Name = "btnDeleteAanmelding";
+            this.btnDeleteAanmelding.Size = new System.Drawing.Size(127, 23);
+            this.btnDeleteAanmelding.TabIndex = 9;
+            this.btnDeleteAanmelding.Text = "Aanmelding verwijderen";
+            this.btnDeleteAanmelding.UseVisualStyleBackColor = true;
+            this.btnDeleteAanmelding.Click += new System.EventHandler(this.btnDeleteAanmelding_Click);
+            // 
+            // clmWachttijd
+            // 
+            this.clmWachttijd.Text = "Tijd in registratielijst (dagen)";
+            this.clmWachttijd.Width = 142;
+            // 
             // FrmDienst
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(702, 439);
+            this.ClientSize = new System.Drawing.Size(838, 439);
+            this.Controls.Add(this.btnSetActiveAanmelding);
+            this.Controls.Add(this.btnDeleteAanmelding);
             this.Controls.Add(this.lblAverageWachttijd);
             this.Controls.Add(this.lblAantalAanmeldingen);
             this.Controls.Add(this.btnOpenConsulent);
             this.Controls.Add(this.btnOpenVoorziening);
-            this.Controls.Add(this.btnEditAanmelding);
             this.Controls.Add(this.btnOpenMinderjarige);
             this.Controls.Add(this.lsvDienstOverzicht);
             this.Controls.Add(this.lblOverzicht);
@@ -184,10 +206,12 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Button btnOpenMinderjarige;
-        private System.Windows.Forms.Button btnEditAanmelding;
         private System.Windows.Forms.Button btnOpenVoorziening;
         private System.Windows.Forms.Button btnOpenConsulent;
         private System.Windows.Forms.Label lblAantalAanmeldingen;
         private System.Windows.Forms.Label lblAverageWachttijd;
+        private System.Windows.Forms.Button btnSetActiveAanmelding;
+        private System.Windows.Forms.Button btnDeleteAanmelding;
+        private System.Windows.Forms.ColumnHeader clmWachttijd;
     }
 }

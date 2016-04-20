@@ -14,8 +14,9 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Model
         public int Telefoonnummer { get; private set; }
         public string Email { get; private set; }
         public string Contactpersoon { get; private set; }
+        public bool Actief { get; set; }
 
-        public Aanmeldpunt(int id, string naam, string adres, int telefoonnummer, string email, string contactpersoon)
+        public Aanmeldpunt(int id, string naam, string adres, int telefoonnummer, string email, string contactpersoon, bool actief)
         {
             ID = id;
             Naam = naam;
@@ -23,6 +24,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Model
             Telefoonnummer = telefoonnummer;
             Email = email;
             Contactpersoon = contactpersoon;
+            Actief = actief;
         }
 
         public override string ToString()

@@ -16,6 +16,10 @@ namespace Intern_Aanmeldpunt_Wachtlijst
     public partial class FrmMain : Form, Observer
     {
         private Controller controller = new Controller();
+        private List<Consulent> consulentLijst = new List<Consulent>();
+        private List<Dienst> dienstLijst = new List<Dienst>();
+        private List<Aanmeldpunt> aanmeldpuntLijst = new List<Aanmeldpunt>();
+        private List<Minderjarige> minderjarigeLijst = new List<Minderjarige>();
 
         public FrmMain()
         {
@@ -30,45 +34,91 @@ namespace Intern_Aanmeldpunt_Wachtlijst
         {
             btnOverzichtDiensten.PerformClick();
             ResetForm();
+            InitListViews();
+            InitComboBox();
+        }
+
+        private void InitLists()
+        {
+            consulentLijst = controller.GetAllConsulenten();
+            dienstLijst = controller.GetAllDiensten();
+            aanmeldpuntLijst = controller.GetAllAanmeldpunten();
+            minderjarigeLijst = controller.GetAllMinderjarige();
+        }
+
+        private void InitListViews()
+        {
+            InitLists();
             LoadDiensten();
-            LoadConsulenten(new List<Consulent>());
             LoadMinderjarigen();
             LoadVoorzieningen();
         }
 
-        private void LoadConsulenten(List<Consulent> consulentLijst)
+        private void InitComboBox()
+        {
+            InitDienstCombobox();
+            InitConsulentCombobox();
+            InitVoorzieningCombobox();
+        }
+
+        private void InitDienstCombobox()
+        {
+            cbbDienst.Items.Clear();
+            cbbDienst.Items.AddRange(dienstLijst.ToArray());
+            cbbDienst.Refresh();
+        }
+
+        private void InitConsulentCombobox()
         {
             cbbAanmelder.Items.Clear();
-            if (consulentLijst.Count() == 0)
-                consulentLijst = controller.GetAllConsulenten();
             cbbAanmelder.Items.AddRange(consulentLijst.ToArray());
             cbbAanmelder.Refresh();
         }
 
-        private void LoadDiensten()
+        private void InitVoorzieningCombobox()
         {
-            List<Dienst> dienstLijst = controller.GetAllDiensten();
-
-            cbbDienst.Items.Clear();
-            cbbDienst.Items.AddRange(dienstLijst.ToArray());
-            lsvDiensten.Items.AddRange(GetDienstListViewItems<Dienst>(dienstLijst).ToArray());
-
-            cbbDienst.Refresh();
-            lsvDiensten.Refresh();
+            cbbAanmeldpunt.Items.Clear();
+            foreach (Aanmeldpunt ap in aanmeldpuntLijst)
+            {
+                if (ap.Actief)
+                    cbbAanmeldpunt.Items.Add(ap);
+            }
+            cbbAanmeldpunt.Refresh();
         }
 
-        private List<ListViewItem> GetDienstListViewItems<T>(List<T> itemLijst)
+        private void LoadDiensten()
+        {
+            LoadList<Dienst>(GetDienstListViewItems, lsvDiensten, dienstLijst);
+        }
+
+        private void LoadMinderjarigen()
+        {
+            LoadList<Minderjarige>(GetMinderjarigeListViewItems, lsvMinderjarige, minderjarigeLijst);
+        }
+
+        private void LoadVoorzieningen()
+        {
+            LoadList<Aanmeldpunt>(GetVoorzieningListViewItems, lsvVoorzieningen, aanmeldpuntLijst);
+        }
+
+        private void LoadList<T>(Func<List<T>, List<ListViewItem>> GetListViewItems, ListView listview, List<T> objectList)
+        {
+            listview.Items.Clear();
+            listview.Items.AddRange(GetListViewItems(objectList).ToArray());
+            listview.Refresh();
+        }
+
+        private List<ListViewItem> GetDienstListViewItems(List<Dienst> itemLijst)
         {
             List<ListViewItem> viewItemList = new List<ListViewItem>();
 
-            foreach (T item in itemLijst)
+            foreach (Dienst item in itemLijst)
             {
                 string[] row = { item.ToString(), GetMinderjarigenCountPerDienst(itemLijst.IndexOf(item) + 1).ToString() };
                 ListViewItem lvi = new ListViewItem(row);
                 lvi.Tag = item;
                 viewItemList.Add(lvi);
             }
-
             return viewItemList;
         }
 
@@ -79,17 +129,6 @@ namespace Intern_Aanmeldpunt_Wachtlijst
             minderjarigeCount = controller.GetMinderjarigenCountPerDienst(dienstId);
 
             return minderjarigeCount;
-        }
-
-        private void LoadVoorzieningen()
-        {
-            List<Aanmeldpunt> aanmeldpuntLijst = controller.GetAllAanmeldpunten();
-            cbbAanmeldpunt.Items.Clear();
-            cbbAanmeldpunt.Items.AddRange(aanmeldpuntLijst.ToArray());
-            lsvVoorzieningen.Items.AddRange(GetVoorzieningListViewItems(aanmeldpuntLijst).ToArray());
-
-            cbbAanmeldpunt.Refresh();
-            lsvVoorzieningen.Refresh();
         }
 
         private List<ListViewItem> GetVoorzieningListViewItems(List<Aanmeldpunt> aanmeldpuntLijst)
@@ -108,11 +147,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst
             return itemList;
         }
         
-        private void LoadMinderjarigen()
-        {
-            List<Minderjarige> minderjarigeLijst = controller.GetAllMinderjarige();
-            lsvMinderjarige.Items.AddRange(GetMinderjarigeListViewItems(minderjarigeLijst).ToArray());
-        }
+
 
         private List<ListViewItem> GetMinderjarigeListViewItems(List<Minderjarige> minderjarigeLijst)
         {
@@ -197,7 +232,8 @@ namespace Intern_Aanmeldpunt_Wachtlijst
             if(cbbDienst.SelectedIndex != -1)
             {
                 int idDienst = cbbDienst.SelectedIndex + 1;
-                LoadConsulenten(controller.GetConsulentInDienst(idDienst));
+                consulentLijst = controller.GetConsulentInDienst(idDienst);
+                InitConsulentCombobox();
             }
         }
 
@@ -225,9 +261,13 @@ namespace Intern_Aanmeldpunt_Wachtlijst
         {
             if (lsvMinderjarige.SelectedItems.Count != 0)
             {
-                Minderjarige minderjarige = (Minderjarige)lsvMinderjarige.SelectedItems[0].Tag;
-                FrmMinderjarige frmMinderjarige = new FrmMinderjarige(controller, controller.GetMinderjarigeInAanmeldpunten(minderjarige.ID));
-                frmMinderjarige.Show();
+                if (lsvMinderjarige.SelectedItems[0].SubItems[1].Text != "0")
+                {
+                    Minderjarige minderjarige = (Minderjarige)lsvMinderjarige.SelectedItems[0].Tag;
+                    FrmMinderjarige frmMinderjarige = new FrmMinderjarige(controller, controller.GetMinderjarigeInAanmeldpunten(minderjarige.ID));
+                    frmMinderjarige.Show();
+                }
+
             }
         }
 
@@ -277,9 +317,9 @@ namespace Intern_Aanmeldpunt_Wachtlijst
 
                 Aanmeldpunt aanmeldpunt = (Aanmeldpunt)cbbAanmeldpunt.SelectedItem;
 
-                controller.InsertNewAanmelding(new MinderjarigeAanmeldpunt(mj, aanmeldpunt, consulent, datumAanmelding));
+                controller.InsertNewAanmelding(new MinderjarigeAanmeldpunt(mj, aanmeldpunt, consulent, datumAanmelding, true));
                 MessageBox.Show("Nieuwe aanmelding is geregistreerd!");
-                Init();
+                ResetForm();
             }
         }
 
@@ -315,6 +355,18 @@ namespace Intern_Aanmeldpunt_Wachtlijst
             }   
 
             return valid;
+        }
+
+        private void btnVoorzieningToevoegen_Click(object sender, EventArgs e)
+        {
+            Aanmeldpunt newAanmeldpunt = new Aanmeldpunt(0, "", "", 0, "", "", true);
+            FrmVoorzieningAanpassen frmvoorzieningAanpassen = new FrmVoorzieningAanpassen(controller, newAanmeldpunt);
+            frmvoorzieningAanpassen.ShowDialog();
+        }
+
+        public void UpdateDeletedAanmelding()
+        {
+            InitListViews();
         }
     }
 }

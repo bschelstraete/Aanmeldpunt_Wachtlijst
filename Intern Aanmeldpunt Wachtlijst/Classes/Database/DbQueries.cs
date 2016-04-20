@@ -17,10 +17,10 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
         {
             Builder = new SqlConnectionStringBuilder()
             {
-                DataSource = "SERVER",
+                DataSource = "S198198\\SQLEXPRESS",
                 InitialCatalog = "dbWachtlijst",
-                UserID = "USERNAME",
-                Password = "PASSWORD"
+                UserID = "sa",
+                Password = "wachtlijst"
             };
         }
 
@@ -52,11 +52,20 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
 
         private static string SafeGetString(SqlDataReader reader, int colIndex)
         {
-            if (!reader.IsDBNull(colIndex))
+            if (!reader.IsDBNull(colIndex) && reader.HasRows)
                 return reader[colIndex].ToString().TrimEnd();
             else
                 return string.Empty;
         }
+
+        private static bool SafeGetBool(SqlDataReader reader, int colIndex)
+        {
+            if (!reader.IsDBNull(colIndex) && reader.HasRows)
+                return reader.GetBoolean(colIndex);
+            else
+                return true;
+        }
+
 
         private static int SafeGetInt(SqlDataReader reader, int colIndex)
         {
@@ -189,7 +198,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
 
         public List<MinderjarigeAanmeldpunt> GetMinderjarigenInDienst(int idDienst)
         {
-            string commandText = "SELECT ma.minderjarigeID, ma.aanmeldpuntID, ma.consulentID, ma.datumAanmelding, ma.datumOpneming "
+            string commandText = "SELECT ma.minderjarigeID, ma.aanmeldpuntID, ma.consulentID, ma.datumAanmelding, ma.datumOpneming, ma.aanmeldingActief "
                                   + "FROM MinderjarigeAanmeldpunt ma "
                                   + "JOIN ConsulentDienst cd "
                                   + "ON ma.consulentID = cd.consulentID "
@@ -264,7 +273,8 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
                     int telefoonnummer = SafeGetInt(dr, 3);
                     string email = SafeGetString(dr, 4);
                     string contactpersoon = SafeGetString(dr, 5);
-                    Aanmeldpunt aanmeldpunt = new Aanmeldpunt(id, naam, adres, telefoonnummer, email, contactpersoon);
+                    bool actief = SafeGetBool(dr, 6);
+                    Aanmeldpunt aanmeldpunt = new Aanmeldpunt(id, naam, adres, telefoonnummer, email, contactpersoon, actief);
                     aanmeldpuntLijst.Add(aanmeldpunt);
                 }
             }
@@ -371,6 +381,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
                     int idConsulent = SafeGetInt(dr, 2);
                     DateTime datumAanmelding = SafeGetDate(dr, 3);
                     DateTime datumOpneming = SafeGetDate(dr, 4);
+                    bool aanmeldingActief = SafeGetBool(dr, 5);
 
                     Minderjarige minderjarige = GetMinderjarige(idMinderjarige);
                     Aanmeldpunt aanmeldpunt = GetAanmeldpunt(idAanmeldpunt);
@@ -379,7 +390,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
                     if (consulent == null)
                         consulent = dummyConsulent;
 
-                    MinderjarigeAanmeldpunt minderjarigeInAanmeldpunt = new MinderjarigeAanmeldpunt(minderjarige, aanmeldpunt, consulent, datumAanmelding, datumOpneming);
+                    MinderjarigeAanmeldpunt minderjarigeInAanmeldpunt = new MinderjarigeAanmeldpunt(minderjarige, aanmeldpunt, consulent, datumAanmelding, datumOpneming, aanmeldingActief);
                     MinderjarigeInAanmeldpuntLijst.Add(minderjarigeInAanmeldpunt);
                 }
             }
@@ -450,6 +461,32 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
             }
         } 
 
+
+        public void AddNewAanmeldpunt(Aanmeldpunt ap)
+        {
+            int ID = GetAllAanmeldpunten().Last().ID + 1;
+            string commandText = "INSERT INTO Aanmeldpunt "
+                + "VALUES(@APID, @APNAAM, @APADRES, @APNR, @APMAIL, @APPERSOON, @APACT)";
+
+            using (SqlConnection connection = new SqlConnection(Builder.ConnectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = commandText;
+                    command.Parameters.Add(new SqlParameter("APID", ID));
+                    command.Parameters.Add(new SqlParameter("APNAAM", ap.Naam));
+                    command.Parameters.Add(new SqlParameter("APADRES", ap.Adres));
+                    command.Parameters.Add(new SqlParameter("APNR", ap.Telefoonnummer));
+                    command.Parameters.Add(new SqlParameter("APMAIL", ap.Email));
+                    command.Parameters.Add(new SqlParameter("APPERSOON", ap.Contactpersoon));
+                    command.Parameters.Add(new SqlParameter("APACT", ap.Actief));
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
         public void InsertNewAanmelding(MinderjarigeAanmeldpunt nieuweAanmelding)
         {
             string commandText = "";
@@ -476,6 +513,84 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
                     if(nieuweAanmelding.Consulent != null)
                         command.Parameters.Add(new SqlParameter("CONID", nieuweAanmelding.Consulent.ID));
                     command.Parameters.Add(new SqlParameter("DATAANMELDING", nieuweAanmelding.DatumAanmelding));
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeleteAanmelding(MinderjarigeAanmeldpunt mja)
+        {
+            string commandText = "";
+
+            if (mja.Consulent == null)
+            {
+                commandText = "DELETE FROM MinderjarigeAanmeldpunt "
+                    + "WHERE minderjarigeID = @MJID "
+                    + "AND aanmeldpuntID = @APID "
+                    + "AND datumAanmelding = @DATAANMELDING ";
+            }
+            else
+            {
+                commandText = "DELETE FROM MinderjarigeAanmeldpunt "
+                    + "WHERE minderjarigeID = @MJID "
+                    + "AND aanmeldpuntID = @APID "
+                    + "AND consulentID = @CONID "
+                    + "AND datumAanmelding = @DATAANMELDING ";
+            }
+
+            using (SqlConnection connection = new SqlConnection(Builder.ConnectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = commandText;
+                    command.Parameters.Add(new SqlParameter("MJID", mja.Minderjarige.ID));
+                    command.Parameters.Add(new SqlParameter("APID", mja.Aanmeldpunt.ID));
+                    if (mja.Consulent != null)
+                        command.Parameters.Add(new SqlParameter("CONID", mja.Consulent.ID));
+                    command.Parameters.Add(new SqlParameter("DATAANMELDING", mja.DatumAanmelding));
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+        public void SetAanmeldingActief(MinderjarigeAanmeldpunt mja, bool actief)
+        {
+            string commandText = "";
+
+            if (mja.Consulent == null)
+            {
+                commandText = "UPDATE MinderjarigeAanmeldpunt "
+                    + "SET aanmeldingActief = @ACTIEF "
+                    + "WHERE minderjarigeID = @MJID "
+                    + "AND aanmeldpuntID = @APID "
+                    + "AND datumAanmelding = @DATAANMELDING ";
+            }
+            else
+            {
+                commandText = "UPDATE MinderjarigeAanmeldpunt "
+                    + "SET aanmeldingActief = @ACTIEF "
+                    + "WHERE minderjarigeID = @MJID "
+                    + "AND aanmeldpuntID = @APID "
+                    + "AND consulentID = @CONID "
+                    + "AND datumAanmelding = @DATAANMELDING ";
+            }
+
+            using (SqlConnection connection = new SqlConnection(Builder.ConnectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = commandText;
+                    command.Parameters.Add(new SqlParameter("ACTIEF", actief));
+                    command.Parameters.Add(new SqlParameter("MJID", mja.Minderjarige.ID));
+                    command.Parameters.Add(new SqlParameter("APID", mja.Aanmeldpunt.ID));
+                    if (mja.Consulent != null)
+                        command.Parameters.Add(new SqlParameter("CONID", mja.Consulent.ID));
+                    command.Parameters.Add(new SqlParameter("DATAANMELDING", mja.DatumAanmelding));
 
                     connection.Open();
                     command.ExecuteNonQuery();

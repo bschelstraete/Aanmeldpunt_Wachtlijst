@@ -137,7 +137,7 @@
             this.btnOpslaan.Name = "btnOpslaan";
             this.btnOpslaan.Size = new System.Drawing.Size(139, 23);
             this.btnOpslaan.TabIndex = 11;
-            this.btnOpslaan.Text = "Aanpassingen opslaan";
+            this.btnOpslaan.Text = "Opslaan";
             this.btnOpslaan.UseVisualStyleBackColor = true;
             this.btnOpslaan.Click += new System.EventHandler(this.btnOpslaan_Click);
             // 

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
 {
-    public partial class FrmVoorziening : Form
+    public partial class FrmVoorziening : Form, Observer
     {
         private Controller.Controller controller;
         private Aanmeldpunt aanmeldpunt;
@@ -22,6 +22,9 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         {
             InitializeComponent();
             Init(aanmeldpunt, controller);
+            InitListView();
+            InitColumns();
+            controller.RegisterObserver(this);
         }
 
         private void Init(Aanmeldpunt aanmeldpunt, Controller.Controller controller)
@@ -33,39 +36,56 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
             lblVoorziening.Text = "Overzicht " + aanmeldpunt;
             lblAantalminderjarige.Text = "Aantal minderjarigen in wachtlijst: " + controller.GetWachttijdCount(minderjarigenInAanmeldpunt);
             lblAverageWachttijd.Text = "Gemiddelde wachttijd in voorziening: " + controller.GetAverageWachtijdMinderjarigen(minderjarigenInAanmeldpunt).ToString("0.## dagen");
-
-            lsvVoorziening.Items.Clear();
-            lsvVoorziening.Items.AddRange(GetListViewItems().ToArray());
-            lsvVoorziening.Refresh();
+            
         }
 
-        private List<ListViewItem> GetListViewItems()
+        private void InitColumns()
         {
+            lsvVoorziening.Columns[0].Name = "clmMinderjarige";
+            lsvVoorziening.Columns[1].Name = "clmConsulent";
+            lsvVoorziening.Columns[2].Name = "clmAanmelding";
+            lsvVoorziening.Columns[3].Name = "clmOpneming";
+            lsvVoorziening.Columns[4].Name = "clmWachttijd";
+
+            foreach (ColumnHeader ch in lsvVoorziening.Columns)
+                ch.Tag = new ColumnProperty() { Ascending = true };
+        }
+
+        private void InitListView()
+        {
+            lsvVoorziening.Items.Clear();
             List<ListViewItem> itemList = new List<ListViewItem>();
             foreach (MinderjarigeAanmeldpunt mja in minderjarigenInAanmeldpunt)
             {
                 List<string> row = new List<string>();
 
+                double wachttijdInDagen = controller.GetWachttijdInDagen(mja);
+                mja.SetWachttijd(wachttijdInDagen);
+
                 if (mja.DatumOpneming < new DateTime(1970, 1, 1))
-                {
-                    double wachttijdInDagen = controller.GetWachttijdInDagen(mja);
+                {                   
                     string[] rowArr ={  mja.Minderjarige.ToString(), mja.Consulent.ToString(),
-                                        mja.DatumAanmelding.ToShortDateString(), "Nog niet opgenomen", wachttijdInDagen.ToString("0.##") };
+                                        mja.DatumAanmelding.ToShortDateString(), "Nog niet opgenomen", mja.Wachttijd.ToString("0") };
                     row.AddRange(rowArr);
+                   
                 }
                 else
-                {
-                    double wachttijdInDagen = controller.GetWachttijdInDagen(mja);
+                {                   
                     string[] rowArr = { mja.Minderjarige.ToString(), mja.Consulent.ToString(),
-                                    mja.DatumAanmelding.ToShortDateString(), mja.DatumOpneming.ToShortDateString(), wachttijdInDagen.ToString("0.##") };
+                                    mja.DatumAanmelding.ToShortDateString(), mja.DatumOpneming.ToShortDateString(), mja.Wachttijd.ToString("0") };
                     row.AddRange(rowArr);
                 }
+
+                if(!mja.AanmeldingActief)
+                    row[4] = "n.v.t. - aanmelding niet actief";
+                
                 ListViewItem item = new ListViewItem(row.ToArray());
                 item.Tag = mja;
                 itemList.Add(item);
             }
 
-            return itemList;
+            lsvVoorziening.Items.AddRange(itemList.ToArray());
+            lsvVoorziening.Refresh();
         }
 
         private void btnOverzichtMJ_Click(object sender, EventArgs e)
@@ -96,6 +116,34 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         {
             FrmVoorzieningAanpassen frmVoorzieningAanpassen = new FrmVoorzieningAanpassen(controller, aanmeldpunt);
             frmVoorzieningAanpassen.ShowDialog();
+        }
+
+        private void lsvVoorziening_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            ColumnProperty columnProperty = (ColumnProperty)lsvVoorziening.Columns[e.Column].Tag;
+            string name = lsvVoorziening.Columns[e.Column].Name;
+            columnProperty.Ascending = !columnProperty.Ascending;
+            lsvVoorziening.Columns[e.Column].Tag = columnProperty;
+
+            minderjarigenInAanmeldpunt = controller.SorteerOp(name, columnProperty.Ascending, minderjarigenInAanmeldpunt);
+
+            InitListView();
+           
+        }
+
+        public void UpdateDeletedAanmelding()
+        {
+            InitListView();
+        }
+
+        public void UpdateDBConnected(bool connected)
+        {
+            //DoNothing
+        }
+
+        public void UpdateVoorziening()
+        {
+            //DoNothing
         }
     }
 }

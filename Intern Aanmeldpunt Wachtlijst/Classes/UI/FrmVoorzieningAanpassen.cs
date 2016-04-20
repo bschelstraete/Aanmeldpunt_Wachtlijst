@@ -30,6 +30,11 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
             this.controller = controller;
             this.aanmeldpunt = aanmeldpunt;
 
+            if (aanmeldpunt.Actief)
+                rbtActief.Checked = true;
+            else
+                rbtNietActief.Checked = true;
+
             InitText();
         }
 
@@ -40,45 +45,54 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
             txtTelefoonnummer.Text = aanmeldpunt.Telefoonnummer.ToString();
             txtEmail.Text = aanmeldpunt.Email;
             txtContactpersoon.Text = aanmeldpunt.Contactpersoon;
+
+            aanpassing = false;
+            aanpassingActief = false;
         }
 
         private void btnOpslaan_Click(object sender, EventArgs e)
         {
-            if (aanpassing == true)
+            if(aanmeldpunt.ID != 0)
             {
-                int telefoonnummer = 0;
-
-                if (String.IsNullOrEmpty(txtNaam.Text))
-                    erpNaam.SetError(txtNaam, "Gelieve een naam in te vullen!");
-                else if (!int.TryParse(txtTelefoonnummer.Text, out telefoonnummer))
+                if (aanpassing == true)
                 {
-                    erpNaam.SetError(txtTelefoonnummer, "Gelieve een geldig telefoonnummer in te vullen!");
-                }
-                else
-                {
-                    string naam = txtNaam.Text;
-                    string adres = txtAdres.Text;
-                    string telefoonnummerText = txtTelefoonnummer.Text;
-                    string email = txtEmail.Text;
-                    string contactpersoon = txtContactpersoon.Text;
+                    int telefoonnummer = 0;
 
-                    int.TryParse(telefoonnummerText, out telefoonnummer);
-
-                    bool aanpassingActief = rbtActief.Checked;
-                    
-                    Aanmeldpunt newAanmeldpunt = new Aanmeldpunt(0, naam, adres, telefoonnummer, email, contactpersoon);
-                    controller.EditAanmeldpunt(aanmeldpunt, newAanmeldpunt);
-
-                    if(aanpassingActief)
+                    if (String.IsNullOrEmpty(txtNaam.Text))
+                        erpNaam.SetError(txtNaam, "Gelieve een naam in te vullen!");
+                    else if (!int.TryParse(txtTelefoonnummer.Text, out telefoonnummer))
                     {
-                        bool actief = rbtActief.Checked;
-                        controller.SetAanmeldpuntActief(aanmeldpunt, actief);
+                        erpNaam.SetError(txtTelefoonnummer, "Gelieve een geldig telefoonnummer in te vullen!");
                     }
+                    else
+                    {
+                        string naam = txtNaam.Text;
+                        string adres = txtAdres.Text;
+                        string telefoonnummerText = txtTelefoonnummer.Text;
+                        string email = txtEmail.Text;
+                        string contactpersoon = txtContactpersoon.Text;
 
-                    this.Close();
+                        int.TryParse(telefoonnummerText, out telefoonnummer);
+
+                        bool aanpassingActief = rbtActief.Checked;
+
+                        Aanmeldpunt newAanmeldpunt = new Aanmeldpunt(0, naam, adres, telefoonnummer, email, contactpersoon, aanpassingActief);
+                        controller.EditAanmeldpunt(aanmeldpunt, newAanmeldpunt);
+
+                        if (aanpassingActief)
+                        {
+                            bool actief = rbtActief.Checked;
+                            controller.SetAanmeldpuntActief(aanmeldpunt, actief);
+                        }
+
+                        this.Close();
+                    }
                 }
             }
-
+            else
+            {
+                controller.AddNewAanmeldpunt(aanmeldpunt);
+            }
         }
 
         private void Text_TextChanged(object sender, EventArgs e)
@@ -93,8 +107,6 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
                 DialogResult dialogResult = MessageBox.Show("Wilt u de wijzigingen opslaan?", "Voorziening aanpassen", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                     btnOpslaan.PerformClick();
-                else
-                    this.Close();
             }
         }
 

@@ -54,29 +54,31 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Controller
 
             foreach (MinderjarigeAanmeldpunt mja in minderjarigenLijst)
             {
-                totalDays += GetWachttijdInDagen(mja);
+                if (mja.AanmeldingActief)
+                    totalDays += GetWachttijdInDagen(mja);
             }
 
-            return totalDays;
+            return totalDays / minderjarigenLijst.Count();
         }
 
         public double GetWachttijdInDagen(MinderjarigeAanmeldpunt mja)
         {
             double wachttijd = 0.0;
-
-            if (mja.DatumOpneming < new DateTime(1970, 1, 1))
+            if (mja.AanmeldingActief)
             {
-                DateTime end = DateTime.Now;
-                DateTime start = mja.DatumAanmelding;
-                wachttijd += (end - start).TotalDays;
+                if (mja.DatumOpneming < new DateTime(1970, 1, 1))
+                {
+                    DateTime end = DateTime.Now;
+                    DateTime start = mja.DatumAanmelding;
+                    wachttijd += (end - start).TotalDays;
+                }
+                else
+                {
+                    DateTime end = mja.DatumOpneming;
+                    DateTime start = mja.DatumAanmelding;
+                    wachttijd += (end - start).TotalDays;
+                }
             }
-            else
-            {
-                DateTime end = mja.DatumOpneming;
-                DateTime start = mja.DatumAanmelding;
-                wachttijd += (end - start).TotalDays;
-            }
-
             return wachttijd;
         }
 
@@ -87,7 +89,8 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Controller
             foreach (MinderjarigeAanmeldpunt mja in minderjarigenLijst)
             {
                 if (mja.DatumOpneming < new DateTime(1970, 1, 1))
-                    wachtijdCount++;
+                    if (mja.AanmeldingActief)
+                        wachtijdCount++;
             }
 
             return wachtijdCount;
@@ -154,6 +157,12 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Controller
                 o.UpdateDBConnected(connected);
         }
 
+        private void NotifyObserverDeletedAanmelding()
+        {
+            foreach (Observer o in observerList)
+                o.UpdateDeletedAanmelding();
+        }
+
         public Minderjarige GetMinderjarigeByNaam(string naam, string voornaam)
         {
             return dbQueries.GetMinderjarigeByNaam(naam, voornaam);
@@ -167,9 +176,76 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Controller
             dbQueries.InsertNewMinderjarige(minderjarige);
         }
 
+        public void AddNewAanmeldpunt(Aanmeldpunt newAanmeldpunt)
+        {
+            dbQueries.AddNewAanmeldpunt(newAanmeldpunt);
+            NotifyObserverDeletedAanmelding();
+        }
+
         public void InsertNewAanmelding(MinderjarigeAanmeldpunt newAanmelding)
         {
             dbQueries.InsertNewAanmelding(newAanmelding);
+            NotifyObserverDeletedAanmelding();
+        }
+
+        public void DeleteAanmelding(MinderjarigeAanmeldpunt mja)
+        {
+            dbQueries.DeleteAanmelding(mja);
+            NotifyObserverDeletedAanmelding();
+        }
+
+        public void SetAanmeldingActief(MinderjarigeAanmeldpunt mja, bool actief)
+        {
+            dbQueries.SetAanmeldingActief(mja, actief);
+            NotifyObserverDeletedAanmelding();
+        }
+
+        public List<MinderjarigeAanmeldpunt> SorteerOp(string property, bool Ascending, List<MinderjarigeAanmeldpunt> mjaList)
+        {
+            List<MinderjarigeAanmeldpunt> sortedMjaList = mjaList;
+
+            switch(property)
+            {
+                case "clmMinderjarige":
+                    if (Ascending)
+                        sortedMjaList = sortedMjaList.OrderBy(x => x.Minderjarige.Naam).ThenBy(x => x.Minderjarige.Voornaam).ToList();
+                    else
+                        sortedMjaList = sortedMjaList.OrderByDescending(x => x.Minderjarige.Naam).ThenByDescending(x => x.Minderjarige.Voornaam).ToList();
+                    break;
+                case "clmVoorziening":
+                    if(Ascending)
+                        sortedMjaList = sortedMjaList.OrderBy(x => x.Aanmeldpunt.Naam).ToList();
+                    else
+                        sortedMjaList = sortedMjaList.OrderByDescending(x => x.Aanmeldpunt.Naam).ToList();
+                    break;
+                case "clmConsulent":
+                    if(Ascending)
+                        sortedMjaList = sortedMjaList.OrderBy(x => x.Consulent.Naam).ThenBy(x => x.Consulent.Voornaam).ToList();
+                    else
+                        sortedMjaList = sortedMjaList.OrderByDescending(x => x.Minderjarige.Naam).ThenByDescending(x => x.Minderjarige.Voornaam).ToList();
+                    break;
+                case "clmAanmelding":
+                    if(Ascending)
+                        sortedMjaList = sortedMjaList.OrderBy(x => x.DatumAanmelding).ToList();
+                    else
+                        sortedMjaList = sortedMjaList.OrderByDescending(x => x.DatumAanmelding).ToList();
+                    break;
+                case "clmOpneming":
+                    if(Ascending)
+                        sortedMjaList = sortedMjaList.OrderBy(x => x.DatumOpneming).ToList();
+                    else
+                        sortedMjaList = sortedMjaList.OrderByDescending(x => x.DatumOpneming).ToList();
+                    break;
+                case "clmWachttijd":
+                    if (Ascending)
+                        sortedMjaList = sortedMjaList.OrderBy(x => x.Wachttijd).ToList();
+                    else
+                        sortedMjaList = sortedMjaList.OrderByDescending(x => x.Wachttijd).ToList();
+                    break;
+            }
+            
+            return sortedMjaList;
+
         }
     }
 }

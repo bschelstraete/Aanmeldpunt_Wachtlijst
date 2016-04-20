@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.mnsMainMenu = new System.Windows.Forms.MenuStrip();
-            this.btnNieuweAanmelding = new System.Windows.Forms.ToolStripMenuItem();
             this.btnDienst = new System.Windows.Forms.ToolStripMenuItem();
             this.btnOverzichtDiensten = new System.Windows.Forms.ToolStripMenuItem();
             this.btnConsulentToevoegen = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,7 +81,6 @@
             // mnsMainMenu
             // 
             this.mnsMainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnNieuweAanmelding,
             this.btnDienst,
             this.btnVoorziening,
             this.btnMinderjarigen,
@@ -92,13 +90,6 @@
             this.mnsMainMenu.Size = new System.Drawing.Size(530, 24);
             this.mnsMainMenu.TabIndex = 0;
             this.mnsMainMenu.Text = "menuStrip1";
-            // 
-            // btnNieuweAanmelding
-            // 
-            this.btnNieuweAanmelding.Name = "btnNieuweAanmelding";
-            this.btnNieuweAanmelding.Size = new System.Drawing.Size(127, 20);
-            this.btnNieuweAanmelding.Text = "Nieuwe Aanmelding";
-            this.btnNieuweAanmelding.Click += new System.EventHandler(this.btnNieuweAanmelding_Click);
             // 
             // btnDienst
             // 
@@ -143,6 +134,7 @@
             this.btnVoorzieningToevoegen.Name = "btnVoorzieningToevoegen";
             this.btnVoorzieningToevoegen.Size = new System.Drawing.Size(238, 22);
             this.btnVoorzieningToevoegen.Text = "Nieuwe voorziening toevoegen";
+            this.btnVoorzieningToevoegen.Click += new System.EventHandler(this.btnVoorzieningToevoegen_Click);
             // 
             // btnMinderjarigen
             // 
@@ -215,7 +207,7 @@
             this.cbbAanmeldpunt.FormattingEnabled = true;
             this.cbbAanmeldpunt.Location = new System.Drawing.Point(93, 152);
             this.cbbAanmeldpunt.Name = "cbbAanmeldpunt";
-            this.cbbAanmeldpunt.Size = new System.Drawing.Size(191, 21);
+            this.cbbAanmeldpunt.Size = new System.Drawing.Size(211, 21);
             this.cbbAanmeldpunt.TabIndex = 6;
             // 
             // cbbAanmelder
@@ -223,7 +215,7 @@
             this.cbbAanmelder.FormattingEnabled = true;
             this.cbbAanmelder.Location = new System.Drawing.Point(93, 73);
             this.cbbAanmelder.Name = "cbbAanmelder";
-            this.cbbAanmelder.Size = new System.Drawing.Size(191, 21);
+            this.cbbAanmelder.Size = new System.Drawing.Size(211, 21);
             this.cbbAanmelder.TabIndex = 3;
             // 
             // cbbDienst
@@ -231,7 +223,7 @@
             this.cbbDienst.FormattingEnabled = true;
             this.cbbDienst.Location = new System.Drawing.Point(93, 46);
             this.cbbDienst.Name = "cbbDienst";
-            this.cbbDienst.Size = new System.Drawing.Size(191, 21);
+            this.cbbDienst.Size = new System.Drawing.Size(211, 21);
             this.cbbDienst.TabIndex = 2;
             this.cbbDienst.SelectedIndexChanged += new System.EventHandler(this.cbbDienst_SelectedIndexChanged);
             // 
@@ -240,21 +232,21 @@
             this.dtpAanmelddatum.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpAanmelddatum.Location = new System.Drawing.Point(93, 19);
             this.dtpAanmelddatum.Name = "dtpAanmelddatum";
-            this.dtpAanmelddatum.Size = new System.Drawing.Size(191, 20);
+            this.dtpAanmelddatum.Size = new System.Drawing.Size(211, 20);
             this.dtpAanmelddatum.TabIndex = 1;
             // 
             // txtVoornaamMJ
             // 
             this.txtVoornaamMJ.Location = new System.Drawing.Point(93, 125);
             this.txtVoornaamMJ.Name = "txtVoornaamMJ";
-            this.txtVoornaamMJ.Size = new System.Drawing.Size(191, 20);
+            this.txtVoornaamMJ.Size = new System.Drawing.Size(211, 20);
             this.txtVoornaamMJ.TabIndex = 5;
             // 
             // txtNaamMJ
             // 
             this.txtNaamMJ.Location = new System.Drawing.Point(93, 98);
             this.txtNaamMJ.Name = "txtNaamMJ";
-            this.txtNaamMJ.Size = new System.Drawing.Size(191, 20);
+            this.txtNaamMJ.Size = new System.Drawing.Size(211, 20);
             this.txtNaamMJ.TabIndex = 4;
             // 
             // label6
@@ -497,7 +489,6 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip mnsMainMenu;
-        private System.Windows.Forms.ToolStripMenuItem btnNieuweAanmelding;
         private System.Windows.Forms.ToolStripMenuItem btnDienst;
         private System.Windows.Forms.ToolStripMenuItem btnVoorziening;
         private System.Windows.Forms.ToolStripMenuItem icoConnected;

@@ -33,10 +33,12 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clmWachttijd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblConsulent = new System.Windows.Forms.Label();
             this.btnOverzichtVoorziening = new System.Windows.Forms.Button();
             this.btnOverzichtMinderjarige = new System.Windows.Forms.Button();
             this.lblAantalMinderjarigen = new System.Windows.Forms.Label();
+            this.btnEditConsulent = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lsvOverzicht
@@ -47,16 +49,18 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3,
-            this.columnHeader4});
+            this.columnHeader4,
+            this.clmWachttijd});
             this.lsvOverzicht.FullRowSelect = true;
             this.lsvOverzicht.GridLines = true;
             this.lsvOverzicht.Location = new System.Drawing.Point(12, 92);
             this.lsvOverzicht.MultiSelect = false;
             this.lsvOverzicht.Name = "lsvOverzicht";
-            this.lsvOverzicht.Size = new System.Drawing.Size(563, 285);
+            this.lsvOverzicht.Size = new System.Drawing.Size(693, 285);
             this.lsvOverzicht.TabIndex = 0;
             this.lsvOverzicht.UseCompatibleStateImageBehavior = false;
             this.lsvOverzicht.View = System.Windows.Forms.View.Details;
+            this.lsvOverzicht.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lsvOverzicht_ColumnClick);
             this.lsvOverzicht.DoubleClick += new System.EventHandler(this.lsvOverzicht_DoubleClick);
             // 
             // columnHeader1
@@ -79,6 +83,11 @@
             this.columnHeader4.Text = "Datum opneming";
             this.columnHeader4.Width = 120;
             // 
+            // clmWachttijd
+            // 
+            this.clmWachttijd.Text = "Tijd in registratielijst (dagen)";
+            this.clmWachttijd.Width = 141;
+            // 
             // lblConsulent
             // 
             this.lblConsulent.AutoSize = true;
@@ -90,7 +99,7 @@
             // 
             // btnOverzichtVoorziening
             // 
-            this.btnOverzichtVoorziening.Location = new System.Drawing.Point(141, 58);
+            this.btnOverzichtVoorziening.Location = new System.Drawing.Point(580, 63);
             this.btnOverzichtVoorziening.Name = "btnOverzichtVoorziening";
             this.btnOverzichtVoorziening.Size = new System.Drawing.Size(125, 23);
             this.btnOverzichtVoorziening.TabIndex = 2;
@@ -100,7 +109,7 @@
             // 
             // btnOverzichtMinderjarige
             // 
-            this.btnOverzichtMinderjarige.Location = new System.Drawing.Point(12, 58);
+            this.btnOverzichtMinderjarige.Location = new System.Drawing.Point(451, 63);
             this.btnOverzichtMinderjarige.Name = "btnOverzichtMinderjarige";
             this.btnOverzichtMinderjarige.Size = new System.Drawing.Size(123, 23);
             this.btnOverzichtMinderjarige.TabIndex = 3;
@@ -117,11 +126,21 @@
             this.lblAantalMinderjarigen.TabIndex = 4;
             this.lblAantalMinderjarigen.Text = "Aantal minderjarigen in wachtlijst: ";
             // 
+            // btnEditConsulent
+            // 
+            this.btnEditConsulent.Location = new System.Drawing.Point(16, 63);
+            this.btnEditConsulent.Name = "btnEditConsulent";
+            this.btnEditConsulent.Size = new System.Drawing.Size(123, 23);
+            this.btnEditConsulent.TabIndex = 5;
+            this.btnEditConsulent.Text = "Consulent aanpassen";
+            this.btnEditConsulent.UseVisualStyleBackColor = true;
+            // 
             // FrmConsulent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(587, 404);
+            this.ClientSize = new System.Drawing.Size(717, 404);
+            this.Controls.Add(this.btnEditConsulent);
             this.Controls.Add(this.lblAantalMinderjarigen);
             this.Controls.Add(this.btnOverzichtMinderjarige);
             this.Controls.Add(this.btnOverzichtVoorziening);
@@ -145,5 +164,7 @@
         private System.Windows.Forms.Button btnOverzichtVoorziening;
         private System.Windows.Forms.Button btnOverzichtMinderjarige;
         private System.Windows.Forms.Label lblAantalMinderjarigen;
+        private System.Windows.Forms.ColumnHeader clmWachttijd;
+        private System.Windows.Forms.Button btnEditConsulent;
     }
 }

@@ -54,13 +54,14 @@
             this.columnHeader5});
             this.lsvVoorziening.FullRowSelect = true;
             this.lsvVoorziening.GridLines = true;
-            this.lsvVoorziening.Location = new System.Drawing.Point(12, 84);
+            this.lsvVoorziening.Location = new System.Drawing.Point(12, 94);
             this.lsvVoorziening.MultiSelect = false;
             this.lsvVoorziening.Name = "lsvVoorziening";
-            this.lsvVoorziening.Size = new System.Drawing.Size(578, 300);
+            this.lsvVoorziening.Size = new System.Drawing.Size(635, 300);
             this.lsvVoorziening.TabIndex = 0;
             this.lsvVoorziening.UseCompatibleStateImageBehavior = false;
             this.lsvVoorziening.View = System.Windows.Forms.View.Details;
+            this.lsvVoorziening.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lsvVoorziening_ColumnClick);
             // 
             // columnHeader1
             // 
@@ -84,8 +85,8 @@
             // 
             // columnHeader5
             // 
-            this.columnHeader5.Text = "Wachtijd (dagen)";
-            this.columnHeader5.Width = 95;
+            this.columnHeader5.Text = "Tijd in registratielijst (dagen)";
+            this.columnHeader5.Width = 151;
             // 
             // lblVoorziening
             // 
@@ -99,7 +100,7 @@
             // btnVoorzieningAanpassen
             // 
             this.btnVoorzieningAanpassen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnVoorzieningAanpassen.Location = new System.Drawing.Point(12, 55);
+            this.btnVoorzieningAanpassen.Location = new System.Drawing.Point(12, 65);
             this.btnVoorzieningAanpassen.Name = "btnVoorzieningAanpassen";
             this.btnVoorzieningAanpassen.Size = new System.Drawing.Size(126, 23);
             this.btnVoorzieningAanpassen.TabIndex = 2;
@@ -110,7 +111,7 @@
             // btnOverzichtMJ
             // 
             this.btnOverzichtMJ.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOverzichtMJ.Location = new System.Drawing.Point(344, 55);
+            this.btnOverzichtMJ.Location = new System.Drawing.Point(401, 65);
             this.btnOverzichtMJ.Name = "btnOverzichtMJ";
             this.btnOverzichtMJ.Size = new System.Drawing.Size(126, 23);
             this.btnOverzichtMJ.TabIndex = 3;
@@ -121,7 +122,7 @@
             // btnOverzichtConsulent
             // 
             this.btnOverzichtConsulent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOverzichtConsulent.Location = new System.Drawing.Point(476, 55);
+            this.btnOverzichtConsulent.Location = new System.Drawing.Point(533, 65);
             this.btnOverzichtConsulent.Name = "btnOverzichtConsulent";
             this.btnOverzichtConsulent.Size = new System.Drawing.Size(114, 23);
             this.btnOverzichtConsulent.TabIndex = 4;
@@ -133,7 +134,7 @@
             // 
             this.lblAantalminderjarige.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblAantalminderjarige.AutoSize = true;
-            this.lblAantalminderjarige.Location = new System.Drawing.Point(12, 387);
+            this.lblAantalminderjarige.Location = new System.Drawing.Point(12, 397);
             this.lblAantalminderjarige.Name = "lblAantalminderjarige";
             this.lblAantalminderjarige.Size = new System.Drawing.Size(165, 13);
             this.lblAantalminderjarige.TabIndex = 5;
@@ -143,7 +144,7 @@
             // 
             this.lblAverageWachttijd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAverageWachttijd.AutoSize = true;
-            this.lblAverageWachttijd.Location = new System.Drawing.Point(341, 387);
+            this.lblAverageWachttijd.Location = new System.Drawing.Point(398, 397);
             this.lblAverageWachttijd.Name = "lblAverageWachttijd";
             this.lblAverageWachttijd.Size = new System.Drawing.Size(182, 13);
             this.lblAverageWachttijd.TabIndex = 6;
@@ -153,7 +154,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(602, 409);
+            this.ClientSize = new System.Drawing.Size(659, 419);
             this.Controls.Add(this.lblAverageWachttijd);
             this.Controls.Add(this.lblAantalminderjarige);
             this.Controls.Add(this.btnOverzichtConsulent);
