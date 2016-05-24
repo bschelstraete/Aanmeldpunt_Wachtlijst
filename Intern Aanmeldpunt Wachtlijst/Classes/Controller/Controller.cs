@@ -12,6 +12,12 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Controller
     {
         private List<Observer> observerList = new List<Observer>();
         private DbQueries dbQueries = new DbQueries();
+        private CsvBuilder csvbuilder;
+
+        public Controller()
+        {
+            csvbuilder = new CsvBuilder(this);
+        }
 
         public Dienst GetDienst(int idDienst)
         {
@@ -194,6 +200,21 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Controller
             NotifyObserverDeletedAanmelding();
         }
 
+        public void AddNewConsulent(Consulent consulent, Dienst dienst)
+        {
+            dbQueries.AddNewConsulent(consulent, dienst);
+        }
+
+        public void SetConsulentActief(Consulent consulent, bool actief)
+        {
+            dbQueries.SetConsulentActief(consulent, actief);
+        }
+
+        public void EditConsulent(Consulent oldConsulent, Consulent newConsulent)
+        {
+            dbQueries.EditConsulent(oldConsulent, newConsulent);
+        }
+
         public void SetAanmeldingActief(MinderjarigeAanmeldpunt mja, bool actief)
         {
             dbQueries.SetAanmeldingActief(mja, actief);
@@ -202,50 +223,76 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Controller
 
         public List<MinderjarigeAanmeldpunt> SorteerOp(string property, bool Ascending, List<MinderjarigeAanmeldpunt> mjaList)
         {
-            List<MinderjarigeAanmeldpunt> sortedMjaList = mjaList;
+            List<MinderjarigeAanmeldpunt> sortedList = mjaList;
 
-            switch(property)
+            switch (property)
             {
                 case "clmMinderjarige":
                     if (Ascending)
-                        sortedMjaList = sortedMjaList.OrderBy(x => x.Minderjarige.Naam).ThenBy(x => x.Minderjarige.Voornaam).ToList();
+                        sortedList = sortedList.OrderBy(x => x.Minderjarige.Naam).ThenBy(x => x.Minderjarige.Voornaam).ToList();
                     else
-                        sortedMjaList = sortedMjaList.OrderByDescending(x => x.Minderjarige.Naam).ThenByDescending(x => x.Minderjarige.Voornaam).ToList();
+                        sortedList = sortedList.OrderByDescending(x => x.Minderjarige.Naam).ThenByDescending(x => x.Minderjarige.Voornaam).ToList();
                     break;
                 case "clmVoorziening":
-                    if(Ascending)
-                        sortedMjaList = sortedMjaList.OrderBy(x => x.Aanmeldpunt.Naam).ToList();
+                    if (Ascending)
+                        sortedList = sortedList.OrderBy(x => x.Aanmeldpunt.Naam).ToList();
                     else
-                        sortedMjaList = sortedMjaList.OrderByDescending(x => x.Aanmeldpunt.Naam).ToList();
+                        sortedList = sortedList.OrderByDescending(x => x.Aanmeldpunt.Naam).ToList();
                     break;
                 case "clmConsulent":
-                    if(Ascending)
-                        sortedMjaList = sortedMjaList.OrderBy(x => x.Consulent.Naam).ThenBy(x => x.Consulent.Voornaam).ToList();
+                    if (Ascending)
+                        sortedList = sortedList.OrderBy(x => x.Consulent.Naam).ThenBy(x => x.Consulent.Voornaam).ToList();
                     else
-                        sortedMjaList = sortedMjaList.OrderByDescending(x => x.Minderjarige.Naam).ThenByDescending(x => x.Minderjarige.Voornaam).ToList();
+                        sortedList = sortedList.OrderByDescending(x => x.Minderjarige.Naam).ThenByDescending(x => x.Minderjarige.Voornaam).ToList();
                     break;
                 case "clmAanmelding":
-                    if(Ascending)
-                        sortedMjaList = sortedMjaList.OrderBy(x => x.DatumAanmelding).ToList();
+                    if (Ascending)
+                        sortedList = sortedList.OrderBy(x => x.DatumAanmelding).ToList();
                     else
-                        sortedMjaList = sortedMjaList.OrderByDescending(x => x.DatumAanmelding).ToList();
+                        sortedList = sortedList.OrderByDescending(x => x.DatumAanmelding).ToList();
                     break;
                 case "clmOpneming":
-                    if(Ascending)
-                        sortedMjaList = sortedMjaList.OrderBy(x => x.DatumOpneming).ToList();
+                    if (Ascending)
+                        sortedList = sortedList.OrderBy(x => x.DatumOpneming).ToList();
                     else
-                        sortedMjaList = sortedMjaList.OrderByDescending(x => x.DatumOpneming).ToList();
+                        sortedList = sortedList.OrderByDescending(x => x.DatumOpneming).ToList();
                     break;
                 case "clmWachttijd":
                     if (Ascending)
-                        sortedMjaList = sortedMjaList.OrderBy(x => x.Wachttijd).ToList();
+                        sortedList = sortedList.OrderBy(x => x.Wachttijd).ToList();
                     else
-                        sortedMjaList = sortedMjaList.OrderByDescending(x => x.Wachttijd).ToList();
+                        sortedList = sortedList.OrderByDescending(x => x.Wachttijd).ToList();
                     break;
             }
-            
-            return sortedMjaList;
 
+            return sortedList;
+
+        }
+
+        public List<MinderjarigeAanmeldpunt> GetMinderjarigeBetweenDatesInDienst(Dienst dienst, DateTime van, DateTime tot)
+        {
+            if (van.Date == tot.Date)
+                return GetMinderjarigenInDienst(dienst.ID);
+            else
+                return dbQueries.GetMinderjarigeBetweenDatesInDienst(dienst, van, tot);
+        }
+
+        public List<MinderjarigeAanmeldpunt> GetMinderjarigeBetweenDatesInAanmeldpunt(Aanmeldpunt aanmeldpunt, DateTime van, DateTime tot)
+        {
+            if (van.Date == tot.Date)
+                return GetMinderjarigenInAanmeldpunt(aanmeldpunt.ID);
+            else
+                return dbQueries.GetMinderjarigeBetweenDatesInAanmeldpunt(aanmeldpunt, van, tot);
+        }
+
+        public List<Minderjarige> FindMinderjarigeAanmelding(string naamZoeken)
+        {
+            return dbQueries.FindMinderjarigeAanmelding(naamZoeken);
+        }
+
+        public void WriteToFile(List<MinderjarigeAanmeldpunt> aanmeldingen, string output)
+        {
+            csvbuilder.BuildCsv(aanmeldingen, output);
         }
     }
 }

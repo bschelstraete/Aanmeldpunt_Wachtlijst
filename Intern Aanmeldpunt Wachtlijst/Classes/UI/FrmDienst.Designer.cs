@@ -35,6 +35,7 @@
             this.ClmVoorziening = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clmWachttijd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnOpenMinderjarige = new System.Windows.Forms.Button();
             this.btnOpenVoorziening = new System.Windows.Forms.Button();
             this.btnOpenConsulent = new System.Windows.Forms.Button();
@@ -42,7 +43,7 @@
             this.lblAverageWachttijd = new System.Windows.Forms.Label();
             this.btnSetActiveAanmelding = new System.Windows.Forms.Button();
             this.btnDeleteAanmelding = new System.Windows.Forms.Button();
-            this.clmWachttijd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnOverzichtOpslaan = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblOverzicht
@@ -101,6 +102,11 @@
             // 
             this.columnHeader2.Text = "Datum opneming";
             this.columnHeader2.Width = 116;
+            // 
+            // clmWachttijd
+            // 
+            this.clmWachttijd.Text = "Tijd in registratielijst (dagen)";
+            this.clmWachttijd.Width = 142;
             // 
             // btnOpenMinderjarige
             // 
@@ -170,16 +176,22 @@
             this.btnDeleteAanmelding.UseVisualStyleBackColor = true;
             this.btnDeleteAanmelding.Click += new System.EventHandler(this.btnDeleteAanmelding_Click);
             // 
-            // clmWachttijd
+            // btnOverzichtOpslaan
             // 
-            this.clmWachttijd.Text = "Tijd in registratielijst (dagen)";
-            this.clmWachttijd.Width = 142;
+            this.btnOverzichtOpslaan.Location = new System.Drawing.Point(689, 412);
+            this.btnOverzichtOpslaan.Name = "btnOverzichtOpslaan";
+            this.btnOverzichtOpslaan.Size = new System.Drawing.Size(137, 23);
+            this.btnOverzichtOpslaan.TabIndex = 11;
+            this.btnOverzichtOpslaan.Text = "Overzicht opslaan";
+            this.btnOverzichtOpslaan.UseVisualStyleBackColor = true;
+            this.btnOverzichtOpslaan.Click += new System.EventHandler(this.btnOverzichtOpslaan_Click);
             // 
             // FrmDienst
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(838, 439);
+            this.Controls.Add(this.btnOverzichtOpslaan);
             this.Controls.Add(this.btnSetActiveAanmelding);
             this.Controls.Add(this.btnDeleteAanmelding);
             this.Controls.Add(this.lblAverageWachttijd);
@@ -213,5 +225,6 @@
         private System.Windows.Forms.Button btnSetActiveAanmelding;
         private System.Windows.Forms.Button btnDeleteAanmelding;
         private System.Windows.Forms.ColumnHeader clmWachttijd;
+        private System.Windows.Forms.Button btnOverzichtOpslaan;
     }
 }

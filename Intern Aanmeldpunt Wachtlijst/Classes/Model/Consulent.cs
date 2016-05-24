@@ -11,6 +11,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Model
         public int ID { get; private set; }
         public string Naam { get; private set; }
         public string Voornaam { get; private set; }
+        public bool Actief { get; set; }
 
         public Consulent(int id, string naam, string voornaam)
         {

@@ -37,7 +37,7 @@
             this.erpNaam = new System.Windows.Forms.ErrorProvider(this.components);
             this.rbtNietActief = new System.Windows.Forms.RadioButton();
             this.rbtActief = new System.Windows.Forms.RadioButton();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbbDienst = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.erpNaam)).BeginInit();
             this.SuspendLayout();
@@ -58,6 +58,7 @@
             this.txtVoornaam.Name = "txtVoornaam";
             this.txtVoornaam.Size = new System.Drawing.Size(148, 20);
             this.txtVoornaam.TabIndex = 20;
+            this.txtVoornaam.TextChanged += new System.EventHandler(this.txtVoornaam_TextChanged);
             // 
             // txtNaam
             // 
@@ -65,6 +66,7 @@
             this.txtNaam.Name = "txtNaam";
             this.txtNaam.Size = new System.Drawing.Size(148, 20);
             this.txtNaam.TabIndex = 19;
+            this.txtNaam.TextChanged += new System.EventHandler(this.txtNaam_TextChanged);
             // 
             // label2
             // 
@@ -109,14 +111,16 @@
             this.rbtActief.TabStop = true;
             this.rbtActief.Text = "Actief";
             this.rbtActief.UseVisualStyleBackColor = true;
+            this.rbtActief.CheckedChanged += new System.EventHandler(this.rbtActief_CheckedChanged);
             // 
-            // comboBox1
+            // cbbDienst
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(79, 60);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(148, 21);
-            this.comboBox1.TabIndex = 27;
+            this.cbbDienst.FormattingEnabled = true;
+            this.cbbDienst.Location = new System.Drawing.Point(79, 60);
+            this.cbbDienst.Name = "cbbDienst";
+            this.cbbDienst.Size = new System.Drawing.Size(148, 21);
+            this.cbbDienst.TabIndex = 27;
+            this.cbbDienst.SelectedIndexChanged += new System.EventHandler(this.cbbDienst_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -133,7 +137,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(412, 97);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbbDienst);
             this.Controls.Add(this.btnOpslaan);
             this.Controls.Add(this.txtVoornaam);
             this.Controls.Add(this.txtNaam);
@@ -143,6 +147,7 @@
             this.Controls.Add(this.rbtActief);
             this.Name = "FrmConsulentAanpassen";
             this.Text = "Consulent aanpassen";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmConsulentAanpassen_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.erpNaam)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -158,7 +163,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ErrorProvider erpNaam;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbbDienst;
         private System.Windows.Forms.RadioButton rbtNietActief;
         private System.Windows.Forms.RadioButton rbtActief;
     }

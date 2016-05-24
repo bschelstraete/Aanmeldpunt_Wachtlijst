@@ -131,5 +131,11 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         {
             //DoNothing
         }
+
+        private void btnEditConsulent_Click(object sender, EventArgs e)
+        {
+            FrmConsulentAanpassen frmConsulentAanpassen = new FrmConsulentAanpassen(controller, consulent);
+            frmConsulentAanpassen.ShowDialog();
+        }
     }
 }

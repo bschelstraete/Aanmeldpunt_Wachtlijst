@@ -43,7 +43,9 @@
             this.erpNaam = new System.Windows.Forms.ErrorProvider(this.components);
             this.rbtActief = new System.Windows.Forms.RadioButton();
             this.rbtNietActief = new System.Windows.Forms.RadioButton();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.erpNaam)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -169,6 +171,10 @@
             this.rbtNietActief.UseVisualStyleBackColor = true;
             this.rbtNietActief.CheckedChanged += new System.EventHandler(this.Radiobutton_CheckedChanged);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // FrmVoorzieningAanpassen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -193,6 +199,7 @@
             this.Text = "Voorziening aanpassen";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmVoorzieningAanpassen_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.erpNaam)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -214,5 +221,6 @@
         private System.Windows.Forms.ErrorProvider erpNaam;
         private System.Windows.Forms.RadioButton rbtNietActief;
         private System.Windows.Forms.RadioButton rbtActief;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

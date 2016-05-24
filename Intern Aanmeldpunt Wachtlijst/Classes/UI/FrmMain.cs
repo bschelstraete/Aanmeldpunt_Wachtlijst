@@ -34,6 +34,8 @@ namespace Intern_Aanmeldpunt_Wachtlijst
         {
             btnOverzichtDiensten.PerformClick();
             ResetForm();
+            InitLists();
+            InitColumns();
             InitListViews();
             InitComboBox();
         }
@@ -46,9 +48,26 @@ namespace Intern_Aanmeldpunt_Wachtlijst
             minderjarigeLijst = controller.GetAllMinderjarige();
         }
 
+        private void InitColumns()
+        {
+            lsvDiensten.Columns[0].Name = "clmDienst";
+            lsvMinderjarige.Columns[0].Name = "clmMinderjarige";
+            lsvVoorzieningen.Columns[0].Name = "clmVoorziening";
+
+            List<GroupBox> gbList = this.Controls.OfType<GroupBox>().ToList();
+            foreach(GroupBox gb in gbList)
+            {
+                List<ListView> listViewList = gb.Controls.OfType<ListView>().ToList();
+                foreach (ListView lv in listViewList)
+                {
+                    foreach (ColumnHeader ch in lv.Columns)
+                        ch.Tag = new ColumnProperty() { Ascending = true };
+                }
+            }
+        }
+
         private void InitListViews()
         {
-            InitLists();
             LoadDiensten();
             LoadMinderjarigen();
             LoadVoorzieningen();
@@ -114,7 +133,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst
 
             foreach (Dienst item in itemLijst)
             {
-                string[] row = { item.ToString(), GetMinderjarigenCountPerDienst(itemLijst.IndexOf(item) + 1).ToString() };
+                string[] row = { item.ToString(), GetMinderjarigenCountPerDienst(item.ID).ToString() };
                 ListViewItem lvi = new ListViewItem(row);
                 lvi.Tag = item;
                 viewItemList.Add(lvi);
@@ -366,7 +385,89 @@ namespace Intern_Aanmeldpunt_Wachtlijst
 
         public void UpdateDeletedAanmelding()
         {
+            InitLists();
             InitListViews();
+        }
+
+        private void lsvMinderjarige_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if(e.Column == 0)
+            {
+                ColumnProperty columnProperty = (ColumnProperty)lsvMinderjarige.Columns[e.Column].Tag;
+                string name = lsvMinderjarige.Columns[e.Column].Name;
+                columnProperty.Ascending = !columnProperty.Ascending;
+                lsvMinderjarige.Columns[e.Column].Tag = columnProperty;
+
+                if (columnProperty.Ascending)
+                    minderjarigeLijst = minderjarigeLijst.OrderBy(x => x.Voornaam).ThenBy(x => x.Naam).ToList();
+                else
+                    minderjarigeLijst = minderjarigeLijst.OrderByDescending(x => x.Voornaam).ThenByDescending(x => x.Naam).ToList();
+                InitListViews();
+            }
+        }
+
+        private void lsvDiensten_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (e.Column == 0)
+            {
+                ColumnProperty columnProperty = (ColumnProperty)lsvMinderjarige.Columns[e.Column].Tag;
+                string name = lsvDiensten.Columns[e.Column].Name;
+                columnProperty.Ascending = !columnProperty.Ascending;
+                lsvDiensten.Columns[e.Column].Tag = columnProperty;
+
+                if (columnProperty.Ascending)
+                    dienstLijst = dienstLijst.OrderBy(x => x.Naam).ToList();
+                else
+                    dienstLijst = dienstLijst.OrderByDescending(x => x.Naam).ToList();
+                InitListViews();
+            }
+        }
+
+        private void lsvVoorzieningen_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (e.Column == 0)
+            {
+                ColumnProperty columnProperty = (ColumnProperty)lsvMinderjarige.Columns[e.Column].Tag;
+                string name = lsvVoorzieningen.Columns[e.Column].Name;
+                columnProperty.Ascending = !columnProperty.Ascending;
+                lsvVoorzieningen.Columns[e.Column].Tag = columnProperty;
+
+                if (columnProperty.Ascending)
+                    aanmeldpuntLijst = aanmeldpuntLijst.OrderBy(x => x.Naam).ToList();
+                else
+                    aanmeldpuntLijst = aanmeldpuntLijst.OrderByDescending(x => x.Naam).ToList();
+                InitListViews();
+            }
+        }
+
+        private void statistiekenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmStatistics frmStatistics = new FrmStatistics(controller);
+            frmStatistics.Show();
+        }
+
+        private void btnConsulentToevoegen_Click(object sender, EventArgs e)
+        {
+            Consulent newConsulent = new Consulent(0, "", "");
+            FrmConsulentAanpassen frmConsulentAanpassen = new FrmConsulentAanpassen(controller, newConsulent);
+            frmConsulentAanpassen.ShowDialog();
+        }
+
+        private void btnZoeken_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(txtZoeken.Text))
+            {
+                string naamZoeken = txtZoeken.Text;
+                List<Minderjarige> minderjarigeResults = controller.FindMinderjarigeAanmelding(naamZoeken);
+
+                if (minderjarigeResults.Count() != 0)
+                {
+                    FrmSearchResults frmSearchResults = new FrmSearchResults(controller, minderjarigeResults, naamZoeken);
+                    frmSearchResults.ShowDialog();
+                }
+                else
+                    MessageBox.Show("Geen resultaten gevonden!", "Zoekresultaten");
+            }
         }
     }
 }

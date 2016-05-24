@@ -12,7 +12,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
     {
         public SqlConnectionStringBuilder Builder { get; private set; }
         private Consulent dummyConsulent = new Consulent(0, "", "");
-        
+
         public DbQueries()
         {
             Builder = new SqlConnectionStringBuilder()
@@ -42,9 +42,9 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
                     {
                         return false;
                     }
-                }        
+                }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return false;
             }
@@ -216,6 +216,37 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
             return GetCount(commandText);
         }
 
+        public List<MinderjarigeAanmeldpunt> GetMinderjarigeBetweenDatesInDienst(Dienst dienst, DateTime van, DateTime tot)
+        {
+            string vanString = van.Date.ToString("yyyyMMdd");
+            string totString = tot.Date.ToString("yyyyMMdd");
+
+            string commandText = "SELECT* FROM MinderjarigeAanmeldpunt ma "
+                                + "JOIN ConsulentDienst cd ON ma.consulentID = cd.consulentID "
+                                + "WHERE cd.dienstID = " + dienst.ID + " "
+                                + "AND ((datumAanmelding > '" + vanString + "' "
+                                + "AND datumOpneming < '" + totString + "') "
+                                + "OR (datumAanmelding > '" + vanString + "' "
+                                + "AND datumOpneming IS NULL)) ";
+
+            return GetList<MinderjarigeAanmeldpunt>(GetMinderjarigenInAanmeldpunten, commandText);
+        }
+
+        public List<MinderjarigeAanmeldpunt> GetMinderjarigeBetweenDatesInAanmeldpunt(Aanmeldpunt aanmeldpunt, DateTime van, DateTime tot)
+        {
+            string vanString = van.Date.ToString("yyyyMMdd");
+            string totString = tot.Date.ToString("yyyyMMdd");
+
+            string commandText = "SELECT* FROM MinderjarigeAanmeldpunt "
+                                + "WHERE aanmeldpuntID = " + aanmeldpunt.ID + " "
+                                + "AND ((datumAanmelding > '" + vanString + "' "
+                                + "AND datumOpneming < '" + totString + "') "
+                                + "OR (datumAanmelding > '" + vanString + "' "
+                                + "AND datumOpneming IS NULL)) ";
+
+            return GetList<MinderjarigeAanmeldpunt>(GetMinderjarigenInAanmeldpunten, commandText);
+        }
+
         private int GetCount(string commandText)
         {
             int count = 0;
@@ -240,6 +271,13 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
             return count;
         }
 
+        public List<Minderjarige> FindMinderjarigeAanmelding(string naamZoeken)
+        {
+            string commandText = "SELECT * FROM Minderjarige WHERE minderjarigeVoornaam "
+                    + "LIKE '%" + naamZoeken + "%' "
+                    + "OR minderjarigeNaam LIKE '%" + naamZoeken + "%'";
+            return GetList<Minderjarige>(GetMinderjarigen, commandText);
+        }
 
         private List<T> GetList<T>(Func<SqlCommand, List<T>> GetResults, string commandText)
         {
@@ -301,6 +339,21 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
             }
 
                 return consulentLijst;
+        }
+
+        public void AddNewConsulent(Consulent consulent, Dienst dienst)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetConsulentActief(Consulent consulent, bool actief)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditConsulent(Consulent oldConsulent, Consulent newConsulent)
+        {
+            throw new NotImplementedException();
         }
 
         private List<Dienst> GetDiensten(SqlCommand command)
@@ -597,5 +650,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
                 }
             }
         }
+
+
     }
 }

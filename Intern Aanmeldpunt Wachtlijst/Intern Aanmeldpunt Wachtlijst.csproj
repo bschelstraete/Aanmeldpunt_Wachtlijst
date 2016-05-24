@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Controller\Controller.cs" />
+    <Compile Include="Classes\Controller\CsvBuilder.cs" />
     <Compile Include="Classes\Database\DbQueries.cs" />
     <Compile Include="Classes\Model\Aanmeldpunt.cs" />
     <Compile Include="Classes\Model\ColumnProperty.cs" />
@@ -86,6 +88,18 @@
     <Compile Include="Classes\UI\FrmMinderjarige.Designer.cs">
       <DependentUpon>FrmMinderjarige.cs</DependentUpon>
     </Compile>
+    <Compile Include="Classes\UI\FrmSearchResults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Classes\UI\FrmSearchResults.Designer.cs">
+      <DependentUpon>FrmSearchResults.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\UI\FrmStatistics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Classes\UI\FrmStatistics.Designer.cs">
+      <DependentUpon>FrmStatistics.cs</DependentUpon>
+    </Compile>
     <Compile Include="Classes\UI\FrmVoorziening.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +128,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Classes\UI\FrmMinderjarige.resx">
       <DependentUpon>FrmMinderjarige.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Classes\UI\FrmSearchResults.resx">
+      <DependentUpon>FrmSearchResults.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Classes\UI\FrmStatistics.resx">
+      <DependentUpon>FrmStatistics.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Classes\UI\FrmVoorziening.resx">
       <DependentUpon>FrmVoorziening.cs</DependentUpon>
@@ -149,6 +169,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Disconnected.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1464102238_Save.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

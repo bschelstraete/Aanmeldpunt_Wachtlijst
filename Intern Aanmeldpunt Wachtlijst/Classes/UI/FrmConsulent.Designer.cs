@@ -128,12 +128,13 @@
             // 
             // btnEditConsulent
             // 
-            this.btnEditConsulent.Location = new System.Drawing.Point(16, 63);
+            this.btnEditConsulent.Location = new System.Drawing.Point(12, 63);
             this.btnEditConsulent.Name = "btnEditConsulent";
             this.btnEditConsulent.Size = new System.Drawing.Size(123, 23);
             this.btnEditConsulent.TabIndex = 5;
             this.btnEditConsulent.Text = "Consulent aanpassen";
             this.btnEditConsulent.UseVisualStyleBackColor = true;
+            this.btnEditConsulent.Click += new System.EventHandler(this.btnEditConsulent_Click);
             // 
             // FrmConsulent
             // 

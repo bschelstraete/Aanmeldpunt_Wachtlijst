@@ -22,6 +22,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         {
             this.controller = controller;
             this.activeDienst = activeDienst;
+
             lblOverzicht.Text = "Overzicht " + activeDienst.Naam;
             minderJarigenInDienst.AddRange(controller.GetMinderjarigenInDienst(activeDienst.ID));
 
@@ -196,6 +197,22 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         public void UpdateVoorziening()
         {
             //DoNothing
+        }
+
+        private void btnOverzichtOpslaan_Click(object sender, EventArgs e)
+        {
+            string output = "";
+
+            FolderBrowserDialog folderselecta = new FolderBrowserDialog();
+            if (folderselecta.ShowDialog() == DialogResult.OK)
+                output = folderselecta.SelectedPath;
+
+            if (!String.IsNullOrEmpty(output))
+            {
+                controller.WriteToFile(minderJarigenInDienst, output);
+                MessageBox.Show("Succesvol opgeslagen!", "Overzicht opslaan");
+            }
+                
         }
     }
 }

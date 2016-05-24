@@ -38,6 +38,7 @@
             this.btnVoorzieningToevoegen = new System.Windows.Forms.ToolStripMenuItem();
             this.btnMinderjarigen = new System.Windows.Forms.ToolStripMenuItem();
             this.btnOverzichtMinderjarigen = new System.Windows.Forms.ToolStripMenuItem();
+            this.statistiekenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.icoConnected = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlNieuweAanmelding = new System.Windows.Forms.GroupBox();
             this.btnClear = new System.Windows.Forms.Button();
@@ -70,6 +71,9 @@
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.erpAanmelding = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtZoeken = new System.Windows.Forms.TextBox();
+            this.btnZoeken = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
             this.mnsMainMenu.SuspendLayout();
             this.pnlNieuweAanmelding.SuspendLayout();
             this.pnlOverzichtDiensten.SuspendLayout();
@@ -84,6 +88,7 @@
             this.btnDienst,
             this.btnVoorziening,
             this.btnMinderjarigen,
+            this.statistiekenToolStripMenuItem,
             this.icoConnected});
             this.mnsMainMenu.Location = new System.Drawing.Point(0, 0);
             this.mnsMainMenu.Name = "mnsMainMenu";
@@ -112,6 +117,7 @@
             this.btnConsulentToevoegen.Name = "btnConsulentToevoegen";
             this.btnConsulentToevoegen.Size = new System.Drawing.Size(228, 22);
             this.btnConsulentToevoegen.Text = "Nieuwe consulent toevoegen";
+            this.btnConsulentToevoegen.Click += new System.EventHandler(this.btnConsulentToevoegen_Click);
             // 
             // btnVoorziening
             // 
@@ -151,6 +157,13 @@
             this.btnOverzichtMinderjarigen.Text = "Overzicht minderjarigen";
             this.btnOverzichtMinderjarigen.Click += new System.EventHandler(this.btnOverzichtMinderjarigen_Click);
             // 
+            // statistiekenToolStripMenuItem
+            // 
+            this.statistiekenToolStripMenuItem.Name = "statistiekenToolStripMenuItem";
+            this.statistiekenToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
+            this.statistiekenToolStripMenuItem.Text = "Statistieken";
+            this.statistiekenToolStripMenuItem.Click += new System.EventHandler(this.statistiekenToolStripMenuItem_Click);
+            // 
             // icoConnected
             // 
             this.icoConnected.Name = "icoConnected";
@@ -161,6 +174,9 @@
             // 
             this.pnlNieuweAanmelding.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlNieuweAanmelding.Controls.Add(this.label7);
+            this.pnlNieuweAanmelding.Controls.Add(this.btnZoeken);
+            this.pnlNieuweAanmelding.Controls.Add(this.txtZoeken);
             this.pnlNieuweAanmelding.Controls.Add(this.btnClear);
             this.pnlNieuweAanmelding.Controls.Add(this.btnSubmit);
             this.pnlNieuweAanmelding.Controls.Add(this.cbbAanmeldpunt);
@@ -344,6 +360,7 @@
             this.lsvDiensten.TabIndex = 0;
             this.lsvDiensten.UseCompatibleStateImageBehavior = false;
             this.lsvDiensten.View = System.Windows.Forms.View.Details;
+            this.lsvDiensten.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lsvDiensten_ColumnClick);
             this.lsvDiensten.DoubleClick += new System.EventHandler(this.lsvDiensten_DoubleClick);
             // 
             // columnHeader1
@@ -353,7 +370,7 @@
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Aantal jongeren in wachtlijst";
+            this.columnHeader2.Text = "Aantal aanmeldingen";
             this.columnHeader2.Width = 185;
             // 
             // pnlOverzichtVoorziening
@@ -385,6 +402,7 @@
             this.lsvVoorzieningen.TabIndex = 1;
             this.lsvVoorzieningen.UseCompatibleStateImageBehavior = false;
             this.lsvVoorzieningen.View = System.Windows.Forms.View.Details;
+            this.lsvVoorzieningen.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lsvVoorzieningen_ColumnClick);
             this.lsvVoorzieningen.DoubleClick += new System.EventHandler(this.lsvVoorzieningen_DoubleClick);
             // 
             // columnHeader3
@@ -412,6 +430,7 @@
             // 
             this.pnlOverzichtMinderjarigen.Controls.Add(this.btnOpenMinderjarige);
             this.pnlOverzichtMinderjarigen.Controls.Add(this.lsvMinderjarige);
+            this.pnlOverzichtMinderjarigen.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pnlOverzichtMinderjarigen.Location = new System.Drawing.Point(12, 217);
             this.pnlOverzichtMinderjarigen.Name = "pnlOverzichtMinderjarigen";
             this.pnlOverzichtMinderjarigen.Size = new System.Drawing.Size(506, 337);
@@ -443,6 +462,7 @@
             this.lsvMinderjarige.TabIndex = 0;
             this.lsvMinderjarige.UseCompatibleStateImageBehavior = false;
             this.lsvMinderjarige.View = System.Windows.Forms.View.Details;
+            this.lsvMinderjarige.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lsvMinderjarige_ColumnClick);
             this.lsvMinderjarige.DoubleClick += new System.EventHandler(this.lsvMinderjarige_DoubleClick);
             // 
             // columnHeader5
@@ -458,6 +478,32 @@
             // erpAanmelding
             // 
             this.erpAanmelding.ContainerControl = this;
+            // 
+            // txtZoeken
+            // 
+            this.txtZoeken.Location = new System.Drawing.Point(325, 125);
+            this.txtZoeken.Name = "txtZoeken";
+            this.txtZoeken.Size = new System.Drawing.Size(175, 20);
+            this.txtZoeken.TabIndex = 22;
+            // 
+            // btnZoeken
+            // 
+            this.btnZoeken.Location = new System.Drawing.Point(425, 150);
+            this.btnZoeken.Name = "btnZoeken";
+            this.btnZoeken.Size = new System.Drawing.Size(75, 23);
+            this.btnZoeken.TabIndex = 23;
+            this.btnZoeken.Text = "Zoeken";
+            this.btnZoeken.UseVisualStyleBackColor = true;
+            this.btnZoeken.Click += new System.EventHandler(this.btnZoeken_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(322, 101);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(105, 13);
+            this.label7.TabIndex = 24;
+            this.label7.Text = "Minderjarige zoeken:";
             // 
             // FrmMain
             // 
@@ -529,6 +575,10 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ErrorProvider erpAanmelding;
+        private System.Windows.Forms.ToolStripMenuItem statistiekenToolStripMenuItem;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnZoeken;
+        private System.Windows.Forms.TextBox txtZoeken;
     }
 }
 
