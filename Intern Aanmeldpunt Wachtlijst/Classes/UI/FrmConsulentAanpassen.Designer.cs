@@ -147,7 +147,6 @@
             this.Controls.Add(this.rbtActief);
             this.Name = "FrmConsulentAanpassen";
             this.Text = "Consulent aanpassen";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmConsulentAanpassen_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.erpNaam)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

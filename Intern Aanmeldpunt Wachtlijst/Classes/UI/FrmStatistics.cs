@@ -219,5 +219,19 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
                 Init();
             }
         }
+
+        private void lblAanmeldingen_Click(object sender, EventArgs e)
+        {
+            if(splContainerAanmeldingen.Visible)
+            {
+                lblAanmeldingen.Text = "Statistieken i.v.m. Aanmeldingen    +";
+                splContainerAanmeldingen.Visible = false;
+            }
+            else
+            {
+                lblAanmeldingen.Text = "Statistieken i.v.m. Aanmeldingen    -";
+                splContainerAanmeldingen.Visible = true;
+            }
+        }
     }
 }

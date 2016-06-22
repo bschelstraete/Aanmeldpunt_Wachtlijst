@@ -39,6 +39,9 @@
             this.btnOverzichtMinderjarige = new System.Windows.Forms.Button();
             this.lblAantalMinderjarigen = new System.Windows.Forms.Label();
             this.btnEditConsulent = new System.Windows.Forms.Button();
+            this.btnAanmeldingAanpassen = new System.Windows.Forms.Button();
+            this.btnSetActiveAanmelding = new System.Windows.Forms.Button();
+            this.btnDeleteAanmelding = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lsvOverzicht
@@ -53,10 +56,10 @@
             this.clmWachttijd});
             this.lsvOverzicht.FullRowSelect = true;
             this.lsvOverzicht.GridLines = true;
-            this.lsvOverzicht.Location = new System.Drawing.Point(12, 92);
+            this.lsvOverzicht.Location = new System.Drawing.Point(12, 98);
             this.lsvOverzicht.MultiSelect = false;
             this.lsvOverzicht.Name = "lsvOverzicht";
-            this.lsvOverzicht.Size = new System.Drawing.Size(693, 285);
+            this.lsvOverzicht.Size = new System.Drawing.Size(693, 275);
             this.lsvOverzicht.TabIndex = 0;
             this.lsvOverzicht.UseCompatibleStateImageBehavior = false;
             this.lsvOverzicht.View = System.Windows.Forms.View.Details;
@@ -99,7 +102,7 @@
             // 
             // btnOverzichtVoorziening
             // 
-            this.btnOverzichtVoorziening.Location = new System.Drawing.Point(580, 63);
+            this.btnOverzichtVoorziening.Location = new System.Drawing.Point(580, 68);
             this.btnOverzichtVoorziening.Name = "btnOverzichtVoorziening";
             this.btnOverzichtVoorziening.Size = new System.Drawing.Size(125, 23);
             this.btnOverzichtVoorziening.TabIndex = 2;
@@ -109,7 +112,7 @@
             // 
             // btnOverzichtMinderjarige
             // 
-            this.btnOverzichtMinderjarige.Location = new System.Drawing.Point(451, 63);
+            this.btnOverzichtMinderjarige.Location = new System.Drawing.Point(451, 68);
             this.btnOverzichtMinderjarige.Name = "btnOverzichtMinderjarige";
             this.btnOverzichtMinderjarige.Size = new System.Drawing.Size(123, 23);
             this.btnOverzichtMinderjarige.TabIndex = 3;
@@ -120,7 +123,7 @@
             // lblAantalMinderjarigen
             // 
             this.lblAantalMinderjarigen.AutoSize = true;
-            this.lblAantalMinderjarigen.Location = new System.Drawing.Point(12, 384);
+            this.lblAantalMinderjarigen.Location = new System.Drawing.Point(13, 73);
             this.lblAantalMinderjarigen.Name = "lblAantalMinderjarigen";
             this.lblAantalMinderjarigen.Size = new System.Drawing.Size(165, 13);
             this.lblAantalMinderjarigen.TabIndex = 4;
@@ -128,7 +131,7 @@
             // 
             // btnEditConsulent
             // 
-            this.btnEditConsulent.Location = new System.Drawing.Point(12, 63);
+            this.btnEditConsulent.Location = new System.Drawing.Point(582, 379);
             this.btnEditConsulent.Name = "btnEditConsulent";
             this.btnEditConsulent.Size = new System.Drawing.Size(123, 23);
             this.btnEditConsulent.TabIndex = 5;
@@ -136,11 +139,44 @@
             this.btnEditConsulent.UseVisualStyleBackColor = true;
             this.btnEditConsulent.Click += new System.EventHandler(this.btnEditConsulent_Click);
             // 
+            // btnAanmeldingAanpassen
+            // 
+            this.btnAanmeldingAanpassen.Location = new System.Drawing.Point(12, 379);
+            this.btnAanmeldingAanpassen.Name = "btnAanmeldingAanpassen";
+            this.btnAanmeldingAanpassen.Size = new System.Drawing.Size(135, 23);
+            this.btnAanmeldingAanpassen.TabIndex = 18;
+            this.btnAanmeldingAanpassen.Text = "Aanmelding aanpassen";
+            this.btnAanmeldingAanpassen.UseVisualStyleBackColor = true;
+            this.btnAanmeldingAanpassen.Click += new System.EventHandler(this.btnAanmeldingAanpassen_Click);
+            // 
+            // btnSetActiveAanmelding
+            // 
+            this.btnSetActiveAanmelding.Location = new System.Drawing.Point(153, 379);
+            this.btnSetActiveAanmelding.Name = "btnSetActiveAanmelding";
+            this.btnSetActiveAanmelding.Size = new System.Drawing.Size(138, 23);
+            this.btnSetActiveAanmelding.TabIndex = 17;
+            this.btnSetActiveAanmelding.Text = "Aanmelding actief/inactief";
+            this.btnSetActiveAanmelding.UseVisualStyleBackColor = true;
+            this.btnSetActiveAanmelding.Click += new System.EventHandler(this.btnSetActiveAanmelding_Click);
+            // 
+            // btnDeleteAanmelding
+            // 
+            this.btnDeleteAanmelding.Location = new System.Drawing.Point(297, 379);
+            this.btnDeleteAanmelding.Name = "btnDeleteAanmelding";
+            this.btnDeleteAanmelding.Size = new System.Drawing.Size(127, 23);
+            this.btnDeleteAanmelding.TabIndex = 16;
+            this.btnDeleteAanmelding.Text = "Aanmelding verwijderen";
+            this.btnDeleteAanmelding.UseVisualStyleBackColor = true;
+            this.btnDeleteAanmelding.Click += new System.EventHandler(this.btnDeleteAanmelding_Click);
+            // 
             // FrmConsulent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(717, 404);
+            this.ClientSize = new System.Drawing.Size(717, 410);
+            this.Controls.Add(this.btnAanmeldingAanpassen);
+            this.Controls.Add(this.btnSetActiveAanmelding);
+            this.Controls.Add(this.btnDeleteAanmelding);
             this.Controls.Add(this.btnEditConsulent);
             this.Controls.Add(this.lblAantalMinderjarigen);
             this.Controls.Add(this.btnOverzichtMinderjarige);
@@ -167,5 +203,8 @@
         private System.Windows.Forms.Label lblAantalMinderjarigen;
         private System.Windows.Forms.ColumnHeader clmWachttijd;
         private System.Windows.Forms.Button btnEditConsulent;
+        private System.Windows.Forms.Button btnAanmeldingAanpassen;
+        private System.Windows.Forms.Button btnSetActiveAanmelding;
+        private System.Windows.Forms.Button btnDeleteAanmelding;
     }
 }

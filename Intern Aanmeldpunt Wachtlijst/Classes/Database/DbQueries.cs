@@ -101,6 +101,36 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
             return GetList<Aanmeldpunt>(GetAanmeldpunten, commandText);
         }
 
+        public void EditAanmelding(MinderjarigeAanmeldpunt mja, MinderjarigeAanmeldpunt newAanmelding)
+        {
+            string commandText = "";
+
+            if(newAanmelding.DatumOpneming > new DateTime(1970, 1, 1))
+                commandText = "UPDATE MinderjarigeAanmeldpunt"
+                                + " SET aanmeldpuntID = @aanmeldpunt, consulentID = @consulentID, datumAanmelding = @datumAanmelding, datumOpneming = @datumOpneming"
+                                + " WHERE minderjarigeID = @minderjarigeID";
+            else
+                commandText = "UPDATE MinderjarigeAanmeldpunt"
+                                + " SET aanmeldpuntID = @aanmeldpunt, consulentID = @consulentID, datumAanmelding = @datumAanmelding"
+                                + " WHERE minderjarigeID = @minderjarigeID";
+
+            using (SqlConnection connection = new SqlConnection(Builder.ConnectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = commandText;
+                    command.Parameters.Add(new SqlParameter("aanmeldpunt", newAanmelding.Aanmeldpunt.ID));
+                    command.Parameters.Add(new SqlParameter("consulentID", newAanmelding.Consulent.ID));
+                    command.Parameters.Add(new SqlParameter("datumAanmelding", newAanmelding.DatumAanmelding));
+                    command.Parameters.Add(new SqlParameter("datumOpneming", newAanmelding.DatumOpneming));
+                    command.Parameters.Add(new SqlParameter("minderjarigeID", mja.Minderjarige.ID));
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
         public Consulent GetConsulent(int id)
         {
             string commandText = "SELECT * FROM Consulent WHERE consulentID = " + id;
@@ -271,6 +301,13 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
             return count;
         }
 
+        public int GetLastIdMinderjarige()
+        {
+            string commandText = "SELECT TOP 1 * FROM Minderjarige "
+                                + "ORDER BY Minderjarige.minderjarigeID DESC";
+            return GetList<Minderjarige>(GetMinderjarigen, commandText).FirstOrDefault().ID;
+        }
+
         public List<Minderjarige> FindMinderjarigeAanmelding(string naamZoeken)
         {
             string commandText = "SELECT * FROM Minderjarige WHERE minderjarigeVoornaam "
@@ -343,17 +380,68 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
 
         public void AddNewConsulent(Consulent consulent, Dienst dienst)
         {
-            throw new NotImplementedException();
+            int ID = GetAllConsulenten().Last().ID + 1;
+            string commandText = "INSERT INTO Consulent "
+                                + "VALUES(@ID, @naam, @voornaam)";
+
+            using (SqlConnection connection = new SqlConnection(Builder.ConnectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = commandText;
+                    command.Parameters.Add(new SqlParameter("ID", ID));
+                    command.Parameters.Add(new SqlParameter("naam", consulent.Naam));
+                    command.Parameters.Add(new SqlParameter("voornaam", consulent.Voornaam));
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            InsertConsulentIntoDienst(ID, dienst.ID);
+        }
+
+        public void InsertConsulentIntoDienst(int consulentID, int dienstID)
+        {
+            string commandText = "INSERT INTO ConsulentDienst "
+                    + "VALUES(@consulentID, @dienstID)";
+            using (SqlConnection connection = new SqlConnection(Builder.ConnectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = commandText;
+                    command.Parameters.Add(new SqlParameter("consulentID", consulentID));
+                    command.Parameters.Add(new SqlParameter("dienstID", dienstID));
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
         }
 
         public void SetConsulentActief(Consulent consulent, bool actief)
         {
-            throw new NotImplementedException();
+            //
         }
 
         public void EditConsulent(Consulent oldConsulent, Consulent newConsulent)
         {
-            throw new NotImplementedException();
+            string commandText = "UPDATE Consulent "
+                         + "SET consulentNaam = @naam, consulentVoornaam = @voornaam "
+                         +"WHERE consulentID = @ID";
+
+            using (SqlConnection connection = new SqlConnection(Builder.ConnectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = commandText;
+                    command.Parameters.Add(new SqlParameter("naam", newConsulent.Naam));
+                    command.Parameters.Add(new SqlParameter("voornaam", newConsulent.Voornaam));
+                    command.Parameters.Add(new SqlParameter("ID", oldConsulent.ID));
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
         }
 
         private List<Dienst> GetDiensten(SqlCommand command)

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -114,7 +115,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
 
         private void btnVoorzieningAanpassen_Click(object sender, EventArgs e)
         {
-            FrmVoorzieningAanpassen frmVoorzieningAanpassen = new FrmVoorzieningAanpassen(controller, aanmeldpunt);
+            FrmVoorzieningAanpassen frmVoorzieningAanpassen = new FrmVoorzieningAanpassen(controller, aanmeldpunt, "edit");
             frmVoorzieningAanpassen.ShowDialog();
         }
 
@@ -144,6 +145,65 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         public void UpdateVoorziening()
         {
             //DoNothing
+        }
+
+        private void btnAanmeldingAanpassen_Click(object sender, EventArgs e)
+        {
+            if (lsvVoorziening.SelectedItems.Count != 0)
+            {
+                MinderjarigeAanmeldpunt selectedmja = (MinderjarigeAanmeldpunt)lsvVoorziening.SelectedItems[0].Tag;
+                FrmAanmeldingAanpassen frmAanmeldingAanpassen = new FrmAanmeldingAanpassen(controller, selectedmja);
+                frmAanmeldingAanpassen.ShowDialog();
+            }
+        }
+
+        private void btnSetActiveAanmelding_Click(object sender, EventArgs e)
+        {
+            if (lsvVoorziening.SelectedItems.Count != 0)
+            {
+                MinderjarigeAanmeldpunt mja = (MinderjarigeAanmeldpunt)lsvVoorziening.SelectedItems[0].Tag;
+                string msgString = mja.AanmeldingActief ? msgString = "Bent u zeker dat u de aanmelding op inactief wilt zetten?" : "Bent u zeker dat u de aanmelding op actief wilt zetten?";
+
+                if (MessageBox.Show(msgString, "Aanmelding actief/inactief", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        controller.SetAanmeldingActief(mja, !mja.AanmeldingActief);
+                        MessageBox.Show("De aanmelding is gewijzigd.", "Wijziging gelukt!");
+                        InitListView();
+                    }
+                    catch (SqlException)
+                    {
+                        MessageBox.Show("Er is iets fout gelopen bij het wijzigen van de aanmelding, probeer later eens opnieuw.", "Wijziging mislukt!");
+                    }
+                }
+            }
+        }
+
+        private void btnDeleteAanmelding_Click(object sender, EventArgs e)
+        {
+            if (lsvVoorziening.SelectedItems.Count != 0)
+            {
+                MinderjarigeAanmeldpunt mja = (MinderjarigeAanmeldpunt)lsvVoorziening.SelectedItems[0].Tag;
+                if (MessageBox.Show("Bent u zeker dat u de aanmelding wilt verwijderen?", "Aanmelding verwijderen", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        controller.DeleteAanmelding(mja);
+                        MessageBox.Show("De aanmelding is verwijderd.", "Verwijderen gelukt!");
+                        InitListView();
+                    }
+                    catch (SqlException)
+                    {
+                        MessageBox.Show("Er is iets fout gelopen bij het verwijderen van de aanmelding, probeer later eens opnieuw.", "Verwijderen mislukt!");
+                    }
+                }
+            }
+        }
+
+        private void lsvVoorziening_DoubleClick(object sender, EventArgs e)
+        {
+            btnOverzichtMJ_Click(sender, e);
         }
     }
 }

@@ -44,6 +44,7 @@
             this.btnSetActiveAanmelding = new System.Windows.Forms.Button();
             this.btnDeleteAanmelding = new System.Windows.Forms.Button();
             this.btnOverzichtOpslaan = new System.Windows.Forms.Button();
+            this.btnAanmeldingAanpassen = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblOverzicht
@@ -141,7 +142,7 @@
             // lblAantalAanmeldingen
             // 
             this.lblAantalAanmeldingen.AutoSize = true;
-            this.lblAantalAanmeldingen.Location = new System.Drawing.Point(13, 417);
+            this.lblAantalAanmeldingen.Location = new System.Drawing.Point(13, 56);
             this.lblAantalAanmeldingen.Name = "lblAantalAanmeldingen";
             this.lblAantalAanmeldingen.Size = new System.Drawing.Size(165, 13);
             this.lblAantalAanmeldingen.TabIndex = 6;
@@ -150,7 +151,7 @@
             // lblAverageWachttijd
             // 
             this.lblAverageWachttijd.AutoSize = true;
-            this.lblAverageWachttijd.Location = new System.Drawing.Point(261, 417);
+            this.lblAverageWachttijd.Location = new System.Drawing.Point(261, 56);
             this.lblAverageWachttijd.Name = "lblAverageWachttijd";
             this.lblAverageWachttijd.Size = new System.Drawing.Size(114, 13);
             this.lblAverageWachttijd.TabIndex = 7;
@@ -158,7 +159,7 @@
             // 
             // btnSetActiveAanmelding
             // 
-            this.btnSetActiveAanmelding.Location = new System.Drawing.Point(145, 51);
+            this.btnSetActiveAanmelding.Location = new System.Drawing.Point(153, 412);
             this.btnSetActiveAanmelding.Name = "btnSetActiveAanmelding";
             this.btnSetActiveAanmelding.Size = new System.Drawing.Size(138, 23);
             this.btnSetActiveAanmelding.TabIndex = 10;
@@ -168,7 +169,7 @@
             // 
             // btnDeleteAanmelding
             // 
-            this.btnDeleteAanmelding.Location = new System.Drawing.Point(12, 51);
+            this.btnDeleteAanmelding.Location = new System.Drawing.Point(297, 412);
             this.btnDeleteAanmelding.Name = "btnDeleteAanmelding";
             this.btnDeleteAanmelding.Size = new System.Drawing.Size(127, 23);
             this.btnDeleteAanmelding.TabIndex = 9;
@@ -186,11 +187,22 @@
             this.btnOverzichtOpslaan.UseVisualStyleBackColor = true;
             this.btnOverzichtOpslaan.Click += new System.EventHandler(this.btnOverzichtOpslaan_Click);
             // 
+            // btnAanmeldingAanpassen
+            // 
+            this.btnAanmeldingAanpassen.Location = new System.Drawing.Point(12, 412);
+            this.btnAanmeldingAanpassen.Name = "btnAanmeldingAanpassen";
+            this.btnAanmeldingAanpassen.Size = new System.Drawing.Size(135, 23);
+            this.btnAanmeldingAanpassen.TabIndex = 12;
+            this.btnAanmeldingAanpassen.Text = "Aanmelding aanpassen";
+            this.btnAanmeldingAanpassen.UseVisualStyleBackColor = true;
+            this.btnAanmeldingAanpassen.Click += new System.EventHandler(this.btnAanmeldingAanpassen_Click);
+            // 
             // FrmDienst
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(838, 439);
+            this.Controls.Add(this.btnAanmeldingAanpassen);
             this.Controls.Add(this.btnOverzichtOpslaan);
             this.Controls.Add(this.btnSetActiveAanmelding);
             this.Controls.Add(this.btnDeleteAanmelding);
@@ -226,5 +238,6 @@
         private System.Windows.Forms.Button btnDeleteAanmelding;
         private System.Windows.Forms.ColumnHeader clmWachttijd;
         private System.Windows.Forms.Button btnOverzichtOpslaan;
+        private System.Windows.Forms.Button btnAanmeldingAanpassen;
     }
 }

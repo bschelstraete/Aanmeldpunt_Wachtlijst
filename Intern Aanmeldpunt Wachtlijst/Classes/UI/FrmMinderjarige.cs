@@ -23,6 +23,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         {
             InitializeComponent();
             Init(controller, minderjarigeInAanmeldpunt);
+            controller.RegisterObserver(this);
         }
 
         private void Init(Controller.Controller controller, List<MinderjarigeAanmeldpunt> minderjarigeInAanmeldpunt)
@@ -193,6 +194,16 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         public void UpdateDeletedAanmelding()
         {
             InitListView();
+        }
+
+        private void btnAanmeldingAanpassen_Click(object sender, EventArgs e)
+        {
+            if (lsvMinderjarige.SelectedItems.Count != 0)
+            {
+                MinderjarigeAanmeldpunt selectedmja = (MinderjarigeAanmeldpunt)((Object[])lsvMinderjarige.SelectedItems[0].Tag)[0];
+                FrmAanmeldingAanpassen frmAanmeldingAanpassen = new FrmAanmeldingAanpassen(controller, selectedmja);
+                frmAanmeldingAanpassen.ShowDialog();
+            }           
         }
     }
 }

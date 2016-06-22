@@ -379,7 +379,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst
         private void btnVoorzieningToevoegen_Click(object sender, EventArgs e)
         {
             Aanmeldpunt newAanmeldpunt = new Aanmeldpunt(0, "", "", 0, "", "", true);
-            FrmVoorzieningAanpassen frmvoorzieningAanpassen = new FrmVoorzieningAanpassen(controller, newAanmeldpunt);
+            FrmVoorzieningAanpassen frmvoorzieningAanpassen = new FrmVoorzieningAanpassen(controller, newAanmeldpunt, "create");
             frmvoorzieningAanpassen.ShowDialog();
         }
 
@@ -449,7 +449,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst
         private void btnConsulentToevoegen_Click(object sender, EventArgs e)
         {
             Consulent newConsulent = new Consulent(0, "", "");
-            FrmConsulentAanpassen frmConsulentAanpassen = new FrmConsulentAanpassen(controller, newConsulent);
+            FrmConsulentAanpassen frmConsulentAanpassen = new FrmConsulentAanpassen(controller, newConsulent, "create");
             frmConsulentAanpassen.ShowDialog();
         }
 

@@ -102,6 +102,12 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Controller
             return wachtijdCount;
         }
 
+        public void EditAanmelding(MinderjarigeAanmeldpunt mja, MinderjarigeAanmeldpunt newAanmelding)
+        {
+            dbQueries.EditAanmelding(mja, newAanmelding);
+            NotifyObserverDeletedAanmelding();
+        }
+
         public List<Minderjarige> GetAllMinderjarige()
         {
             return dbQueries.GetAllMinderjarige();
@@ -176,7 +182,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Controller
 
         public void InsertNewMinderjarige(string naam, string voornaam)
         {
-            int ID = GetAllMinderjarige().Count + 1;
+            int ID = dbQueries.GetLastIdMinderjarige() + 1;
             Minderjarige minderjarige = new Minderjarige(ID, naam, voornaam);
 
             dbQueries.InsertNewMinderjarige(minderjarige);
@@ -203,6 +209,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Controller
         public void AddNewConsulent(Consulent consulent, Dienst dienst)
         {
             dbQueries.AddNewConsulent(consulent, dienst);
+            NotifyObserverDeletedAanmelding();
         }
 
         public void SetConsulentActief(Consulent consulent, bool actief)
@@ -213,6 +220,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Controller
         public void EditConsulent(Consulent oldConsulent, Consulent newConsulent)
         {
             dbQueries.EditConsulent(oldConsulent, newConsulent);
+            NotifyObserverDeletedAanmelding();
         }
 
         public void SetAanmeldingActief(MinderjarigeAanmeldpunt mja, bool actief)

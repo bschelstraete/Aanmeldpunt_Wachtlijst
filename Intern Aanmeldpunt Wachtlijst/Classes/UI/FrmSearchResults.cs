@@ -51,7 +51,19 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
 
         private void btnOpenMJ_Click(object sender, EventArgs e)
         {
+            if (lsvResults.SelectedItems.Count != 0)
+            {
+                Minderjarige mj = (Minderjarige)lsvResults.SelectedItems[0].Tag;
+                List<MinderjarigeAanmeldpunt> minderjarigeAanmeldingen = controller.GetMinderjarigeInAanmeldpunten(mj.ID);
+                FrmMinderjarige frmMinderjarige = new FrmMinderjarige(controller, minderjarigeAanmeldingen);
+                frmMinderjarige.Show();
+            }
+            
+        }
 
+        private void lsvResults_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            btnOpenMJ_Click(sender, e);
         }
     }
 }

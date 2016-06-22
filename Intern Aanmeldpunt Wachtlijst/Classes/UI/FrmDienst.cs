@@ -23,6 +23,8 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
             this.controller = controller;
             this.activeDienst = activeDienst;
 
+            controller.RegisterObserver(this);
+
             lblOverzicht.Text = "Overzicht " + activeDienst.Naam;
             minderJarigenInDienst.AddRange(controller.GetMinderjarigenInDienst(activeDienst.ID));
 
@@ -213,6 +215,16 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
                 MessageBox.Show("Succesvol opgeslagen!", "Overzicht opslaan");
             }
                 
+        }
+
+        private void btnAanmeldingAanpassen_Click(object sender, EventArgs e)
+        {
+            if (lsvDienstOverzicht.SelectedItems.Count != 0)
+            {
+                MinderjarigeAanmeldpunt selectedmja = (MinderjarigeAanmeldpunt)lsvDienstOverzicht.SelectedItems[0].Tag;
+                FrmAanmeldingAanpassen frmAanmeldingAanpassen = new FrmAanmeldingAanpassen(controller, selectedmja);
+                frmAanmeldingAanpassen.ShowDialog();
+            }
         }
     }
 }

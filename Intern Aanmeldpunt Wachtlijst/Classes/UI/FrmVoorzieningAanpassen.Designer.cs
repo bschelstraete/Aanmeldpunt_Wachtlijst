@@ -197,7 +197,6 @@
             this.MaximizeBox = false;
             this.Name = "FrmVoorzieningAanpassen";
             this.Text = "Voorziening aanpassen";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmVoorzieningAanpassen_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.erpNaam)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);

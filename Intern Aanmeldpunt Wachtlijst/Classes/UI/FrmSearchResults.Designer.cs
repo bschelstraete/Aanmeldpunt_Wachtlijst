@@ -49,6 +49,7 @@
             this.lsvResults.TabIndex = 0;
             this.lsvResults.UseCompatibleStateImageBehavior = false;
             this.lsvResults.View = System.Windows.Forms.View.Details;
+            this.lsvResults.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lsvResults_MouseDoubleClick);
             // 
             // clmNaam
             // 

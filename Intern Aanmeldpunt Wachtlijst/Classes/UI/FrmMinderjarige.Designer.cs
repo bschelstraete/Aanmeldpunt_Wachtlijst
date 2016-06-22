@@ -35,13 +35,14 @@
             this.clmVoorziening = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmAanmelding = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmOpneming = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clmWachttijd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnOverzichtConsulent = new System.Windows.Forms.Button();
             this.btnOverzichtDienst = new System.Windows.Forms.Button();
             this.btnOverzichtVoorziening = new System.Windows.Forms.Button();
             this.btnDeleteAanmelding = new System.Windows.Forms.Button();
             this.lblAantalAanmeldingen = new System.Windows.Forms.Label();
             this.btnSetActiveAanmelding = new System.Windows.Forms.Button();
-            this.clmWachttijd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnAanmeldingAanpassen = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblMinderjarige
@@ -69,7 +70,7 @@
             this.lsvMinderjarige.Location = new System.Drawing.Point(16, 90);
             this.lsvMinderjarige.MultiSelect = false;
             this.lsvMinderjarige.Name = "lsvMinderjarige";
-            this.lsvMinderjarige.Size = new System.Drawing.Size(762, 288);
+            this.lsvMinderjarige.Size = new System.Drawing.Size(762, 285);
             this.lsvMinderjarige.TabIndex = 1;
             this.lsvMinderjarige.UseCompatibleStateImageBehavior = false;
             this.lsvMinderjarige.View = System.Windows.Forms.View.Details;
@@ -99,6 +100,11 @@
             // 
             this.clmOpneming.Text = "Datum opneming";
             this.clmOpneming.Width = 103;
+            // 
+            // clmWachttijd
+            // 
+            this.clmWachttijd.Text = "Tijd in registratielijst (dagen)";
+            this.clmWachttijd.Width = 148;
             // 
             // btnOverzichtConsulent
             // 
@@ -132,7 +138,7 @@
             // 
             // btnDeleteAanmelding
             // 
-            this.btnDeleteAanmelding.Location = new System.Drawing.Point(16, 61);
+            this.btnDeleteAanmelding.Location = new System.Drawing.Point(301, 381);
             this.btnDeleteAanmelding.Name = "btnDeleteAanmelding";
             this.btnDeleteAanmelding.Size = new System.Drawing.Size(127, 23);
             this.btnDeleteAanmelding.TabIndex = 6;
@@ -143,7 +149,7 @@
             // lblAantalAanmeldingen
             // 
             this.lblAantalAanmeldingen.AutoSize = true;
-            this.lblAantalAanmeldingen.Location = new System.Drawing.Point(12, 381);
+            this.lblAantalAanmeldingen.Location = new System.Drawing.Point(13, 66);
             this.lblAantalAanmeldingen.Name = "lblAantalAanmeldingen";
             this.lblAantalAanmeldingen.Size = new System.Drawing.Size(109, 13);
             this.lblAantalAanmeldingen.TabIndex = 7;
@@ -151,7 +157,7 @@
             // 
             // btnSetActiveAanmelding
             // 
-            this.btnSetActiveAanmelding.Location = new System.Drawing.Point(149, 61);
+            this.btnSetActiveAanmelding.Location = new System.Drawing.Point(157, 381);
             this.btnSetActiveAanmelding.Name = "btnSetActiveAanmelding";
             this.btnSetActiveAanmelding.Size = new System.Drawing.Size(138, 23);
             this.btnSetActiveAanmelding.TabIndex = 8;
@@ -159,16 +165,22 @@
             this.btnSetActiveAanmelding.UseVisualStyleBackColor = true;
             this.btnSetActiveAanmelding.Click += new System.EventHandler(this.btnSetActiveAanmelding_Click);
             // 
-            // clmWachttijd
+            // btnAanmeldingAanpassen
             // 
-            this.clmWachttijd.Text = "Tijd in registratielijst (dagen)";
-            this.clmWachttijd.Width = 148;
+            this.btnAanmeldingAanpassen.Location = new System.Drawing.Point(16, 381);
+            this.btnAanmeldingAanpassen.Name = "btnAanmeldingAanpassen";
+            this.btnAanmeldingAanpassen.Size = new System.Drawing.Size(135, 23);
+            this.btnAanmeldingAanpassen.TabIndex = 9;
+            this.btnAanmeldingAanpassen.Text = "Aanmelding aanpassen";
+            this.btnAanmeldingAanpassen.UseVisualStyleBackColor = true;
+            this.btnAanmeldingAanpassen.Click += new System.EventHandler(this.btnAanmeldingAanpassen_Click);
             // 
             // FrmMinderjarige
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(790, 403);
+            this.ClientSize = new System.Drawing.Size(790, 411);
+            this.Controls.Add(this.btnAanmeldingAanpassen);
             this.Controls.Add(this.btnSetActiveAanmelding);
             this.Controls.Add(this.lblAantalAanmeldingen);
             this.Controls.Add(this.btnDeleteAanmelding);
@@ -200,5 +212,6 @@
         private System.Windows.Forms.Label lblAantalAanmeldingen;
         private System.Windows.Forms.Button btnSetActiveAanmelding;
         private System.Windows.Forms.ColumnHeader clmWachttijd;
+        private System.Windows.Forms.Button btnAanmeldingAanpassen;
     }
 }
