@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Intern_Aanmeldpunt_Wachtlijst.Classes.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmMain());
+            Application.Run(new FrmMainNew());
         }
     }
 }

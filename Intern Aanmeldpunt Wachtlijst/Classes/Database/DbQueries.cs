@@ -308,12 +308,19 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
             return GetList<Minderjarige>(GetMinderjarigen, commandText).FirstOrDefault().ID;
         }
 
-        public List<Minderjarige> FindMinderjarigeAanmelding(string naamZoeken)
+        public List<MinderjarigeAanmeldpunt> FindMinderjarigeAanmelding(string naamZoeken)
         {
             string commandText = "SELECT * FROM Minderjarige WHERE minderjarigeVoornaam "
                     + "LIKE '%" + naamZoeken + "%' "
                     + "OR minderjarigeNaam LIKE '%" + naamZoeken + "%'";
-            return GetList<Minderjarige>(GetMinderjarigen, commandText);
+            List<Minderjarige> mjResult = GetList<Minderjarige>(GetMinderjarigen, commandText);
+            List<MinderjarigeAanmeldpunt> aanmeldingen = new List<MinderjarigeAanmeldpunt>();
+            foreach(Minderjarige mj in mjResult)
+            {
+                aanmeldingen.AddRange(GetMinderjarigeInAanmeldpunten(mj.ID));
+            }
+
+            return aanmeldingen;
         }
 
         private List<T> GetList<T>(Func<SqlCommand, List<T>> GetResults, string commandText)

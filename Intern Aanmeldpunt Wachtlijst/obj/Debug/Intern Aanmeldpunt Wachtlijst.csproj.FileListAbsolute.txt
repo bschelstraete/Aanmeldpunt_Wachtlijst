@@ -19,3 +19,19 @@ d:\gebruikersgegevens\schelsbr\documents\visual studio 2015\Projects\Intern Aanm
 C:\Users\schelsbr\Source\Repos\Aanmeldpunt_Wachtlijst\Intern Aanmeldpunt Wachtlijst\bin\Debug\Intern Aanmeldpunt Wachtlijst.exe.config
 C:\Users\schelsbr\Source\Repos\Aanmeldpunt_Wachtlijst\Intern Aanmeldpunt Wachtlijst\obj\Debug\Intern Aanmeldpunt Wachtlijst.exe
 C:\Users\schelsbr\Source\Repos\Aanmeldpunt_Wachtlijst\Intern Aanmeldpunt Wachtlijst\obj\Debug\Intern Aanmeldpunt Wachtlijst.pdb
+C:\Users\schelsbr\Source\Repos\Aanmeldpunt_Wachtlijst\Intern Aanmeldpunt Wachtlijst\bin\Debug\Intern Aanmeldpunt Wachtlijst.exe
+C:\Users\schelsbr\Source\Repos\Aanmeldpunt_Wachtlijst\Intern Aanmeldpunt Wachtlijst\bin\Debug\Intern Aanmeldpunt Wachtlijst.pdb
+C:\Users\schelsbr\Source\Repos\Aanmeldpunt_Wachtlijst\Intern Aanmeldpunt Wachtlijst\obj\Debug\Intern Aanmeldpunt Wachtlijst.csprojResolveAssemblyReference.cache
+C:\Users\schelsbr\Source\Repos\Aanmeldpunt_Wachtlijst\Intern Aanmeldpunt Wachtlijst\obj\Debug\Intern_Aanmeldpunt_Wachtlijst.Classes.UI.FrmAanmeldingAanpassen.resources
+C:\Users\schelsbr\Source\Repos\Aanmeldpunt_Wachtlijst\Intern Aanmeldpunt Wachtlijst\obj\Debug\Intern_Aanmeldpunt_Wachtlijst.Classes.UI.FrmConsulent.resources
+C:\Users\schelsbr\Source\Repos\Aanmeldpunt_Wachtlijst\Intern Aanmeldpunt Wachtlijst\obj\Debug\Intern_Aanmeldpunt_Wachtlijst.Classes.UI.FrmConsulentAanpassen.resources
+C:\Users\schelsbr\Source\Repos\Aanmeldpunt_Wachtlijst\Intern Aanmeldpunt Wachtlijst\obj\Debug\Intern_Aanmeldpunt_Wachtlijst.Classes.UI.FrmDienst.resources
+C:\Users\schelsbr\Source\Repos\Aanmeldpunt_Wachtlijst\Intern Aanmeldpunt Wachtlijst\obj\Debug\Intern_Aanmeldpunt_Wachtlijst.FrmMain.resources
+C:\Users\schelsbr\Source\Repos\Aanmeldpunt_Wachtlijst\Intern Aanmeldpunt Wachtlijst\obj\Debug\Intern_Aanmeldpunt_Wachtlijst.Classes.UI.FrmMainNew.resources
+C:\Users\schelsbr\Source\Repos\Aanmeldpunt_Wachtlijst\Intern Aanmeldpunt Wachtlijst\obj\Debug\Intern_Aanmeldpunt_Wachtlijst.Classes.UI.FrmMinderjarige.resources
+C:\Users\schelsbr\Source\Repos\Aanmeldpunt_Wachtlijst\Intern Aanmeldpunt Wachtlijst\obj\Debug\Intern_Aanmeldpunt_Wachtlijst.Classes.UI.FrmSearchResults.resources
+C:\Users\schelsbr\Source\Repos\Aanmeldpunt_Wachtlijst\Intern Aanmeldpunt Wachtlijst\obj\Debug\Intern_Aanmeldpunt_Wachtlijst.Classes.UI.FrmStatistics.resources
+C:\Users\schelsbr\Source\Repos\Aanmeldpunt_Wachtlijst\Intern Aanmeldpunt Wachtlijst\obj\Debug\Intern_Aanmeldpunt_Wachtlijst.Classes.UI.FrmVoorziening.resources
+C:\Users\schelsbr\Source\Repos\Aanmeldpunt_Wachtlijst\Intern Aanmeldpunt Wachtlijst\obj\Debug\Intern_Aanmeldpunt_Wachtlijst.Classes.UI.FrmVoorzieningAanpassen.resources
+C:\Users\schelsbr\Source\Repos\Aanmeldpunt_Wachtlijst\Intern Aanmeldpunt Wachtlijst\obj\Debug\Intern_Aanmeldpunt_Wachtlijst.Properties.Resources.resources
+C:\Users\schelsbr\Source\Repos\Aanmeldpunt_Wachtlijst\Intern Aanmeldpunt Wachtlijst\obj\Debug\Intern Aanmeldpunt Wachtlijst.csproj.GenerateResource.Cache

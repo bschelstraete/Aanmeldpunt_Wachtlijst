@@ -293,7 +293,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Controller
                 return dbQueries.GetMinderjarigeBetweenDatesInAanmeldpunt(aanmeldpunt, van, tot);
         }
 
-        public List<Minderjarige> FindMinderjarigeAanmelding(string naamZoeken)
+        public List<MinderjarigeAanmeldpunt> FindMinderjarigeAanmelding(string naamZoeken)
         {
             return dbQueries.FindMinderjarigeAanmelding(naamZoeken);
         }

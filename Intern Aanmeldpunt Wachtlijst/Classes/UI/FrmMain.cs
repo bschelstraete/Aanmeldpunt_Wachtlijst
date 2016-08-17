@@ -28,6 +28,8 @@ namespace Intern_Aanmeldpunt_Wachtlijst
             controller.Init();
 
             Init();
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
         }
 
         private void Init()
@@ -455,19 +457,19 @@ namespace Intern_Aanmeldpunt_Wachtlijst
 
         private void btnZoeken_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(txtZoeken.Text))
-            {
-                string naamZoeken = txtZoeken.Text;
-                List<Minderjarige> minderjarigeResults = controller.FindMinderjarigeAanmelding(naamZoeken);
+            //if (!String.IsNullOrEmpty(txtZoeken.Text))
+            //{
+            //    string naamZoeken = txtZoeken.Text;
+            //    List<Minderjarige> minderjarigeResults = controller.FindMinderjarigeAanmelding(naamZoeken);
 
-                if (minderjarigeResults.Count() != 0)
-                {
-                    FrmSearchResults frmSearchResults = new FrmSearchResults(controller, minderjarigeResults, naamZoeken);
-                    frmSearchResults.ShowDialog();
-                }
-                else
-                    MessageBox.Show("Geen resultaten gevonden!", "Zoekresultaten");
-            }
+            //    if (minderjarigeResults.Count() != 0)
+            //    {
+            //        FrmSearchResults frmSearchResults = new FrmSearchResults(controller, minderjarigeResults, naamZoeken);
+            //        frmSearchResults.ShowDialog();
+            //    }
+            //    else
+            //        MessageBox.Show("Geen resultaten gevonden!", "Zoekresultaten");
+            //}
         }
     }
 }
