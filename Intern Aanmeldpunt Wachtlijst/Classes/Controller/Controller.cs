@@ -302,5 +302,10 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Controller
         {
             csvbuilder.BuildCsv(aanmeldingen, output);
         }
+
+        public void EditMinderjarige(Minderjarige oudMinderjarige, Minderjarige newMinderjarige)
+        {
+            dbQueries.EditMinderjarige(oudMinderjarige, newMinderjarige);
+        }
     }
 }

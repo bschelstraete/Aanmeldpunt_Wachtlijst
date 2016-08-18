@@ -262,6 +262,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
             return GetList<MinderjarigeAanmeldpunt>(GetMinderjarigenInAanmeldpunten, commandText);
         }
 
+
         public List<MinderjarigeAanmeldpunt> GetMinderjarigeBetweenDatesInAanmeldpunt(Aanmeldpunt aanmeldpunt, DateTime van, DateTime tot)
         {
             string vanString = van.Date.ToString("yyyyMMdd");
@@ -745,6 +746,29 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
                 }
             }
         }
+
+        public void EditMinderjarige(Minderjarige oudMinderjarige, Minderjarige newMinderjarige)
+        {
+            string commandText = "UPDATE Minderjarige "
+                                + "SET minderjarigeNaam = @naam, minderjarigeVoornaam = @voornaam "
+                                + "WHERE minderjarigeID = @ID";
+
+            using (SqlConnection connection = new SqlConnection(Builder.ConnectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = commandText;
+                    command.Parameters.Add(new SqlParameter("naam", newMinderjarige.Naam));
+                    command.Parameters.Add(new SqlParameter("voornaam", newMinderjarige.Voornaam));
+                    command.Parameters.Add(new SqlParameter("ID", oudMinderjarige.ID));
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+
+        }
+
 
 
     }
