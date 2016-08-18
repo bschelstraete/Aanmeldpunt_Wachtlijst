@@ -109,6 +109,7 @@
             this.btnSaveEdit = new System.Windows.Forms.Label();
             this.btnCancelEdit = new System.Windows.Forms.Label();
             this.chkOpgenomen = new System.Windows.Forms.CheckBox();
+            this.label22 = new System.Windows.Forms.Label();
             this.pnlSidebar.SuspendLayout();
             this.pnlCopyright.SuspendLayout();
             this.pnlLogo.SuspendLayout();
@@ -117,6 +118,7 @@
             this.pnlOverzichtAanmeldingen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAanmeldingen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.erpAanmelding)).BeginInit();
+            this.pnlFooter.SuspendLayout();
             this.pnlMinderjarige.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOverzichtMj)).BeginInit();
             this.pnlEditAanmelding.SuspendLayout();
@@ -376,6 +378,7 @@
             this.pnlNewAanmelding.Name = "pnlNewAanmelding";
             this.pnlNewAanmelding.Size = new System.Drawing.Size(785, 586);
             this.pnlNewAanmelding.TabIndex = 3;
+            this.pnlNewAanmelding.Click += new System.EventHandler(this.pnlNewAanmelding_Click);
             // 
             // pnlOverzichtAanmeldingen
             // 
@@ -603,6 +606,7 @@
             // 
             // pnlFooter
             // 
+            this.pnlFooter.Controls.Add(this.label22);
             this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlFooter.Location = new System.Drawing.Point(184, 614);
             this.pnlFooter.Name = "pnlFooter";
@@ -653,6 +657,7 @@
             this.btnMJAanmeldingVerwijderen.TabIndex = 5;
             this.btnMJAanmeldingVerwijderen.Text = "Aanmelding verwijderen";
             this.btnMJAanmeldingVerwijderen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnMJAanmeldingVerwijderen.Click += new System.EventHandler(this.btnMJAanmeldingVerwijderen_Click);
             this.btnMJAanmeldingVerwijderen.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
             this.btnMJAanmeldingVerwijderen.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
             // 
@@ -665,6 +670,7 @@
             this.btnMjAanmeldingActief.TabIndex = 4;
             this.btnMjAanmeldingActief.Text = "Aanmelding actief/inactief";
             this.btnMjAanmeldingActief.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnMjAanmeldingActief.Click += new System.EventHandler(this.btnMjAanmeldingActief_Click);
             this.btnMjAanmeldingActief.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
             this.btnMjAanmeldingActief.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
             // 
@@ -699,6 +705,7 @@
             this.dgvOverzichtMj.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvOverzichtMj.Size = new System.Drawing.Size(739, 368);
             this.dgvOverzichtMj.TabIndex = 2;
+            this.dgvOverzichtMj.DoubleClick += new System.EventHandler(this.dgvOverzichtMj_DoubleClick);
             // 
             // clmOMJnaam
             // 
@@ -879,6 +886,7 @@
             this.txtMinderjarigeNaam.Name = "txtMinderjarigeNaam";
             this.txtMinderjarigeNaam.Size = new System.Drawing.Size(209, 20);
             this.txtMinderjarigeNaam.TabIndex = 8;
+            this.txtMinderjarigeNaam.TextChanged += new System.EventHandler(this.EditAanmeldingChanged);
             // 
             // txtMinderjarigeVoornaam
             // 
@@ -886,6 +894,7 @@
             this.txtMinderjarigeVoornaam.Name = "txtMinderjarigeVoornaam";
             this.txtMinderjarigeVoornaam.Size = new System.Drawing.Size(209, 20);
             this.txtMinderjarigeVoornaam.TabIndex = 9;
+            this.txtMinderjarigeVoornaam.TextChanged += new System.EventHandler(this.EditAanmeldingChanged);
             // 
             // cbbMJDienst
             // 
@@ -903,6 +912,7 @@
             this.cbbMJConsulent.Name = "cbbMJConsulent";
             this.cbbMJConsulent.Size = new System.Drawing.Size(209, 21);
             this.cbbMJConsulent.TabIndex = 11;
+            this.cbbMJConsulent.SelectedIndexChanged += new System.EventHandler(this.EditAanmeldingChanged);
             // 
             // cbbMJVoorziening
             // 
@@ -911,6 +921,7 @@
             this.cbbMJVoorziening.Name = "cbbMJVoorziening";
             this.cbbMJVoorziening.Size = new System.Drawing.Size(209, 21);
             this.cbbMJVoorziening.TabIndex = 12;
+            this.cbbMJVoorziening.SelectedIndexChanged += new System.EventHandler(this.EditAanmeldingChanged);
             // 
             // dtpAanmelding
             // 
@@ -919,6 +930,7 @@
             this.dtpAanmelding.Name = "dtpAanmelding";
             this.dtpAanmelding.Size = new System.Drawing.Size(209, 20);
             this.dtpAanmelding.TabIndex = 13;
+            this.dtpAanmelding.ValueChanged += new System.EventHandler(this.EditAanmeldingChanged);
             // 
             // dtpOpneming
             // 
@@ -927,6 +939,7 @@
             this.dtpOpneming.Name = "dtpOpneming";
             this.dtpOpneming.Size = new System.Drawing.Size(209, 20);
             this.dtpOpneming.TabIndex = 14;
+            this.dtpOpneming.ValueChanged += new System.EventHandler(this.EditAanmeldingChanged);
             // 
             // btnSaveEdit
             // 
@@ -937,6 +950,7 @@
             this.btnSaveEdit.TabIndex = 15;
             this.btnSaveEdit.Text = "Opslaan";
             this.btnSaveEdit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnSaveEdit.Click += new System.EventHandler(this.BtnSaveEdit_Click);
             this.btnSaveEdit.MouseEnter += new System.EventHandler(this.btnConfirm_Hover);
             this.btnSaveEdit.MouseLeave += new System.EventHandler(this.btnConfirm_Hover);
             // 
@@ -964,6 +978,18 @@
             this.chkOpgenomen.TabIndex = 17;
             this.chkOpgenomen.Text = "Opgenomen?";
             this.chkOpgenomen.UseVisualStyleBackColor = true;
+            this.chkOpgenomen.CheckedChanged += new System.EventHandler(this.EditAanmeldingChanged);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Century Gothic", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label22.Location = new System.Drawing.Point(751, 3);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(31, 13);
+            this.label22.TabIndex = 1;
+            this.label22.Text = "v0.99";
             // 
             // FrmMainNew
             // 
@@ -999,6 +1025,8 @@
             this.pnlOverzichtAanmeldingen.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAanmeldingen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.erpAanmelding)).EndInit();
+            this.pnlFooter.ResumeLayout(false);
+            this.pnlFooter.PerformLayout();
             this.pnlMinderjarige.ResumeLayout(false);
             this.pnlMinderjarige.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOverzichtMj)).EndInit();
@@ -1090,5 +1118,6 @@
         private System.Windows.Forms.Label btnCancelEdit;
         private System.Windows.Forms.Label btnSaveEdit;
         private System.Windows.Forms.CheckBox chkOpgenomen;
+        private System.Windows.Forms.Label label22;
     }
 }
