@@ -110,6 +110,7 @@
             this.btnCancelEdit = new System.Windows.Forms.Label();
             this.chkOpgenomen = new System.Windows.Forms.CheckBox();
             this.label22 = new System.Windows.Forms.Label();
+            this.lblEditSaved = new System.Windows.Forms.Label();
             this.pnlSidebar.SuspendLayout();
             this.pnlCopyright.SuspendLayout();
             this.pnlLogo.SuspendLayout();
@@ -635,6 +636,7 @@
             // pnlMinderjarige
             // 
             this.pnlMinderjarige.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlMinderjarige.Controls.Add(this.lblEditSaved);
             this.pnlMinderjarige.Controls.Add(this.pnlEditAanmelding);
             this.pnlMinderjarige.Controls.Add(this.btnMJAanmeldingVerwijderen);
             this.pnlMinderjarige.Controls.Add(this.btnMjAanmeldingActief);
@@ -776,8 +778,9 @@
             // 
             // pnlEditAanmelding
             // 
-            this.pnlEditAanmelding.Controls.Add(this.chkOpgenomen);
+            this.pnlEditAanmelding.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(253)))));
             this.pnlEditAanmelding.Controls.Add(this.btnCancelEdit);
+            this.pnlEditAanmelding.Controls.Add(this.chkOpgenomen);
             this.pnlEditAanmelding.Controls.Add(this.btnSaveEdit);
             this.pnlEditAanmelding.Controls.Add(this.dtpOpneming);
             this.pnlEditAanmelding.Controls.Add(this.dtpAanmelding);
@@ -795,16 +798,17 @@
             this.pnlEditAanmelding.Controls.Add(this.label15);
             this.pnlEditAanmelding.Controls.Add(this.label14);
             this.pnlEditAanmelding.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlEditAanmelding.Location = new System.Drawing.Point(392, 0);
+            this.pnlEditAanmelding.Location = new System.Drawing.Point(388, 0);
             this.pnlEditAanmelding.Name = "pnlEditAanmelding";
-            this.pnlEditAanmelding.Size = new System.Drawing.Size(393, 566);
+            this.pnlEditAanmelding.Size = new System.Drawing.Size(397, 566);
             this.pnlEditAanmelding.TabIndex = 6;
+            this.pnlEditAanmelding.Visible = false;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(21, 22);
+            this.label14.Location = new System.Drawing.Point(25, 21);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(230, 22);
             this.label14.TabIndex = 0;
@@ -951,21 +955,21 @@
             this.btnSaveEdit.Text = "Opslaan";
             this.btnSaveEdit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnSaveEdit.Click += new System.EventHandler(this.BtnSaveEdit_Click);
-            this.btnSaveEdit.MouseEnter += new System.EventHandler(this.btnConfirm_Hover);
-            this.btnSaveEdit.MouseLeave += new System.EventHandler(this.btnConfirm_Hover);
+            this.btnSaveEdit.MouseEnter += new System.EventHandler(this.btnEditConfirm_Hover);
+            this.btnSaveEdit.MouseLeave += new System.EventHandler(this.btnEditConfirm_Hover);
             // 
             // btnCancelEdit
             // 
             this.btnCancelEdit.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelEdit.Location = new System.Drawing.Point(211, 292);
+            this.btnCancelEdit.Location = new System.Drawing.Point(217, 292);
             this.btnCancelEdit.Name = "btnCancelEdit";
             this.btnCancelEdit.Size = new System.Drawing.Size(126, 34);
             this.btnCancelEdit.TabIndex = 16;
             this.btnCancelEdit.Text = "Annuleren";
             this.btnCancelEdit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnCancelEdit.Click += new System.EventHandler(this.btnCancelEdit_Click);
-            this.btnCancelEdit.MouseEnter += new System.EventHandler(this.btnCancel_Hover);
-            this.btnCancelEdit.MouseLeave += new System.EventHandler(this.btnCancel_Hover);
+            this.btnCancelEdit.MouseEnter += new System.EventHandler(this.btnEditCancel_Hover);
+            this.btnCancelEdit.MouseLeave += new System.EventHandler(this.btnEditCancel_Hover);
             // 
             // chkOpgenomen
             // 
@@ -990,6 +994,16 @@
             this.label22.Size = new System.Drawing.Size(31, 13);
             this.label22.TabIndex = 1;
             this.label22.Text = "v0.99";
+            // 
+            // lblEditSaved
+            // 
+            this.lblEditSaved.AutoSize = true;
+            this.lblEditSaved.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEditSaved.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblEditSaved.Location = new System.Drawing.Point(273, 22);
+            this.lblEditSaved.Name = "lblEditSaved";
+            this.lblEditSaved.Size = new System.Drawing.Size(0, 21);
+            this.lblEditSaved.TabIndex = 7;
             // 
             // FrmMainNew
             // 
@@ -1119,5 +1133,6 @@
         private System.Windows.Forms.Label btnSaveEdit;
         private System.Windows.Forms.CheckBox chkOpgenomen;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label lblEditSaved;
     }
 }

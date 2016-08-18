@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
@@ -43,6 +44,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
             InitComboBox();
             InitDatagridViews();
             InitAanmeldingCountLabel();
+            controller.RegisterObserver(this);
         }
 
         public void UpdateDeletedAanmelding()
@@ -120,12 +122,29 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
                 ((Label)sender).BackColor = Color.FromName("Control");
         }
 
+        private void btnEditConfirm_Hover(object sender, EventArgs e)
+        {
+            if (((Label)sender).BackColor == Color.FromArgb(253, 253, 253))
+                ((Label)sender).BackColor = Color.FromArgb(150, 210, 130);
+            else
+                ((Label)sender).BackColor = Color.FromArgb(253, 253, 253);
+        }
+
+
         private void btnCancel_Hover(object sender, EventArgs e)
         {
             if (((Label)sender).BackColor == Color.FromName("Control"))
                 ((Label)sender).BackColor = Color.FromArgb(220, 130, 130);
             else
-                ((Label)sender).BackColor = Color.FromName("Control");
+                ((Label)sender).BackColor = Color.FromArgb(253, 253, 253);
+        }
+
+        private void btnEditCancel_Hover(object sender, EventArgs e)
+        {
+            if (((Label)sender).BackColor == Color.FromArgb(253, 253, 253))
+                ((Label)sender).BackColor = Color.FromArgb(220, 130, 130);
+            else
+                ((Label)sender).BackColor = Color.FromArgb(253, 253, 253);
         }
 
         private void btnContainer_Hover(object sender, EventArgs e)
@@ -210,6 +229,10 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
 
         private void InitLists()
         {
+            consulentLijst.Clear();
+            dienstLijst.Clear();
+            aanmeldpuntLijst.Clear();
+
             consulentLijst = controller.GetAllConsulenten();
             dienstLijst = controller.GetAllDiensten();
             aanmeldpuntLijst = controller.GetAllAanmeldpunten();
@@ -218,6 +241,8 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
 
         private void InitAanmeldingList()
         {
+            minderjarigeLijst.Clear();
+            alleAanmeldingen.Clear();
             minderjarigeLijst = controller.GetAllMinderjarige();
 
             minderjarigeLijst = minderjarigeLijst.OrderBy(x => x.Naam).ThenBy(x => x.Voornaam).ToList();
@@ -263,6 +288,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
 
         private void InitDataGrid(DataGridView dvgActive, List<MinderjarigeAanmeldpunt> aanmeldingen)
         {
+            dvgActive.Rows.Clear();
             int rowCount = 0;
             foreach (MinderjarigeAanmeldpunt mja in aanmeldingen)
             {
@@ -455,30 +481,68 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
             {
                 if (MessageBox.Show("Bent u zeker dat u wilt opslaan?", "Aanmelding aanpassen", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    string naam = txtMinderjarigeNaam.Text;
-                    string voornaam = txtMinderjarigeVoornaam.Text;
-                    Consulent consulent = (Consulent)cbbMJConsulent.SelectedItem;
-                    Aanmeldpunt voorziening = (Aanmeldpunt)cbbMJVoorziening.SelectedItem;
-                    DateTime datumAanmelding = dtpAanmelding.Value;
-                    DateTime datumOpneming = new DateTime();
-
-                    if (chkOpgenomen.Checked)
-                        datumOpneming = dtpOpneming.Value;
-                    else
-                        datumOpneming = new DateTime(1960, 1, 1);
-
-                    if(editAanmelding.Minderjarige.Naam != naam || editAanmelding.Minderjarige.Voornaam != voornaam)
+                    try
                     {
-                        Minderjarige newMinderjarige = new Minderjarige(editAanmelding.Minderjarige.ID, naam, voornaam);
-                        controller.EditMinderjarige(editAanmelding.Minderjarige, newMinderjarige);
-                    }
-                     
+                        string naam = txtMinderjarigeNaam.Text;
+                        string voornaam = txtMinderjarigeVoornaam.Text;
+                        Consulent consulent = (Consulent)cbbMJConsulent.SelectedItem;
+                        Aanmeldpunt voorziening = (Aanmeldpunt)cbbMJVoorziening.SelectedItem;
+                        DateTime datumAanmelding = dtpAanmelding.Value;
+                        DateTime datumOpneming = new DateTime();
 
-                    MinderjarigeAanmeldpunt newAanmelding = new MinderjarigeAanmeldpunt(editAanmelding.Minderjarige, voorziening, consulent, datumAanmelding, datumOpneming, true);
-                    controller.EditAanmelding(editAanmelding, newAanmelding);
-                    pnlEditAanmelding.Visible = false;
+                        if (chkOpgenomen.Checked)
+                            datumOpneming = dtpOpneming.Value;
+                        else
+                            datumOpneming = new DateTime(1960, 1, 1);
+
+                        if (editAanmelding.Minderjarige.Naam != naam || editAanmelding.Minderjarige.Voornaam != voornaam)
+                        {
+                            Minderjarige newMinderjarige = new Minderjarige(editAanmelding.Minderjarige.ID, naam, voornaam);
+                            controller.EditMinderjarige(editAanmelding.Minderjarige, newMinderjarige);
+                        }
+
+
+                        MinderjarigeAanmeldpunt newAanmelding = new MinderjarigeAanmeldpunt(editAanmelding.Minderjarige, voorziening, consulent, datumAanmelding, datumOpneming, true);
+                        controller.EditAanmelding(editAanmelding, newAanmelding);
+                        pnlEditAanmelding.Visible = false;
+                        lblEditSaved.Text = "Opgeslaan!";
+                        lblEditSaved.ForeColor = Color.DarkGreen;
+                        Task.Factory.StartNew(() =>
+                            {
+                                System.Timers.Timer timer = new System.Timers.Timer();
+                                timer.Elapsed += OnTimedEvent;
+                                timer.Interval = 10000;
+                                timer.Start();
+                            }
+                        );
+                    }
+                    catch(Exception)
+                    {
+                        lblEditSaved.Text = "Fout in het opslaan!";
+                        lblEditSaved.ForeColor = Color.DarkRed;
+                        Task.Factory.StartNew(() =>
+                            {
+                            System.Timers.Timer timer = new System.Timers.Timer();
+                            timer.Elapsed += OnTimedEvent;
+                            timer.Interval = 10000;
+                            timer.Start();
+                            }
+                         );
+                    }
+
                 }
             }
+        }
+
+        private void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+            if (lblEditSaved.InvokeRequired)
+            {
+                lblEditSaved.Invoke(new Action (() => lblEditSaved.Text = ""));
+            }
+            else
+                lblEditSaved.Text = "";
+            ((System.Timers.Timer)source).Stop();
         }
 
         private void btnCancelEdit_Click(object sender, EventArgs e)
