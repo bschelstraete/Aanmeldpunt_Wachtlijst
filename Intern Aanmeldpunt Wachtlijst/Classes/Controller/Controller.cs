@@ -64,7 +64,10 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Controller
                     totalDays += GetWachttijdInDagen(mja);
             }
 
-            return totalDays / minderjarigenLijst.Count();
+            if (totalDays > 0)
+                return totalDays / minderjarigenLijst.Count();
+            else
+                return 0;
         }
 
         public double GetWachttijdInDagen(MinderjarigeAanmeldpunt mja)
@@ -306,6 +309,24 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Controller
         public void EditMinderjarige(Minderjarige oudMinderjarige, Minderjarige newMinderjarige)
         {
             dbQueries.EditMinderjarige(oudMinderjarige, newMinderjarige);
+        }
+
+        public double GetAverageWachttijdOverAlleVoorzieningen()
+        {
+            double averageWachttijd = 0.0;
+            List <Aanmeldpunt> voorzieningLijst = GetAllAanmeldpunten();
+
+            foreach(Aanmeldpunt vz in voorzieningLijst)
+            {
+                List<MinderjarigeAanmeldpunt> aanmeldingenInVoorziening = GetMinderjarigenInAanmeldpunt(vz.ID);
+                if(aanmeldingenInVoorziening.Count() > 0)
+                {
+                    double wachttijd = GetAverageWachtijdMinderjarigen(aanmeldingenInVoorziening);
+                    averageWachttijd += wachttijd;
+                }
+            }
+
+            return averageWachttijd / voorzieningLijst.Count();
         }
     }
 }
