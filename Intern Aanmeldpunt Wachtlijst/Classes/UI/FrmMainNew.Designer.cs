@@ -74,9 +74,30 @@
             this.txtNaamMJ = new System.Windows.Forms.TextBox();
             this.erpAanmelding = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlFooter = new System.Windows.Forms.Panel();
+            this.label22 = new System.Windows.Forms.Label();
             this.pnlDiensten = new System.Windows.Forms.Panel();
             this.pnlVoorzieningen = new System.Windows.Forms.Panel();
             this.pnlMinderjarige = new System.Windows.Forms.Panel();
+            this.lblEditSaved = new System.Windows.Forms.Label();
+            this.pnlEditAanmelding = new System.Windows.Forms.Panel();
+            this.btnCancelEdit = new System.Windows.Forms.Label();
+            this.chkOpgenomen = new System.Windows.Forms.CheckBox();
+            this.btnSaveEdit = new System.Windows.Forms.Label();
+            this.dtpOpneming = new System.Windows.Forms.DateTimePicker();
+            this.dtpAanmelding = new System.Windows.Forms.DateTimePicker();
+            this.cbbMJVoorziening = new System.Windows.Forms.ComboBox();
+            this.cbbMJConsulent = new System.Windows.Forms.ComboBox();
+            this.cbbMJDienst = new System.Windows.Forms.ComboBox();
+            this.txtMinderjarigeVoornaam = new System.Windows.Forms.TextBox();
+            this.txtMinderjarigeNaam = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.btnMJAanmeldingVerwijderen = new System.Windows.Forms.Label();
             this.btnMjAanmeldingActief = new System.Windows.Forms.Label();
             this.btnMJAanmeldingAanpassen = new System.Windows.Forms.Label();
@@ -90,27 +111,27 @@
             this.lblMJAantal = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.pnlStatistieken = new System.Windows.Forms.Panel();
-            this.pnlEditAanmelding = new System.Windows.Forms.Panel();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.txtMinderjarigeNaam = new System.Windows.Forms.TextBox();
-            this.txtMinderjarigeVoornaam = new System.Windows.Forms.TextBox();
-            this.cbbMJDienst = new System.Windows.Forms.ComboBox();
-            this.cbbMJConsulent = new System.Windows.Forms.ComboBox();
-            this.cbbMJVoorziening = new System.Windows.Forms.ComboBox();
-            this.dtpAanmelding = new System.Windows.Forms.DateTimePicker();
-            this.dtpOpneming = new System.Windows.Forms.DateTimePicker();
-            this.btnSaveEdit = new System.Windows.Forms.Label();
-            this.btnCancelEdit = new System.Windows.Forms.Label();
-            this.chkOpgenomen = new System.Windows.Forms.CheckBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.lblEditSaved = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.dgvOverzichtVoorziening = new System.Windows.Forms.DataGridView();
+            this.btnDetailVoorziening = new System.Windows.Forms.Label();
+            this.lblOverzichtAverageVoorziening = new System.Windows.Forms.Label();
+            this.clmVoorzieningNaam = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmVoorzieningCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmVoorzieningAvWachttijd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlDetailVoorziening = new System.Windows.Forms.Panel();
+            this.btnOverzichtVoorziening = new System.Windows.Forms.Label();
+            this.lblDetailVoorziening = new System.Windows.Forms.Label();
+            this.dgvDetailVoorziening = new System.Windows.Forms.DataGridView();
+            this.clmDetailVMJNaam = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmDetailVConsulent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmDetailVDienst = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmDetailVDatumAanmelding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmDetailVDatumOpneming = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblDetailVAantal = new System.Windows.Forms.Label();
+            this.lblDetailVAverageWachttijd = new System.Windows.Forms.Label();
+            this.btnDetailVAanpassen = new System.Windows.Forms.Label();
+            this.btnDetailVActiveToggle = new System.Windows.Forms.Label();
+            this.btnDetailVDelete = new System.Windows.Forms.Label();
             this.pnlSidebar.SuspendLayout();
             this.pnlCopyright.SuspendLayout();
             this.pnlLogo.SuspendLayout();
@@ -120,9 +141,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvAanmeldingen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.erpAanmelding)).BeginInit();
             this.pnlFooter.SuspendLayout();
+            this.pnlVoorzieningen.SuspendLayout();
             this.pnlMinderjarige.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOverzichtMj)).BeginInit();
             this.pnlEditAanmelding.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOverzichtMj)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOverzichtVoorziening)).BeginInit();
+            this.pnlDetailVoorziening.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetailVoorziening)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlSidebar
@@ -377,7 +402,7 @@
             this.pnlNewAanmelding.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlNewAanmelding.Location = new System.Drawing.Point(184, 48);
             this.pnlNewAanmelding.Name = "pnlNewAanmelding";
-            this.pnlNewAanmelding.Size = new System.Drawing.Size(785, 586);
+            this.pnlNewAanmelding.Size = new System.Drawing.Size(785, 566);
             this.pnlNewAanmelding.TabIndex = 3;
             this.pnlNewAanmelding.Click += new System.EventHandler(this.pnlNewAanmelding_Click);
             // 
@@ -614,24 +639,40 @@
             this.pnlFooter.Size = new System.Drawing.Size(785, 20);
             this.pnlFooter.TabIndex = 2;
             // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Century Gothic", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label22.Location = new System.Drawing.Point(751, 3);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(31, 13);
+            this.label22.TabIndex = 1;
+            this.label22.Text = "v0.99";
+            // 
             // pnlDiensten
             // 
             this.pnlDiensten.BackColor = System.Drawing.SystemColors.Control;
             this.pnlDiensten.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlDiensten.Location = new System.Drawing.Point(184, 48);
+            this.pnlDiensten.Location = new System.Drawing.Point(0, 0);
             this.pnlDiensten.Name = "pnlDiensten";
-            this.pnlDiensten.Size = new System.Drawing.Size(785, 566);
+            this.pnlDiensten.Size = new System.Drawing.Size(969, 634);
             this.pnlDiensten.TabIndex = 4;
             // 
             // pnlVoorzieningen
             // 
             this.pnlVoorzieningen.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlVoorzieningen.Controls.Add(this.pnlDetailVoorziening);
+            this.pnlVoorzieningen.Controls.Add(this.lblOverzichtAverageVoorziening);
+            this.pnlVoorzieningen.Controls.Add(this.btnDetailVoorziening);
+            this.pnlVoorzieningen.Controls.Add(this.dgvOverzichtVoorziening);
+            this.pnlVoorzieningen.Controls.Add(this.label23);
             this.pnlVoorzieningen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlVoorzieningen.Location = new System.Drawing.Point(184, 48);
             this.pnlVoorzieningen.Name = "pnlVoorzieningen";
             this.pnlVoorzieningen.Size = new System.Drawing.Size(785, 566);
             this.pnlVoorzieningen.TabIndex = 5;
-            this.pnlVoorzieningen.Visible = false;
+            this.pnlVoorzieningen.VisibleChanged += new System.EventHandler(this.pnlVoorzieningen_VisibleChanged);
             // 
             // pnlMinderjarige
             // 
@@ -649,6 +690,224 @@
             this.pnlMinderjarige.Name = "pnlMinderjarige";
             this.pnlMinderjarige.Size = new System.Drawing.Size(785, 566);
             this.pnlMinderjarige.TabIndex = 6;
+            // 
+            // lblEditSaved
+            // 
+            this.lblEditSaved.AutoSize = true;
+            this.lblEditSaved.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEditSaved.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblEditSaved.Location = new System.Drawing.Point(273, 22);
+            this.lblEditSaved.Name = "lblEditSaved";
+            this.lblEditSaved.Size = new System.Drawing.Size(0, 21);
+            this.lblEditSaved.TabIndex = 7;
+            // 
+            // pnlEditAanmelding
+            // 
+            this.pnlEditAanmelding.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(253)))));
+            this.pnlEditAanmelding.Controls.Add(this.btnCancelEdit);
+            this.pnlEditAanmelding.Controls.Add(this.chkOpgenomen);
+            this.pnlEditAanmelding.Controls.Add(this.btnSaveEdit);
+            this.pnlEditAanmelding.Controls.Add(this.dtpOpneming);
+            this.pnlEditAanmelding.Controls.Add(this.dtpAanmelding);
+            this.pnlEditAanmelding.Controls.Add(this.cbbMJVoorziening);
+            this.pnlEditAanmelding.Controls.Add(this.cbbMJConsulent);
+            this.pnlEditAanmelding.Controls.Add(this.cbbMJDienst);
+            this.pnlEditAanmelding.Controls.Add(this.txtMinderjarigeVoornaam);
+            this.pnlEditAanmelding.Controls.Add(this.txtMinderjarigeNaam);
+            this.pnlEditAanmelding.Controls.Add(this.label21);
+            this.pnlEditAanmelding.Controls.Add(this.label20);
+            this.pnlEditAanmelding.Controls.Add(this.label19);
+            this.pnlEditAanmelding.Controls.Add(this.label18);
+            this.pnlEditAanmelding.Controls.Add(this.label17);
+            this.pnlEditAanmelding.Controls.Add(this.label16);
+            this.pnlEditAanmelding.Controls.Add(this.label15);
+            this.pnlEditAanmelding.Controls.Add(this.label14);
+            this.pnlEditAanmelding.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlEditAanmelding.Location = new System.Drawing.Point(388, 0);
+            this.pnlEditAanmelding.Name = "pnlEditAanmelding";
+            this.pnlEditAanmelding.Size = new System.Drawing.Size(397, 566);
+            this.pnlEditAanmelding.TabIndex = 6;
+            this.pnlEditAanmelding.Visible = false;
+            // 
+            // btnCancelEdit
+            // 
+            this.btnCancelEdit.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelEdit.Location = new System.Drawing.Point(217, 292);
+            this.btnCancelEdit.Name = "btnCancelEdit";
+            this.btnCancelEdit.Size = new System.Drawing.Size(126, 34);
+            this.btnCancelEdit.TabIndex = 16;
+            this.btnCancelEdit.Text = "Annuleren";
+            this.btnCancelEdit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnCancelEdit.Click += new System.EventHandler(this.btnCancelEdit_Click);
+            this.btnCancelEdit.MouseEnter += new System.EventHandler(this.btnEditCancel_Hover);
+            this.btnCancelEdit.MouseLeave += new System.EventHandler(this.btnEditCancel_Hover);
+            // 
+            // chkOpgenomen
+            // 
+            this.chkOpgenomen.AutoSize = true;
+            this.chkOpgenomen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkOpgenomen.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkOpgenomen.Location = new System.Drawing.Point(164, 249);
+            this.chkOpgenomen.Name = "chkOpgenomen";
+            this.chkOpgenomen.Size = new System.Drawing.Size(128, 24);
+            this.chkOpgenomen.TabIndex = 17;
+            this.chkOpgenomen.Text = "Opgenomen?";
+            this.chkOpgenomen.UseVisualStyleBackColor = true;
+            this.chkOpgenomen.CheckedChanged += new System.EventHandler(this.EditAanmeldingChanged);
+            // 
+            // btnSaveEdit
+            // 
+            this.btnSaveEdit.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveEdit.Location = new System.Drawing.Point(63, 292);
+            this.btnSaveEdit.Name = "btnSaveEdit";
+            this.btnSaveEdit.Size = new System.Drawing.Size(126, 34);
+            this.btnSaveEdit.TabIndex = 15;
+            this.btnSaveEdit.Text = "Opslaan";
+            this.btnSaveEdit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnSaveEdit.Click += new System.EventHandler(this.BtnSaveEdit_Click);
+            this.btnSaveEdit.MouseEnter += new System.EventHandler(this.btnEditConfirm_Hover);
+            this.btnSaveEdit.MouseLeave += new System.EventHandler(this.btnEditConfirm_Hover);
+            // 
+            // dtpOpneming
+            // 
+            this.dtpOpneming.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpOpneming.Location = new System.Drawing.Point(164, 221);
+            this.dtpOpneming.Name = "dtpOpneming";
+            this.dtpOpneming.Size = new System.Drawing.Size(209, 20);
+            this.dtpOpneming.TabIndex = 14;
+            this.dtpOpneming.ValueChanged += new System.EventHandler(this.EditAanmeldingChanged);
+            // 
+            // dtpAanmelding
+            // 
+            this.dtpAanmelding.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpAanmelding.Location = new System.Drawing.Point(164, 195);
+            this.dtpAanmelding.Name = "dtpAanmelding";
+            this.dtpAanmelding.Size = new System.Drawing.Size(209, 20);
+            this.dtpAanmelding.TabIndex = 13;
+            this.dtpAanmelding.ValueChanged += new System.EventHandler(this.EditAanmeldingChanged);
+            // 
+            // cbbMJVoorziening
+            // 
+            this.cbbMJVoorziening.FormattingEnabled = true;
+            this.cbbMJVoorziening.Location = new System.Drawing.Point(164, 168);
+            this.cbbMJVoorziening.Name = "cbbMJVoorziening";
+            this.cbbMJVoorziening.Size = new System.Drawing.Size(209, 21);
+            this.cbbMJVoorziening.TabIndex = 12;
+            this.cbbMJVoorziening.SelectedIndexChanged += new System.EventHandler(this.EditAanmeldingChanged);
+            // 
+            // cbbMJConsulent
+            // 
+            this.cbbMJConsulent.FormattingEnabled = true;
+            this.cbbMJConsulent.Location = new System.Drawing.Point(164, 140);
+            this.cbbMJConsulent.Name = "cbbMJConsulent";
+            this.cbbMJConsulent.Size = new System.Drawing.Size(209, 21);
+            this.cbbMJConsulent.TabIndex = 11;
+            this.cbbMJConsulent.SelectedIndexChanged += new System.EventHandler(this.EditAanmeldingChanged);
+            // 
+            // cbbMJDienst
+            // 
+            this.cbbMJDienst.FormattingEnabled = true;
+            this.cbbMJDienst.Location = new System.Drawing.Point(164, 112);
+            this.cbbMJDienst.Name = "cbbMJDienst";
+            this.cbbMJDienst.Size = new System.Drawing.Size(209, 21);
+            this.cbbMJDienst.TabIndex = 10;
+            this.cbbMJDienst.SelectedIndexChanged += new System.EventHandler(this.cbbMJDienst_SelectedIndexChanged);
+            // 
+            // txtMinderjarigeVoornaam
+            // 
+            this.txtMinderjarigeVoornaam.Location = new System.Drawing.Point(164, 84);
+            this.txtMinderjarigeVoornaam.Name = "txtMinderjarigeVoornaam";
+            this.txtMinderjarigeVoornaam.Size = new System.Drawing.Size(209, 20);
+            this.txtMinderjarigeVoornaam.TabIndex = 9;
+            this.txtMinderjarigeVoornaam.TextChanged += new System.EventHandler(this.EditAanmeldingChanged);
+            // 
+            // txtMinderjarigeNaam
+            // 
+            this.txtMinderjarigeNaam.Location = new System.Drawing.Point(164, 56);
+            this.txtMinderjarigeNaam.Name = "txtMinderjarigeNaam";
+            this.txtMinderjarigeNaam.Size = new System.Drawing.Size(209, 20);
+            this.txtMinderjarigeNaam.TabIndex = 8;
+            this.txtMinderjarigeNaam.TextChanged += new System.EventHandler(this.EditAanmeldingChanged);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(19, 222);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(139, 20);
+            this.label21.TabIndex = 7;
+            this.label21.Text = "Datum opneming:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(6, 194);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(152, 20);
+            this.label20.TabIndex = 6;
+            this.label20.Text = "Datum aanmelding:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(59, 166);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(99, 20);
+            this.label19.TabIndex = 5;
+            this.label19.Text = "Voorziening:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(72, 138);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(86, 20);
+            this.label18.TabIndex = 4;
+            this.label18.Text = "Consulent:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(101, 110);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(57, 20);
+            this.label17.TabIndex = 3;
+            this.label17.Text = "Dienst:";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(67, 82);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(91, 20);
+            this.label16.TabIndex = 2;
+            this.label16.Text = "Voornaam:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(101, 54);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(57, 20);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "Naam:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(25, 21);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(230, 22);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "Aanmelding aanpassen";
             // 
             // btnMJAanmeldingVerwijderen
             // 
@@ -776,234 +1035,227 @@
             this.pnlStatistieken.TabIndex = 7;
             this.pnlStatistieken.Visible = false;
             // 
-            // pnlEditAanmelding
+            // label23
             // 
-            this.pnlEditAanmelding.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(253)))));
-            this.pnlEditAanmelding.Controls.Add(this.btnCancelEdit);
-            this.pnlEditAanmelding.Controls.Add(this.chkOpgenomen);
-            this.pnlEditAanmelding.Controls.Add(this.btnSaveEdit);
-            this.pnlEditAanmelding.Controls.Add(this.dtpOpneming);
-            this.pnlEditAanmelding.Controls.Add(this.dtpAanmelding);
-            this.pnlEditAanmelding.Controls.Add(this.cbbMJVoorziening);
-            this.pnlEditAanmelding.Controls.Add(this.cbbMJConsulent);
-            this.pnlEditAanmelding.Controls.Add(this.cbbMJDienst);
-            this.pnlEditAanmelding.Controls.Add(this.txtMinderjarigeVoornaam);
-            this.pnlEditAanmelding.Controls.Add(this.txtMinderjarigeNaam);
-            this.pnlEditAanmelding.Controls.Add(this.label21);
-            this.pnlEditAanmelding.Controls.Add(this.label20);
-            this.pnlEditAanmelding.Controls.Add(this.label19);
-            this.pnlEditAanmelding.Controls.Add(this.label18);
-            this.pnlEditAanmelding.Controls.Add(this.label17);
-            this.pnlEditAanmelding.Controls.Add(this.label16);
-            this.pnlEditAanmelding.Controls.Add(this.label15);
-            this.pnlEditAanmelding.Controls.Add(this.label14);
-            this.pnlEditAanmelding.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlEditAanmelding.Location = new System.Drawing.Point(388, 0);
-            this.pnlEditAanmelding.Name = "pnlEditAanmelding";
-            this.pnlEditAanmelding.Size = new System.Drawing.Size(397, 566);
-            this.pnlEditAanmelding.TabIndex = 6;
-            this.pnlEditAanmelding.Visible = false;
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(13, 16);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(235, 22);
+            this.label23.TabIndex = 0;
+            this.label23.Text = "Overzicht voorzieningen";
             // 
-            // label14
+            // dgvOverzichtVoorziening
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(25, 21);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(230, 22);
-            this.label14.TabIndex = 0;
-            this.label14.Text = "Aanmelding aanpassen";
+            this.dgvOverzichtVoorziening.AllowUserToAddRows = false;
+            this.dgvOverzichtVoorziening.AllowUserToDeleteRows = false;
+            this.dgvOverzichtVoorziening.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOverzichtVoorziening.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clmVoorzieningNaam,
+            this.clmVoorzieningCount,
+            this.clmVoorzieningAvWachttijd});
+            this.dgvOverzichtVoorziening.Location = new System.Drawing.Point(17, 130);
+            this.dgvOverzichtVoorziening.MultiSelect = false;
+            this.dgvOverzichtVoorziening.Name = "dgvOverzichtVoorziening";
+            this.dgvOverzichtVoorziening.ReadOnly = true;
+            this.dgvOverzichtVoorziening.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvOverzichtVoorziening.Size = new System.Drawing.Size(756, 367);
+            this.dgvOverzichtVoorziening.TabIndex = 1;
+            this.dgvOverzichtVoorziening.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvOverzichtVoorziening_CellMouseDoubleClick);
             // 
-            // label15
+            // btnDetailVoorziening
             // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(101, 54);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(57, 20);
-            this.label15.TabIndex = 1;
-            this.label15.Text = "Naam:";
+            this.btnDetailVoorziening.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDetailVoorziening.Location = new System.Drawing.Point(13, 519);
+            this.btnDetailVoorziening.Name = "btnDetailVoorziening";
+            this.btnDetailVoorziening.Size = new System.Drawing.Size(231, 33);
+            this.btnDetailVoorziening.TabIndex = 4;
+            this.btnDetailVoorziening.Text = "Details voorziening";
+            this.btnDetailVoorziening.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnDetailVoorziening.Click += new System.EventHandler(this.btnDetailVoorziening_Click);
+            this.btnDetailVoorziening.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
+            this.btnDetailVoorziening.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
             // 
-            // label16
+            // lblOverzichtAverageVoorziening
             // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(67, 82);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(91, 20);
-            this.label16.TabIndex = 2;
-            this.label16.Text = "Voornaam:";
+            this.lblOverzichtAverageVoorziening.AutoSize = true;
+            this.lblOverzichtAverageVoorziening.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOverzichtAverageVoorziening.Location = new System.Drawing.Point(13, 105);
+            this.lblOverzichtAverageVoorziening.Name = "lblOverzichtAverageVoorziening";
+            this.lblOverzichtAverageVoorziening.Size = new System.Drawing.Size(372, 21);
+            this.lblOverzichtAverageVoorziening.TabIndex = 5;
+            this.lblOverzichtAverageVoorziening.Text = "Gemiddelde wachtijd over alle voorzieningen: ";
             // 
-            // label17
+            // clmVoorzieningNaam
             // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(101, 110);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(57, 20);
-            this.label17.TabIndex = 3;
-            this.label17.Text = "Dienst:";
+            this.clmVoorzieningNaam.HeaderText = "Voorziening";
+            this.clmVoorzieningNaam.Name = "clmVoorzieningNaam";
+            this.clmVoorzieningNaam.ReadOnly = true;
+            this.clmVoorzieningNaam.Width = 250;
             // 
-            // label18
+            // clmVoorzieningCount
             // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(72, 138);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(86, 20);
-            this.label18.TabIndex = 4;
-            this.label18.Text = "Consulent:";
+            this.clmVoorzieningCount.HeaderText = "Aantal aanmeldingen";
+            this.clmVoorzieningCount.Name = "clmVoorzieningCount";
+            this.clmVoorzieningCount.ReadOnly = true;
+            this.clmVoorzieningCount.Width = 175;
             // 
-            // label19
+            // clmVoorzieningAvWachttijd
             // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(59, 166);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(99, 20);
-            this.label19.TabIndex = 5;
-            this.label19.Text = "Voorziening:";
+            this.clmVoorzieningAvWachttijd.HeaderText = "Gemiddelde wachttijd (dagen)";
+            this.clmVoorzieningAvWachttijd.Name = "clmVoorzieningAvWachttijd";
+            this.clmVoorzieningAvWachttijd.ReadOnly = true;
+            this.clmVoorzieningAvWachttijd.Width = 175;
             // 
-            // label20
+            // pnlDetailVoorziening
             // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(6, 194);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(152, 20);
-            this.label20.TabIndex = 6;
-            this.label20.Text = "Datum aanmelding:";
+            this.pnlDetailVoorziening.Controls.Add(this.btnDetailVDelete);
+            this.pnlDetailVoorziening.Controls.Add(this.btnDetailVActiveToggle);
+            this.pnlDetailVoorziening.Controls.Add(this.btnDetailVAanpassen);
+            this.pnlDetailVoorziening.Controls.Add(this.lblDetailVAverageWachttijd);
+            this.pnlDetailVoorziening.Controls.Add(this.lblDetailVAantal);
+            this.pnlDetailVoorziening.Controls.Add(this.dgvDetailVoorziening);
+            this.pnlDetailVoorziening.Controls.Add(this.lblDetailVoorziening);
+            this.pnlDetailVoorziening.Controls.Add(this.btnOverzichtVoorziening);
+            this.pnlDetailVoorziening.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDetailVoorziening.Location = new System.Drawing.Point(0, 0);
+            this.pnlDetailVoorziening.Name = "pnlDetailVoorziening";
+            this.pnlDetailVoorziening.Size = new System.Drawing.Size(785, 566);
+            this.pnlDetailVoorziening.TabIndex = 6;
+            this.pnlDetailVoorziening.VisibleChanged += new System.EventHandler(this.pnlDetailVoorziening_VisibleChanged);
             // 
-            // label21
+            // btnOverzichtVoorziening
             // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(19, 222);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(139, 20);
-            this.label21.TabIndex = 7;
-            this.label21.Text = "Datum opneming:";
+            this.btnOverzichtVoorziening.AutoSize = true;
+            this.btnOverzichtVoorziening.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.btnOverzichtVoorziening.Location = new System.Drawing.Point(17, 16);
+            this.btnOverzichtVoorziening.Name = "btnOverzichtVoorziening";
+            this.btnOverzichtVoorziening.Size = new System.Drawing.Size(199, 21);
+            this.btnOverzichtVoorziening.TabIndex = 0;
+            this.btnOverzichtVoorziening.Text = "Overzicht voorzieningen";
+            this.btnOverzichtVoorziening.Click += new System.EventHandler(this.btnOverzichtVoorziening_Click);
+            this.btnOverzichtVoorziening.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
+            this.btnOverzichtVoorziening.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
             // 
-            // txtMinderjarigeNaam
+            // lblDetailVoorziening
             // 
-            this.txtMinderjarigeNaam.Location = new System.Drawing.Point(164, 56);
-            this.txtMinderjarigeNaam.Name = "txtMinderjarigeNaam";
-            this.txtMinderjarigeNaam.Size = new System.Drawing.Size(209, 20);
-            this.txtMinderjarigeNaam.TabIndex = 8;
-            this.txtMinderjarigeNaam.TextChanged += new System.EventHandler(this.EditAanmeldingChanged);
+            this.lblDetailVoorziening.AutoSize = true;
+            this.lblDetailVoorziening.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.lblDetailVoorziening.Location = new System.Drawing.Point(223, 16);
+            this.lblDetailVoorziening.Name = "lblDetailVoorziening";
+            this.lblDetailVoorziening.Size = new System.Drawing.Size(24, 21);
+            this.lblDetailVoorziening.TabIndex = 1;
+            this.lblDetailVoorziening.Text = "> ";
             // 
-            // txtMinderjarigeVoornaam
+            // dgvDetailVoorziening
             // 
-            this.txtMinderjarigeVoornaam.Location = new System.Drawing.Point(164, 84);
-            this.txtMinderjarigeVoornaam.Name = "txtMinderjarigeVoornaam";
-            this.txtMinderjarigeVoornaam.Size = new System.Drawing.Size(209, 20);
-            this.txtMinderjarigeVoornaam.TabIndex = 9;
-            this.txtMinderjarigeVoornaam.TextChanged += new System.EventHandler(this.EditAanmeldingChanged);
+            this.dgvDetailVoorziening.AllowUserToAddRows = false;
+            this.dgvDetailVoorziening.AllowUserToDeleteRows = false;
+            this.dgvDetailVoorziening.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDetailVoorziening.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clmDetailVMJNaam,
+            this.clmDetailVConsulent,
+            this.clmDetailVDienst,
+            this.clmDetailVDatumAanmelding,
+            this.clmDetailVDatumOpneming});
+            this.dgvDetailVoorziening.Location = new System.Drawing.Point(17, 129);
+            this.dgvDetailVoorziening.Name = "dgvDetailVoorziening";
+            this.dgvDetailVoorziening.ReadOnly = true;
+            this.dgvDetailVoorziening.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDetailVoorziening.Size = new System.Drawing.Size(748, 365);
+            this.dgvDetailVoorziening.TabIndex = 2;
+            this.dgvDetailVoorziening.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetailVoorziening_CellDoubleClick);
             // 
-            // cbbMJDienst
+            // clmDetailVMJNaam
             // 
-            this.cbbMJDienst.FormattingEnabled = true;
-            this.cbbMJDienst.Location = new System.Drawing.Point(164, 112);
-            this.cbbMJDienst.Name = "cbbMJDienst";
-            this.cbbMJDienst.Size = new System.Drawing.Size(209, 21);
-            this.cbbMJDienst.TabIndex = 10;
-            this.cbbMJDienst.SelectedIndexChanged += new System.EventHandler(this.cbbMJDienst_SelectedIndexChanged);
+            this.clmDetailVMJNaam.HeaderText = "Naam";
+            this.clmDetailVMJNaam.Name = "clmDetailVMJNaam";
+            this.clmDetailVMJNaam.ReadOnly = true;
             // 
-            // cbbMJConsulent
+            // clmDetailVConsulent
             // 
-            this.cbbMJConsulent.FormattingEnabled = true;
-            this.cbbMJConsulent.Location = new System.Drawing.Point(164, 140);
-            this.cbbMJConsulent.Name = "cbbMJConsulent";
-            this.cbbMJConsulent.Size = new System.Drawing.Size(209, 21);
-            this.cbbMJConsulent.TabIndex = 11;
-            this.cbbMJConsulent.SelectedIndexChanged += new System.EventHandler(this.EditAanmeldingChanged);
+            this.clmDetailVConsulent.HeaderText = "Consulent";
+            this.clmDetailVConsulent.Name = "clmDetailVConsulent";
+            this.clmDetailVConsulent.ReadOnly = true;
             // 
-            // cbbMJVoorziening
+            // clmDetailVDienst
             // 
-            this.cbbMJVoorziening.FormattingEnabled = true;
-            this.cbbMJVoorziening.Location = new System.Drawing.Point(164, 168);
-            this.cbbMJVoorziening.Name = "cbbMJVoorziening";
-            this.cbbMJVoorziening.Size = new System.Drawing.Size(209, 21);
-            this.cbbMJVoorziening.TabIndex = 12;
-            this.cbbMJVoorziening.SelectedIndexChanged += new System.EventHandler(this.EditAanmeldingChanged);
+            this.clmDetailVDienst.HeaderText = "Dienst";
+            this.clmDetailVDienst.Name = "clmDetailVDienst";
+            this.clmDetailVDienst.ReadOnly = true;
             // 
-            // dtpAanmelding
+            // clmDetailVDatumAanmelding
             // 
-            this.dtpAanmelding.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpAanmelding.Location = new System.Drawing.Point(164, 195);
-            this.dtpAanmelding.Name = "dtpAanmelding";
-            this.dtpAanmelding.Size = new System.Drawing.Size(209, 20);
-            this.dtpAanmelding.TabIndex = 13;
-            this.dtpAanmelding.ValueChanged += new System.EventHandler(this.EditAanmeldingChanged);
+            this.clmDetailVDatumAanmelding.HeaderText = "Datum Aanmelding";
+            this.clmDetailVDatumAanmelding.Name = "clmDetailVDatumAanmelding";
+            this.clmDetailVDatumAanmelding.ReadOnly = true;
+            this.clmDetailVDatumAanmelding.Width = 150;
             // 
-            // dtpOpneming
+            // clmDetailVDatumOpneming
             // 
-            this.dtpOpneming.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpOpneming.Location = new System.Drawing.Point(164, 221);
-            this.dtpOpneming.Name = "dtpOpneming";
-            this.dtpOpneming.Size = new System.Drawing.Size(209, 20);
-            this.dtpOpneming.TabIndex = 14;
-            this.dtpOpneming.ValueChanged += new System.EventHandler(this.EditAanmeldingChanged);
+            this.clmDetailVDatumOpneming.HeaderText = "Datum Opneming";
+            this.clmDetailVDatumOpneming.Name = "clmDetailVDatumOpneming";
+            this.clmDetailVDatumOpneming.ReadOnly = true;
+            this.clmDetailVDatumOpneming.Width = 150;
             // 
-            // btnSaveEdit
+            // lblDetailVAantal
             // 
-            this.btnSaveEdit.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveEdit.Location = new System.Drawing.Point(63, 292);
-            this.btnSaveEdit.Name = "btnSaveEdit";
-            this.btnSaveEdit.Size = new System.Drawing.Size(126, 34);
-            this.btnSaveEdit.TabIndex = 15;
-            this.btnSaveEdit.Text = "Opslaan";
-            this.btnSaveEdit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnSaveEdit.Click += new System.EventHandler(this.BtnSaveEdit_Click);
-            this.btnSaveEdit.MouseEnter += new System.EventHandler(this.btnEditConfirm_Hover);
-            this.btnSaveEdit.MouseLeave += new System.EventHandler(this.btnEditConfirm_Hover);
+            this.lblDetailVAantal.AutoSize = true;
+            this.lblDetailVAantal.Font = new System.Drawing.Font("Century Gothic", 10F);
+            this.lblDetailVAantal.Location = new System.Drawing.Point(17, 83);
+            this.lblDetailVAantal.Name = "lblDetailVAantal";
+            this.lblDetailVAantal.Size = new System.Drawing.Size(170, 19);
+            this.lblDetailVAantal.TabIndex = 3;
+            this.lblDetailVAantal.Text = "Aantal aanmeldingen: ";
             // 
-            // btnCancelEdit
+            // lblDetailVAverageWachttijd
             // 
-            this.btnCancelEdit.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelEdit.Location = new System.Drawing.Point(217, 292);
-            this.btnCancelEdit.Name = "btnCancelEdit";
-            this.btnCancelEdit.Size = new System.Drawing.Size(126, 34);
-            this.btnCancelEdit.TabIndex = 16;
-            this.btnCancelEdit.Text = "Annuleren";
-            this.btnCancelEdit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnCancelEdit.Click += new System.EventHandler(this.btnCancelEdit_Click);
-            this.btnCancelEdit.MouseEnter += new System.EventHandler(this.btnEditCancel_Hover);
-            this.btnCancelEdit.MouseLeave += new System.EventHandler(this.btnEditCancel_Hover);
+            this.lblDetailVAverageWachttijd.AutoSize = true;
+            this.lblDetailVAverageWachttijd.Font = new System.Drawing.Font("Century Gothic", 10F);
+            this.lblDetailVAverageWachttijd.Location = new System.Drawing.Point(17, 105);
+            this.lblDetailVAverageWachttijd.Name = "lblDetailVAverageWachttijd";
+            this.lblDetailVAverageWachttijd.Size = new System.Drawing.Size(282, 19);
+            this.lblDetailVAverageWachttijd.TabIndex = 4;
+            this.lblDetailVAverageWachttijd.Text = "Gemiddeld aantal dagen in wachtlijst: ";
             // 
-            // chkOpgenomen
+            // btnDetailVAanpassen
             // 
-            this.chkOpgenomen.AutoSize = true;
-            this.chkOpgenomen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkOpgenomen.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkOpgenomen.Location = new System.Drawing.Point(164, 249);
-            this.chkOpgenomen.Name = "chkOpgenomen";
-            this.chkOpgenomen.Size = new System.Drawing.Size(128, 24);
-            this.chkOpgenomen.TabIndex = 17;
-            this.chkOpgenomen.Text = "Opgenomen?";
-            this.chkOpgenomen.UseVisualStyleBackColor = true;
-            this.chkOpgenomen.CheckedChanged += new System.EventHandler(this.EditAanmeldingChanged);
+            this.btnDetailVAanpassen.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDetailVAanpassen.Location = new System.Drawing.Point(17, 509);
+            this.btnDetailVAanpassen.Name = "btnDetailVAanpassen";
+            this.btnDetailVAanpassen.Size = new System.Drawing.Size(231, 33);
+            this.btnDetailVAanpassen.TabIndex = 5;
+            this.btnDetailVAanpassen.Text = "Aanmelding aanpassen";
+            this.btnDetailVAanpassen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnDetailVAanpassen.Click += new System.EventHandler(this.btnVoorzieningAanmeldingAanpassen_Click);
+            this.btnDetailVAanpassen.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
+            this.btnDetailVAanpassen.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
             // 
-            // label22
+            // btnDetailVActiveToggle
             // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Century Gothic", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label22.Location = new System.Drawing.Point(751, 3);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(31, 13);
-            this.label22.TabIndex = 1;
-            this.label22.Text = "v0.99";
+            this.btnDetailVActiveToggle.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDetailVActiveToggle.Location = new System.Drawing.Point(273, 509);
+            this.btnDetailVActiveToggle.Name = "btnDetailVActiveToggle";
+            this.btnDetailVActiveToggle.Size = new System.Drawing.Size(231, 33);
+            this.btnDetailVActiveToggle.TabIndex = 6;
+            this.btnDetailVActiveToggle.Text = "Aanmelding actief/inactief";
+            this.btnDetailVActiveToggle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnDetailVActiveToggle.Click += new System.EventHandler(this.btnVoorzieningAanmeldingToggle_Click);
+            this.btnDetailVActiveToggle.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
+            this.btnDetailVActiveToggle.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
             // 
-            // lblEditSaved
+            // btnDetailVDelete
             // 
-            this.lblEditSaved.AutoSize = true;
-            this.lblEditSaved.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEditSaved.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblEditSaved.Location = new System.Drawing.Point(273, 22);
-            this.lblEditSaved.Name = "lblEditSaved";
-            this.lblEditSaved.Size = new System.Drawing.Size(0, 21);
-            this.lblEditSaved.TabIndex = 7;
+            this.btnDetailVDelete.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDetailVDelete.Location = new System.Drawing.Point(534, 509);
+            this.btnDetailVDelete.Name = "btnDetailVDelete";
+            this.btnDetailVDelete.Size = new System.Drawing.Size(231, 33);
+            this.btnDetailVDelete.TabIndex = 7;
+            this.btnDetailVDelete.Text = "Aanmelding verwijderen";
+            this.btnDetailVDelete.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnDetailVDelete.Click += new System.EventHandler(this.btnVoorzieningAanmeldingVerwijderen_Click);
+            this.btnDetailVDelete.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
+            this.btnDetailVDelete.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
             // 
             // FrmMainNew
             // 
@@ -1012,13 +1264,13 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(45)))), ((int)(((byte)(55)))));
             this.ClientSize = new System.Drawing.Size(969, 634);
-            this.Controls.Add(this.pnlMinderjarige);
             this.Controls.Add(this.pnlVoorzieningen);
-            this.Controls.Add(this.pnlDiensten);
-            this.Controls.Add(this.pnlFooter);
             this.Controls.Add(this.pnlNewAanmelding);
+            this.Controls.Add(this.pnlMinderjarige);
+            this.Controls.Add(this.pnlFooter);
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.pnlSidebar);
+            this.Controls.Add(this.pnlDiensten);
             this.Controls.Add(this.pnlStatistieken);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmMainNew";
@@ -1041,11 +1293,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.erpAanmelding)).EndInit();
             this.pnlFooter.ResumeLayout(false);
             this.pnlFooter.PerformLayout();
+            this.pnlVoorzieningen.ResumeLayout(false);
+            this.pnlVoorzieningen.PerformLayout();
             this.pnlMinderjarige.ResumeLayout(false);
             this.pnlMinderjarige.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOverzichtMj)).EndInit();
             this.pnlEditAanmelding.ResumeLayout(false);
             this.pnlEditAanmelding.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOverzichtMj)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOverzichtVoorziening)).EndInit();
+            this.pnlDetailVoorziening.ResumeLayout(false);
+            this.pnlDetailVoorziening.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetailVoorziening)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1134,5 +1392,26 @@
         private System.Windows.Forms.CheckBox chkOpgenomen;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label lblEditSaved;
+        private System.Windows.Forms.Label btnDetailVoorziening;
+        private System.Windows.Forms.DataGridView dgvOverzichtVoorziening;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label lblOverzichtAverageVoorziening;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmVoorzieningNaam;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmVoorzieningCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmVoorzieningAvWachttijd;
+        private System.Windows.Forms.Panel pnlDetailVoorziening;
+        private System.Windows.Forms.DataGridView dgvDetailVoorziening;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmDetailVMJNaam;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmDetailVConsulent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmDetailVDienst;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmDetailVDatumAanmelding;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmDetailVDatumOpneming;
+        private System.Windows.Forms.Label lblDetailVoorziening;
+        private System.Windows.Forms.Label btnOverzichtVoorziening;
+        private System.Windows.Forms.Label btnDetailVDelete;
+        private System.Windows.Forms.Label btnDetailVActiveToggle;
+        private System.Windows.Forms.Label btnDetailVAanpassen;
+        private System.Windows.Forms.Label lblDetailVAverageWachttijd;
+        private System.Windows.Forms.Label lblDetailVAantal;
     }
 }

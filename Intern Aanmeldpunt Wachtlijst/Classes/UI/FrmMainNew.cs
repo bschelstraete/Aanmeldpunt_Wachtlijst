@@ -136,7 +136,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
             if (((Label)sender).BackColor == Color.FromName("Control"))
                 ((Label)sender).BackColor = Color.FromArgb(220, 130, 130);
             else
-                ((Label)sender).BackColor = Color.FromArgb(253, 253, 253);
+                ((Label)sender).BackColor = Color.FromName("Control");
         }
 
         private void btnEditCancel_Hover(object sender, EventArgs e)
@@ -297,7 +297,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
                 string datumOpneming = mja.DatumOpneming > new DateTime(1970, 1, 1) ? mja.DatumOpneming.ToShortDateString() : " ";
                 Dienst aanmeldDienst = controller.GetDienstVanConsulent(mja.Consulent.ID);
                 string[] row = { mjNaam, mja.Aanmeldpunt.Naam, cNaam, aanmeldDienst.Naam,
-                                mja.DatumAanmelding.ToShortDateString(), mja.DatumOpneming.ToShortDateString() };
+                                mja.DatumAanmelding.ToShortDateString(), datumOpneming };
                 dvgActive.Rows.Add(row);
                 dvgActive.Rows[rowCount].Tag = mja;
                 rowCount++;
@@ -429,9 +429,9 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
             {
                 editAanmelding = (MinderjarigeAanmeldpunt)dgvOverzichtMj.SelectedRows[0].Tag;
                 InitAanmeldingAanpassen(editAanmelding);
+                pnlEditAanmelding.Parent = ((Label)sender).Parent;
                 pnlEditAanmelding.Visible = true;
             }
-            
         }
 
         private void InitAanmeldingAanpassen(MinderjarigeAanmeldpunt mja)
@@ -619,6 +619,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
                 }
             }
         }
+        //End aanmelding aanpassen
 
         private void pnlNewAanmelding_Click(object sender, EventArgs e)
         {
@@ -626,6 +627,157 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         }
 
 
-        //End aanmelding aanpassen
+        //Begin Overzicht voorziening
+
+        private void pnlVoorzieningen_VisibleChanged(object sender, EventArgs e)
+        {
+            if (pnlVoorzieningen.Visible == true)
+            {
+                InitOverzichtVoorziening();
+            }
+        }
+
+        private void InitOverzichtVoorziening()
+        {
+            pnlDetailVoorziening.Visible = false;
+            InitDatagridOVerzichtVoorziening();
+            lblOverzichtAverageVoorziening.Text = "Gemiddelde wachttijd voor alle voorzieningen: " + controller.GetAverageWachttijdOverAlleVoorzieningen().ToString("0") + " dagen";
+        }
+
+        private void InitDatagridOVerzichtVoorziening()
+        {
+            int rowCount = 0;
+            foreach (Aanmeldpunt voorziening in aanmeldpuntLijst)
+            {
+                List<MinderjarigeAanmeldpunt> aanmeldingenInVoorziening = controller.GetMinderjarigenInAanmeldpunt(voorziening.ID);
+                double averageWachttijd = controller.GetAverageWachtijdMinderjarigen(aanmeldingenInVoorziening);
+                string[] row = { voorziening.Naam, aanmeldingenInVoorziening.Count.ToString(), averageWachttijd.ToString("0.##") };
+                dgvOverzichtVoorziening.Rows.Add(row);
+                dgvOverzichtVoorziening.Rows[rowCount].Tag = aanmeldingenInVoorziening;
+                rowCount++;
+            }
+        }
+
+        private void btnDetailVoorziening_Click(object sender, EventArgs e)
+        {
+            dgvOverzichtVoorziening_CellMouseDoubleClick(null, null);
+        }
+
+        private void dgvOverzichtVoorziening_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (dgvOverzichtVoorziening.SelectedRows.Count > 0)
+            {
+                if(((List<MinderjarigeAanmeldpunt>)dgvOverzichtVoorziening.SelectedRows[0].Tag).Count() > 0)
+                {
+                    pnlDetailVoorziening.Visible = true;
+                }
+            }
+        }
+
+        //Begin Detail Voorziening
+
+        private void pnlDetailVoorziening_VisibleChanged(object sender, EventArgs e)
+        {
+            if(pnlDetailVoorziening.Visible == true)
+            {
+                InitPnlDetailVoorziening();
+            }
+        }
+
+        private void InitPnlDetailVoorziening()
+        {
+            lblDetailVoorziening.Text = "> " + ((List<MinderjarigeAanmeldpunt>)dgvOverzichtVoorziening.SelectedRows[0].Tag)[0].Aanmeldpunt.Naam;
+            lblDetailVAantal.Text = "Aantal aanmeldingen: " + ((List<MinderjarigeAanmeldpunt>)dgvOverzichtVoorziening.SelectedRows[0].Tag).Count().ToString();
+            lblDetailVAverageWachttijd.Text = "Gemiddeld aantal dagen in wachtlijst: " + controller.GetAverageWachtijdMinderjarigen((List<MinderjarigeAanmeldpunt>)dgvOverzichtVoorziening.SelectedRows[0].Tag).ToString("0");
+            InitDatagridDetailVoorziening();
+        }
+
+        private void InitDatagridDetailVoorziening()
+        {
+            List<MinderjarigeAanmeldpunt> aanmeldingen = (List<MinderjarigeAanmeldpunt>)dgvOverzichtVoorziening.SelectedRows[0].Tag;
+            dgvDetailVoorziening.Rows.Clear();
+            int rowCount = 0;
+            foreach (MinderjarigeAanmeldpunt mja in aanmeldingen)
+            {
+                string mjNaam = mja.Minderjarige.Naam + " " + mja.Minderjarige.Voornaam;
+                string cNaam = mja.Consulent.Naam + " " + mja.Consulent.Voornaam;
+                string datumOpneming = mja.DatumOpneming > new DateTime(1970, 1, 1) ? mja.DatumOpneming.ToShortDateString() : " ";
+                Dienst aanmeldDienst = controller.GetDienstVanConsulent(mja.Consulent.ID);
+                string[] row = { mjNaam, cNaam, aanmeldDienst.Naam,
+                                mja.DatumAanmelding.ToShortDateString(), datumOpneming };
+                dgvDetailVoorziening.Rows.Add(row);
+                dgvDetailVoorziening.Rows[rowCount].Tag = mja;
+                rowCount++;
+            }
+        }
+
+        private void btnVoorzieningAanmeldingAanpassen_Click(object sender, EventArgs e)
+        {
+            if (dgvDetailVoorziening.SelectedRows.Count > 0)
+            {
+                editAanmelding = (MinderjarigeAanmeldpunt)dgvDetailVoorziening.SelectedRows[0].Tag;
+                InitAanmeldingAanpassen(editAanmelding);
+                pnlEditAanmelding.Parent = ((Label)sender).Parent;
+                pnlEditAanmelding.BringToFront();
+                pnlEditAanmelding.Visible = true;
+
+            }
+        }
+
+        private void btnVoorzieningAanmeldingToggle_Click(object sender, EventArgs e)
+        {
+            if (dgvDetailVoorziening.SelectedRows.Count > 0)
+            {
+                MinderjarigeAanmeldpunt mja = (MinderjarigeAanmeldpunt)dgvDetailVoorziening.SelectedRows[0].Tag;
+                string msgString = mja.AanmeldingActief ? msgString = "Bent u zeker dat u de aanmelding op inactief wilt zetten?" : "Bent u zeker dat u de aanmelding op actief wilt zetten?";
+
+                if (MessageBox.Show(msgString, "Aanmelding actief/inactief", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        controller.SetAanmeldingActief(mja, !mja.AanmeldingActief);
+                        MessageBox.Show("De aanmelding is gewijzigd.", "Wijziging gelukt!");
+                    }
+                    catch (SqlException)
+                    {
+                        MessageBox.Show("Er is iets fout gelopen bij het wijzigen van de aanmelding, probeer later eens opnieuw.", "Wijziging mislukt!");
+                    }
+                }
+            }
+        }
+
+        private void btnVoorzieningAanmeldingVerwijderen_Click(object sender, EventArgs e)
+        {
+            if (dgvDetailVoorziening.SelectedRows.Count > 0)
+            {
+                MinderjarigeAanmeldpunt mja = (MinderjarigeAanmeldpunt)dgvDetailVoorziening.SelectedRows[0].Tag;
+                if (MessageBox.Show("Bent u zeker dat u de aanmelding wilt verwijderen?", "Aanmelding verwijderen", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        controller.DeleteAanmelding(mja);
+                        MessageBox.Show("De minderjarige is verwijderd.", "Verwijderen gelukt!");
+                    }
+                    catch (SqlException)
+                    {
+                        MessageBox.Show("Er is iets fout gelopen bij het verwijderen van de aanmelding, probeer later eens opnieuw.", "Verwijderen mislukt!");
+                    }
+                }
+            }
+        }
+
+        private void btnOverzichtVoorziening_Click(object sender, EventArgs e)
+        {
+            pnlDetailVoorziening.Visible = false;
+        }
+
+        private void dgvDetailVoorziening_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnVoorzieningAanmeldingAanpassen_Click(btnDetailVAanpassen, null);
+        }
+
+        //End Detail Voorziening
+
+        //End Overzicht voorziening
     }
 }
