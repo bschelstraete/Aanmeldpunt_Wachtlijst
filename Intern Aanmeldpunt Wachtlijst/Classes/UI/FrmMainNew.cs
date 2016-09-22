@@ -24,6 +24,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
 
         private Controller.Controller controller = new Controller.Controller();
         private List<Consulent> consulentLijst = new List<Consulent>();
+        private List<Consulent> alleConsulenten = new List<Consulent>();
         private List<Dienst> dienstLijst = new List<Dienst>();
         private List<Aanmeldpunt> aanmeldpuntLijst = new List<Aanmeldpunt>();
         private List<Minderjarige> minderjarigeLijst = new List<Minderjarige>();
@@ -71,7 +72,8 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         private void InitDatagridViews()
         {
             InitDataGrid(dgvAanmeldingen, alleAanmeldingen);
-            InitDataGrid(dgvOverzichtMj, alleAanmeldingen);            
+            InitDataGrid(dgvOverzichtMj, alleAanmeldingen);
+            InitDatagridOVerzichtVoorziening();          
             
         }
 
@@ -92,6 +94,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         private void InitContainerPanels()
         {
             this.DoubleBuffered = true;
+            pnlEditAanmelding.Parent = this;
             containerPanels.Add(pnlDiensten);
             containerPanels.Add(pnlMinderjarige);
             containerPanels.Add(pnlNewAanmelding);
@@ -234,6 +237,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
             aanmeldpuntLijst.Clear();
 
             consulentLijst = controller.GetAllConsulenten();
+            alleConsulenten = consulentLijst;
             dienstLijst = controller.GetAllDiensten();
             aanmeldpuntLijst = controller.GetAllAanmeldpunten();
             InitAanmeldingList();
@@ -412,7 +416,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
                 controller.InsertNewAanmelding(new MinderjarigeAanmeldpunt(mj, aanmeldpunt, consulent, datumAanmelding, true));
                 MessageBox.Show("Nieuwe aanmelding is geregistreerd!");
                 ResetForm();
-                InitOverzichtAanmeldingen();
+                InitDatagridViews();
             }
         }
 
@@ -429,13 +433,15 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
             {
                 editAanmelding = (MinderjarigeAanmeldpunt)dgvOverzichtMj.SelectedRows[0].Tag;
                 InitAanmeldingAanpassen(editAanmelding);
-                pnlEditAanmelding.Parent = ((Label)sender).Parent;
+                pnlEditAanmelding.BringToFront();
                 pnlEditAanmelding.Visible = true;
             }
         }
 
         private void InitAanmeldingAanpassen(MinderjarigeAanmeldpunt mja)
         {
+            cbbMJDienst_SelectedIndexChanged(null, null);
+
             txtMinderjarigeNaam.Text = mja.Minderjarige.Naam;
             txtMinderjarigeVoornaam.Text = mja.Minderjarige.Voornaam;
 
@@ -458,10 +464,12 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
             if (mja.Consulent.ID != 0)
             {
                 Dienst dienst = controller.GetDienstVanConsulent(mja.Consulent.ID);
-                int iConsulent = consulentLijst.FindIndex(x => x.Naam == mja.Consulent.Naam);
                 int iDienst = dienstLijst.FindIndex(x => x.Naam == dienst.Naam);
-                cbbMJConsulent.SelectedItem = consulentLijst[iConsulent];
                 cbbMJDienst.SelectedItem = dienstLijst[iDienst];
+
+
+                int iConsulent = consulentLijst.FindIndex(x => x.Naam == mja.Consulent.Naam);
+                cbbMJConsulent.SelectedItem = consulentLijst[iConsulent];
             }
 
             int iVoorziening = aanmeldpuntLijst.FindIndex(x => x.Naam == mja.Aanmeldpunt.Naam);
@@ -504,6 +512,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
 
                         MinderjarigeAanmeldpunt newAanmelding = new MinderjarigeAanmeldpunt(editAanmelding.Minderjarige, voorziening, consulent, datumAanmelding, datumOpneming, true);
                         controller.EditAanmelding(editAanmelding, newAanmelding);
+                        InitDatagridViews();
                         pnlEditAanmelding.Visible = false;
                         lblEditSaved.Text = "Opgeslaan!";
                         lblEditSaved.ForeColor = Color.DarkGreen;
@@ -647,6 +656,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         private void InitDatagridOVerzichtVoorziening()
         {
             int rowCount = 0;
+            dgvOverzichtVoorziening.Rows.Clear();
             foreach (Aanmeldpunt voorziening in aanmeldpuntLijst)
             {
                 List<MinderjarigeAanmeldpunt> aanmeldingenInVoorziening = controller.GetMinderjarigenInAanmeldpunt(voorziening.ID);
@@ -717,7 +727,6 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
             {
                 editAanmelding = (MinderjarigeAanmeldpunt)dgvDetailVoorziening.SelectedRows[0].Tag;
                 InitAanmeldingAanpassen(editAanmelding);
-                pnlEditAanmelding.Parent = ((Label)sender).Parent;
                 pnlEditAanmelding.BringToFront();
                 pnlEditAanmelding.Visible = true;
 
@@ -775,6 +784,25 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         {
             btnVoorzieningAanmeldingAanpassen_Click(btnDetailVAanpassen, null);
         }
+
+        private void dgvAanmeldingen_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvAanmeldingen.SelectedRows.Count > 0)
+            {
+                editAanmelding = (MinderjarigeAanmeldpunt)dgvAanmeldingen.SelectedRows[0].Tag;
+                InitAanmeldingAanpassen(editAanmelding);
+                pnlEditAanmelding.BringToFront();
+                pnlEditAanmelding.Visible = true;
+
+            }
+        }
+
+        private void btnResetZoeken_Click(object sender, EventArgs e)
+        {
+            txtZoeken.Text = "";
+            InitDatagridViews();
+        }
+
 
         //End Detail Voorziening
 
