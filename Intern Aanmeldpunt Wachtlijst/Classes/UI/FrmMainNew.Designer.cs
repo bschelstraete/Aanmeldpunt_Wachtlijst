@@ -162,6 +162,21 @@
             this.label27 = new System.Windows.Forms.Label();
             this.btnSaveConsulent = new System.Windows.Forms.Label();
             this.btnCancelConsulent = new System.Windows.Forms.Label();
+            this.pnlDienstConsulent = new System.Windows.Forms.Panel();
+            this.label24 = new System.Windows.Forms.Label();
+            this.btnConsulentAanmDelete = new System.Windows.Forms.Label();
+            this.btnConsulentAanmToggle = new System.Windows.Forms.Label();
+            this.btnConsulentAanmAanpassen = new System.Windows.Forms.Label();
+            this.dgvConsulentAanmeldingen = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnReturnToDienstenCons = new System.Windows.Forms.Label();
+            this.btnReturnToDienstOverzicht = new System.Windows.Forms.Label();
+            this.lblDetailConsulent = new System.Windows.Forms.Label();
             this.pnlSidebar.SuspendLayout();
             this.pnlCopyright.SuspendLayout();
             this.pnlLogo.SuspendLayout();
@@ -183,6 +198,8 @@
             this.pnlDienstDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetailDienst)).BeginInit();
             this.pnlAddNewConsulent.SuspendLayout();
+            this.pnlDienstConsulent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConsulentAanmeldingen)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlSidebar
@@ -414,8 +431,8 @@
             // 
             this.pnlNewAanmelding.AutoScroll = true;
             this.pnlNewAanmelding.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlNewAanmelding.Controls.Add(this.btnResetZoeken);
             this.pnlNewAanmelding.Controls.Add(this.pnlOverzichtAanmeldingen);
+            this.pnlNewAanmelding.Controls.Add(this.btnResetZoeken);
             this.pnlNewAanmelding.Controls.Add(this.label11);
             this.pnlNewAanmelding.Controls.Add(this.label2);
             this.pnlNewAanmelding.Controls.Add(this.btnClearAanmelding);
@@ -690,6 +707,7 @@
             // pnlDiensten
             // 
             this.pnlDiensten.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlDiensten.Controls.Add(this.pnlDienstConsulent);
             this.pnlDiensten.Controls.Add(this.pnlDienstDetail);
             this.pnlDiensten.Controls.Add(this.btnDetailDienst);
             this.pnlDiensten.Controls.Add(this.lblDienstGemiddeld);
@@ -989,9 +1007,9 @@
             this.pnlEditAanmelding.Controls.Add(this.label15);
             this.pnlEditAanmelding.Controls.Add(this.label14);
             this.pnlEditAanmelding.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlEditAanmelding.Location = new System.Drawing.Point(388, 0);
+            this.pnlEditAanmelding.Location = new System.Drawing.Point(391, 0);
             this.pnlEditAanmelding.Name = "pnlEditAanmelding";
-            this.pnlEditAanmelding.Size = new System.Drawing.Size(397, 566);
+            this.pnlEditAanmelding.Size = new System.Drawing.Size(394, 566);
             this.pnlEditAanmelding.TabIndex = 6;
             this.pnlEditAanmelding.Visible = false;
             // 
@@ -1428,6 +1446,7 @@
             this.btnDetailConsulent.TabIndex = 11;
             this.btnDetailConsulent.Text = "Detail consulent";
             this.btnDetailConsulent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnDetailConsulent.Click += new System.EventHandler(this.btnDetailConsulent_Click);
             this.btnDetailConsulent.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
             this.btnDetailConsulent.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
             // 
@@ -1466,6 +1485,7 @@
             this.dgvDetailDienst.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDetailDienst.Size = new System.Drawing.Size(748, 365);
             this.dgvDetailDienst.TabIndex = 13;
+            this.dgvDetailDienst.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetailDienst_CellDoubleClick);
             // 
             // btnReturnToDienst
             // 
@@ -1618,6 +1638,165 @@
             this.btnCancelConsulent.MouseEnter += new System.EventHandler(this.btnEditCancel_Hover);
             this.btnCancelConsulent.MouseLeave += new System.EventHandler(this.btnEditCancel_Hover);
             // 
+            // pnlDienstConsulent
+            // 
+            this.pnlDienstConsulent.Controls.Add(this.lblDetailConsulent);
+            this.pnlDienstConsulent.Controls.Add(this.btnReturnToDienstOverzicht);
+            this.pnlDienstConsulent.Controls.Add(this.label24);
+            this.pnlDienstConsulent.Controls.Add(this.btnConsulentAanmDelete);
+            this.pnlDienstConsulent.Controls.Add(this.btnConsulentAanmToggle);
+            this.pnlDienstConsulent.Controls.Add(this.btnConsulentAanmAanpassen);
+            this.pnlDienstConsulent.Controls.Add(this.dgvConsulentAanmeldingen);
+            this.pnlDienstConsulent.Controls.Add(this.btnReturnToDienstenCons);
+            this.pnlDienstConsulent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDienstConsulent.Location = new System.Drawing.Point(0, 0);
+            this.pnlDienstConsulent.Name = "pnlDienstConsulent";
+            this.pnlDienstConsulent.Size = new System.Drawing.Size(785, 566);
+            this.pnlDienstConsulent.TabIndex = 19;
+            this.pnlDienstConsulent.VisibleChanged += new System.EventHandler(this.pnlDienstConsulent_VisibleChanged);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.ForeColor = System.Drawing.Color.DarkRed;
+            this.label24.Location = new System.Drawing.Point(272, 35);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(0, 21);
+            this.label24.TabIndex = 13;
+            // 
+            // btnConsulentAanmDelete
+            // 
+            this.btnConsulentAanmDelete.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConsulentAanmDelete.Location = new System.Drawing.Point(533, 499);
+            this.btnConsulentAanmDelete.Name = "btnConsulentAanmDelete";
+            this.btnConsulentAanmDelete.Size = new System.Drawing.Size(231, 33);
+            this.btnConsulentAanmDelete.TabIndex = 12;
+            this.btnConsulentAanmDelete.Text = "Aanmelding verwijderen";
+            this.btnConsulentAanmDelete.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnConsulentAanmDelete.Click += new System.EventHandler(this.btnConsulentAanmDelete_Click);
+            this.btnConsulentAanmDelete.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
+            this.btnConsulentAanmDelete.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
+            // 
+            // btnConsulentAanmToggle
+            // 
+            this.btnConsulentAanmToggle.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConsulentAanmToggle.Location = new System.Drawing.Point(272, 499);
+            this.btnConsulentAanmToggle.Name = "btnConsulentAanmToggle";
+            this.btnConsulentAanmToggle.Size = new System.Drawing.Size(231, 33);
+            this.btnConsulentAanmToggle.TabIndex = 11;
+            this.btnConsulentAanmToggle.Text = "Aanmelding actief/inactief";
+            this.btnConsulentAanmToggle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnConsulentAanmToggle.Click += new System.EventHandler(this.btnConsulentAanmToggle_Click);
+            this.btnConsulentAanmToggle.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
+            this.btnConsulentAanmToggle.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
+            // 
+            // btnConsulentAanmAanpassen
+            // 
+            this.btnConsulentAanmAanpassen.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConsulentAanmAanpassen.Location = new System.Drawing.Point(21, 499);
+            this.btnConsulentAanmAanpassen.Name = "btnConsulentAanmAanpassen";
+            this.btnConsulentAanmAanpassen.Size = new System.Drawing.Size(231, 33);
+            this.btnConsulentAanmAanpassen.TabIndex = 10;
+            this.btnConsulentAanmAanpassen.Text = "Aanmelding aanpassen";
+            this.btnConsulentAanmAanpassen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnConsulentAanmAanpassen.Click += new System.EventHandler(this.btnConsulentAanmAanpassen_Click);
+            this.btnConsulentAanmAanpassen.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
+            this.btnConsulentAanmAanpassen.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
+            // 
+            // dgvConsulentAanmeldingen
+            // 
+            this.dgvConsulentAanmeldingen.AllowUserToAddRows = false;
+            this.dgvConsulentAanmeldingen.AllowUserToDeleteRows = false;
+            this.dgvConsulentAanmeldingen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvConsulentAanmeldingen.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8,
+            this.dataGridViewTextBoxColumn9});
+            this.dgvConsulentAanmeldingen.Location = new System.Drawing.Point(25, 88);
+            this.dgvConsulentAanmeldingen.MultiSelect = false;
+            this.dgvConsulentAanmeldingen.Name = "dgvConsulentAanmeldingen";
+            this.dgvConsulentAanmeldingen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvConsulentAanmeldingen.Size = new System.Drawing.Size(739, 368);
+            this.dgvConsulentAanmeldingen.TabIndex = 9;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Minderjarige";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Voorziening";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Consulten";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Dienst";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "Datum Aanmelding";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.HeaderText = "Datum Opneming";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.dataGridViewTextBoxColumn9.Width = 150;
+            // 
+            // btnReturnToDienstenCons
+            // 
+            this.btnReturnToDienstenCons.AutoSize = true;
+            this.btnReturnToDienstenCons.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReturnToDienstenCons.Location = new System.Drawing.Point(25, 35);
+            this.btnReturnToDienstenCons.Name = "btnReturnToDienstenCons";
+            this.btnReturnToDienstenCons.Size = new System.Drawing.Size(177, 21);
+            this.btnReturnToDienstenCons.TabIndex = 8;
+            this.btnReturnToDienstenCons.Text = "Overzichten diensten";
+            this.btnReturnToDienstenCons.Click += new System.EventHandler(this.btnReturnToDienstenCons_Click);
+            this.btnReturnToDienstenCons.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
+            this.btnReturnToDienstenCons.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
+            // 
+            // btnReturnToDienstOverzicht
+            // 
+            this.btnReturnToDienstOverzicht.AutoSize = true;
+            this.btnReturnToDienstOverzicht.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReturnToDienstOverzicht.Location = new System.Drawing.Point(208, 35);
+            this.btnReturnToDienstOverzicht.Name = "btnReturnToDienstOverzicht";
+            this.btnReturnToDienstOverzicht.Size = new System.Drawing.Size(20, 21);
+            this.btnReturnToDienstOverzicht.TabIndex = 14;
+            this.btnReturnToDienstOverzicht.Text = ">";
+            this.btnReturnToDienstOverzicht.Click += new System.EventHandler(this.btnReturnToDienstOverzicht_Click);
+            this.btnReturnToDienstOverzicht.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
+            this.btnReturnToDienstOverzicht.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
+            // 
+            // lblDetailConsulent
+            // 
+            this.lblDetailConsulent.AutoSize = true;
+            this.lblDetailConsulent.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDetailConsulent.Location = new System.Drawing.Point(387, 35);
+            this.lblDetailConsulent.Name = "lblDetailConsulent";
+            this.lblDetailConsulent.Size = new System.Drawing.Size(20, 21);
+            this.lblDetailConsulent.TabIndex = 15;
+            this.lblDetailConsulent.Text = ">";
+            // 
             // FrmMainNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1625,11 +1804,11 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(45)))), ((int)(((byte)(55)))));
             this.ClientSize = new System.Drawing.Size(969, 634);
-            this.Controls.Add(this.pnlNewAanmelding);
             this.Controls.Add(this.pnlDiensten);
+            this.Controls.Add(this.pnlMinderjarige);
+            this.Controls.Add(this.pnlNewAanmelding);
             this.Controls.Add(this.pnlVoorzieningen);
             this.Controls.Add(this.pnlStatistieken);
-            this.Controls.Add(this.pnlMinderjarige);
             this.Controls.Add(this.pnlFooter);
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.pnlSidebar);
@@ -1673,6 +1852,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetailDienst)).EndInit();
             this.pnlAddNewConsulent.ResumeLayout(false);
             this.pnlAddNewConsulent.PerformLayout();
+            this.pnlDienstConsulent.ResumeLayout(false);
+            this.pnlDienstConsulent.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConsulentAanmeldingen)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1812,5 +1994,20 @@
         private System.Windows.Forms.TextBox txtNewConsDienst;
         private System.Windows.Forms.TextBox txtNewConsFamilienaam;
         private System.Windows.Forms.TextBox txtNewConsVoornaam;
+        private System.Windows.Forms.Panel pnlDienstConsulent;
+        private System.Windows.Forms.Label lblDetailConsulent;
+        private System.Windows.Forms.Label btnReturnToDienstOverzicht;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label btnConsulentAanmDelete;
+        private System.Windows.Forms.Label btnConsulentAanmToggle;
+        private System.Windows.Forms.Label btnConsulentAanmAanpassen;
+        private System.Windows.Forms.DataGridView dgvConsulentAanmeldingen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.Label btnReturnToDienstenCons;
     }
 }

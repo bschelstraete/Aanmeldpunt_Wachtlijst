@@ -821,6 +821,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         private void InitPnlDiensten()
         {
             pnlDienstDetail.Visible = false;
+            pnlDienstConsulent.Visible = false;
             InitDienstLabels();
             InitDgvDienstAlgemeen();
         }
@@ -959,7 +960,126 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
             }
         }
 
+        private void dgvDetailDienst_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnDetailConsulent_Click(null, null);
+        }
 
+        private void btnDetailConsulent_Click(object sender, EventArgs e)
+        {
+            if(dgvDetailDienst.SelectedRows.Count > 0)
+            {
+                pnlDienstConsulent.Visible = true;
+                pnlDienstConsulent.BringToFront();
+            }
+        }
+
+        //Begin DetailOverzicht Consulent
+
+        private void pnlDienstConsulent_VisibleChanged(object sender, EventArgs e)
+        {
+            if(pnlDienstConsulent.Visible == true)
+            {
+                InitPnlDienstConsulent();
+            }
+        }
+
+        private void InitPnlDienstConsulent()
+        {
+            Consulent consulent = (Consulent)dgvDetailDienst.SelectedRows[0].Tag;
+            InitPnlDienstConsulentLabels(consulent);
+            InitPnlDienstDatagridViews(consulent);
+        }
+
+        private void InitPnlDienstConsulentLabels(Consulent consulent)
+        {
+
+        }
+
+        private void InitPnlDienstDatagridViews(Consulent consulent)
+        {
+            List<MinderjarigeAanmeldpunt> aanmeldingen = controller.GetMinderjarigenAangemeldDoor(consulent.ID);
+            InitDataGrid(dgvConsulentAanmeldingen, aanmeldingen);
+        }
+
+        private void btnConsulentAanmAanpassen_Click(object sender, EventArgs e)
+        {
+            if (dgvConsulentAanmeldingen.SelectedRows.Count > 0)
+            {
+                editAanmelding = (MinderjarigeAanmeldpunt)dgvConsulentAanmeldingen.SelectedRows[0].Tag;
+                InitAanmeldingAanpassen(editAanmelding);
+                pnlEditAanmelding.BringToFront();
+                pnlEditAanmelding.Visible = true;
+
+            }
+        }
+
+        private void btnConsulentAanmToggle_Click(object sender, EventArgs e)
+        {
+
+            if (dgvConsulentAanmeldingen.SelectedRows.Count > 0)
+            {
+                MinderjarigeAanmeldpunt mja = (MinderjarigeAanmeldpunt)dgvConsulentAanmeldingen.SelectedRows[0].Tag;
+                string msgString = mja.AanmeldingActief ? msgString = "Bent u zeker dat u de aanmelding op inactief wilt zetten?" : "Bent u zeker dat u de aanmelding op actief wilt zetten?";
+
+                if (MessageBox.Show(msgString, "Aanmelding actief/inactief", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        controller.SetAanmeldingActief(mja, !mja.AanmeldingActief);
+                        MessageBox.Show("De aanmelding is gewijzigd.", "Wijziging gelukt!");
+                    }
+                    catch (SqlException)
+                    {
+                        MessageBox.Show("Er is iets fout gelopen bij het wijzigen van de aanmelding, probeer later eens opnieuw.", "Wijziging mislukt!");
+                    }
+                }
+            }
+        }
+
+        private void btnConsulentAanmDelete_Click(object sender, EventArgs e)
+        {
+
+            if (dgvConsulentAanmeldingen.SelectedRows.Count > 0)
+            {
+                MinderjarigeAanmeldpunt mja = (MinderjarigeAanmeldpunt)dgvConsulentAanmeldingen.SelectedRows[0].Tag;
+                if (MessageBox.Show("Bent u zeker dat u de aanmelding wilt verwijderen?", "Aanmelding verwijderen", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        controller.DeleteAanmelding(mja);
+                        MessageBox.Show("De minderjarige is verwijderd.", "Verwijderen gelukt!");
+                    }
+                    catch (SqlException)
+                    {
+                        MessageBox.Show("Er is iets fout gelopen bij het verwijderen van de aanmelding, probeer later eens opnieuw.", "Verwijderen mislukt!");
+                    }
+                }
+            }
+        }
+
+        private void btnReturnToDienstenCons_Click(object sender, EventArgs e)
+        {
+            pnlDienstConsulent.Visible = false;
+            pnlDienstDetail.Visible = false;
+            pnlDiensten.Visible = true;
+            pnlDiensten.BringToFront();
+        }
+
+        private void btnReturnToDienstOverzicht_Click(object sender, EventArgs e)
+        {
+            pnlDienstConsulent.Visible = false;
+            pnlDienstDetail.Visible = true;
+            pnlDiensten.Visible = true;
+            pnlDienstDetail.BringToFront();
+        }
+
+
+
+
+
+
+        //End Detailoverzicht Consulent
 
         //End Detail Diensten
 
