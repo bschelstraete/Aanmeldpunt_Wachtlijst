@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms.VisualStyles;
 
 namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
@@ -993,7 +994,10 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
 
         private void InitPnlDienstConsulentLabels(Consulent consulent)
         {
-
+            Dienst dienst = controller.GetDienstVanConsulent(consulent.ID);
+            btnReturnToDienstOverzicht.Text = "> " + dienst.Naam;
+            lblDetailConsulent.Location = new Point(btnReturnToDienstOverzicht.Location.X + btnReturnToDienstOverzicht.Size.Width + 4, lblDetailConsulent.Location.Y);
+            lblDetailConsulent.Text = "> " + consulent.Naam + " " + consulent.Voornaam;
         }
 
         private void InitPnlDienstDatagridViews(Consulent consulent)
@@ -1074,15 +1078,222 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
             pnlDienstDetail.BringToFront();
         }
 
-
-
-
-
-
         //End Detailoverzicht Consulent
 
         //End Detail Diensten
 
         //End Overzicht Diensten
+
+        //Begin Statistics
+
+        private void pnlStatistieken_VisibleChanged(object sender, EventArgs e)
+        {
+            if (pnlStatistieken.Visible)
+            {
+                InitStatistics(new DateTime(2000, 01, 01), DateTime.Now);
+            }
+        }
+
+        private void btnStatToepassen_Click(object sender, EventArgs e)
+        {
+            DateTime datumVan = dtpVan.Value;
+            DateTime datumTot = dtpTot.Value;
+
+            if (datumVan > datumTot)
+                MessageBox.Show("Gelieve een begindatum te kiezen die kleiner is dan de einddatum", "Datum selecteren");
+            else if (datumVan < datumTot)
+            {
+                InitStatistics(datumVan, datumTot);
+            }
+        }
+
+        private void btnStatReset_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void InitStatistics(DateTime datumVan, DateTime datumTot)
+        {
+            InitDiensten(datumVan, datumTot);
+            InitVoorzieningen(datumVan, datumTot);
+            InitWachttijdDiensten(datumVan, datumTot);
+            InitWachttijdVoorzieningen(datumVan, datumTot);
+        }
+
+        private void InitDiensten(DateTime datumVan, DateTime datumTot)
+        {
+            List<int> dienstAanmelding = new List<int>();
+            List<int> dienstOpneming = new List<int>();
+            LoadLijsten<Dienst>(dienstLijst, dienstAanmelding, dienstOpneming, datumVan, datumTot);
+            chtDiensten.Text = "Overzicht actieve aanmeldingen in alle diensten";
+
+            if (chtDiensten.Titles.Count == 0)
+                chtDiensten.Titles.Add("Overzicht actieve aanmeldingen in alle diensten");
+            else
+                chtDiensten.Titles[0].Text = "Overzicht actieve aanmeldingen in alle diensten";
+            LoadChartAanmelding<Dienst>(dienstLijst, dienstAanmelding, dienstOpneming, chtDiensten);
+        }
+
+        private void InitVoorzieningen(DateTime datumVan, DateTime datumTot)
+        {
+            List<int> voorzieningAanmelding = new List<int>();
+            List<int> voorzieningOpneming = new List<int>();
+            LoadLijsten<Aanmeldpunt>(aanmeldpuntLijst, voorzieningAanmelding, voorzieningOpneming, datumVan, datumTot);
+            chtVoorzieningen.Text = "Overzicht actieve aanmeldingen in alle voorzieningen";
+
+            if (chtVoorzieningen.Titles.Count == 0)
+                chtVoorzieningen.Titles.Add("Overzicht actieve aanmeldingen in alle voorzieningen");
+            else
+                chtVoorzieningen.Titles[0].Text = "Overzicht actieve aanmeldingen in alle voorzieningen";
+
+            LoadChartAanmelding<Aanmeldpunt>(aanmeldpuntLijst, voorzieningAanmelding, voorzieningOpneming, chtVoorzieningen);
+        }
+
+        private void InitWachttijdDiensten(DateTime datumVan, DateTime datumTot)
+        {
+            List<int> dienstAanmelding = new List<int>();
+            List<int> dienstOpneming = new List<int>();
+            LoadLijsten<Dienst>(dienstLijst, dienstAanmelding, dienstOpneming, datumVan, datumTot);
+            chtWachttijdDienst.Text = "Overzicht gemiddelde wachtijd per dienst";
+
+            if (chtWachttijdDienst.Titles.Count == 0)
+                chtWachttijdDienst.Titles.Add(chtWachttijdDienst.Text);
+            else
+                chtWachttijdDienst.Titles[0].Text = "Overzicht gemiddelde wachtijd per dienst";
+
+            LoadChartWachttijd<Dienst>(dienstLijst, dienstAanmelding, dienstOpneming, chtWachttijdDienst);
+        }
+
+        private void InitWachttijdVoorzieningen(DateTime datumVan, DateTime datumTot)
+        {
+            List<int> voorzieningAanmelding = new List<int>();
+            List<int> voorzieningOpneming = new List<int>();
+            LoadLijsten<Aanmeldpunt>(aanmeldpuntLijst, voorzieningAanmelding, voorzieningOpneming, datumVan, datumTot);
+            chtWachttijdVoorziening.Text = "Overzicht gemiddelde wachttijd per voorziening";
+
+            if (chtWachttijdVoorziening.Titles.Count == 0)
+                chtWachttijdVoorziening.Titles.Add(chtWachttijdVoorziening.Text);
+            else
+                chtWachttijdVoorziening.Titles[0].Text = chtWachttijdVoorziening.Text;
+            LoadChartWachttijd<Aanmeldpunt>(aanmeldpuntLijst, voorzieningAanmelding, voorzieningOpneming, chtWachttijdVoorziening);
+        }
+
+
+        private void LoadLijsten<T>(List<T> inputList, List<int> aanmeldingCountLijst, List<int> opnemingCountLijst, DateTime datumVan, DateTime datumTot)
+        {
+            aanmeldingCountLijst.Clear();
+            opnemingCountLijst.Clear();
+
+            List<T> objectLijst = inputList;
+
+            foreach (Object item in objectLijst)
+            {
+                List<MinderjarigeAanmeldpunt> aanmeldingLijst = new List<MinderjarigeAanmeldpunt>();
+                if (item.GetType() == typeof(Dienst))
+                    aanmeldingLijst = controller.GetMinderjarigeBetweenDatesInDienst(((Dienst)item), datumVan, datumTot);
+                if (item.GetType() == typeof(Aanmeldpunt))
+                    aanmeldingLijst = controller.GetMinderjarigeBetweenDatesInAanmeldpunt(((Aanmeldpunt)item), datumVan, datumTot);
+                int aanmeldingCount = 0;
+                int opnemingCount = 0;
+                foreach (MinderjarigeAanmeldpunt mja in aanmeldingLijst)
+                {
+                    if (mja.AanmeldingActief)
+                    {
+                        aanmeldingCount++;
+                        if (mja.DatumOpneming > new DateTime(1970, 1, 1))
+                        {
+                            opnemingCount++;
+                        }
+                    }
+
+                }
+                aanmeldingCountLijst.Add(aanmeldingCount);
+                opnemingCountLijst.Add(opnemingCount);
+            }
+        }
+
+        private void LoadChartAanmelding<T>(List<T> overzichtLijst, List<int> aanmeldingCount, List<int> opnemingCount, Chart chart)
+        {
+            chart.Series.Clear();
+            chart.Series.Add("Aanmeldingen");
+            chart.Series["Aanmeldingen"].Label = "#VALX\n#VALY aanmelding(en)\n#PERCENT";
+            chart.Series["Aanmeldingen"].IsVisibleInLegend = false;
+            chart.Series["Aanmeldingen"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            chart.Series["Aanmeldingen"]["PieLabelStyle"] = "Outside";
+            chart.ChartAreas[0].Area3DStyle.Enable3D = true;
+
+            for (int i = 0; i < overzichtLijst.Count(); i++)
+            {
+                if (aanmeldingCount[i] != 0)
+                {
+                    if (opnemingCount[i] == 0)
+                    {
+                        Object b = overzichtLijst[i];
+                        if (typeof(T) == typeof(Dienst))
+                        {
+                            Dienst dienst = (Dienst)b;
+                            chart.Series["Aanmeldingen"].Points.AddXY(dienst.Naam, aanmeldingCount[i]);
+                        }
+                        else
+                        {
+                            Aanmeldpunt ap = (Aanmeldpunt)b;
+                            chart.Series["Aanmeldingen"].Points.AddXY(ap.Naam, aanmeldingCount[i]);
+                        }
+                    }
+                }
+            }
+            chart.Legends.Clear();
+            chart.Update();
+        }
+
+        private void LoadChartWachttijd<T>(List<T> overzichtLijst, List<int> aanmeldingCount, List<int> opnemeingCount, Chart chart)
+        {
+            chart.Series.Clear();
+            chart.Series.Add("Gemiddelde wachttijd in dagen");
+            //chart.Series["Gemiddelde wachttijd in dagen"].Label = "#VALX\n#VALY dagen";
+            chart.ChartAreas[0].AxisX.LabelStyle.Interval = 1;
+            chart.ChartAreas[0].AxisX.LabelStyle.Angle = 45;
+            //chart.Series["Gemiddelde wachttijd in dagen"].IsVisibleInLegend = false;
+            //chart.Series["Gemiddelde wachttijd in dagen"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            //chart.Series["Gemiddelde wachttijd in dagen"]["PieLabelStyle"] = "Outside";
+            //chart.ChartAreas[0].Area3DStyle.Enable3D = true;
+            double totalAverageWachttijd = 0.0;
+
+            for (int i = 0; i < overzichtLijst.Count(); i++)
+            {
+                if (aanmeldingCount[i] != 0)
+                {
+                    Object b = overzichtLijst[i];
+                    if (typeof(T) == typeof(Dienst))
+                    {
+                        Dienst dienst = (Dienst)b;
+                        List<MinderjarigeAanmeldpunt> aanmeldingen = controller.GetMinderjarigenInDienst(dienst.ID);
+                        totalAverageWachttijd += controller.GetAverageWachtijdMinderjarigen(aanmeldingen);
+                        double averageWachttijd = controller.GetAverageWachtijdMinderjarigen(aanmeldingen);
+                        chart.Series["Gemiddelde wachttijd in dagen"].Points.AddXY(dienst.Naam, Convert.ToInt32(averageWachttijd));
+                    }
+                    if (typeof(T) == typeof(Aanmeldpunt))
+                    {
+                        Aanmeldpunt aanmeldpunt = (Aanmeldpunt)b;
+                        List<MinderjarigeAanmeldpunt> aanmeldingen = controller.GetMinderjarigenInAanmeldpunt(aanmeldpunt.ID);
+                        totalAverageWachttijd += controller.GetAverageWachtijdMinderjarigen(aanmeldingen);
+                        double averageWachttijd = controller.GetAverageWachtijdMinderjarigen(aanmeldingen);
+                        chart.Series["Gemiddelde wachttijd in dagen"].Points.AddXY(aanmeldpunt.Naam, Convert.ToInt32(averageWachttijd));
+                    }
+                }
+            }
+
+            if (totalAverageWachttijd != 0.0)
+            {
+                totalAverageWachttijd /= overzichtLijst.Count();
+                chart.Titles[0].Text += " - Totale gemiddelde wachttijd: " + totalAverageWachttijd.ToString("0.## dagen");
+            }
+            chart.Legends.Clear();
+            chart.Update();
+        }
+
+
+
+        //End Statistics
     }
 }

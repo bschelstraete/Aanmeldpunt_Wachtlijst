@@ -79,6 +79,7 @@
             this.dtpVan.Name = "dtpVan";
             this.dtpVan.Size = new System.Drawing.Size(92, 20);
             this.dtpVan.TabIndex = 5;
+            this.dtpVan.ValueChanged += new System.EventHandler(this.dtpVan_ValueChanged);
             // 
             // dtpTot
             // 
@@ -87,6 +88,7 @@
             this.dtpTot.Name = "dtpTot";
             this.dtpTot.Size = new System.Drawing.Size(97, 20);
             this.dtpTot.TabIndex = 6;
+            this.dtpTot.ValueChanged += new System.EventHandler(this.dtpTot_ValueChanged);
             // 
             // label1
             // 
@@ -96,6 +98,7 @@
             this.label1.Size = new System.Drawing.Size(115, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = "Selecteer periode: Van";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -105,6 +108,7 @@
             this.label2.Size = new System.Drawing.Size(54, 13);
             this.label2.TabIndex = 8;
             this.label2.Text = "tot en met";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // btnToepassen
             // 
@@ -124,6 +128,7 @@
             this.btnReset.TabIndex = 10;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // lblAanmeldingen
             // 
@@ -155,6 +160,7 @@
             this.splContainerAanmeldingen.Size = new System.Drawing.Size(990, 588);
             this.splContainerAanmeldingen.SplitterDistance = 307;
             this.splContainerAanmeldingen.TabIndex = 4;
+            this.splContainerAanmeldingen.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splContainerAanmeldingen_SplitterMoved);
             // 
             // spcAanmeldingen
             // 
@@ -174,6 +180,7 @@
             this.spcAanmeldingen.Size = new System.Drawing.Size(960, 301);
             this.spcAanmeldingen.SplitterDistance = 461;
             this.spcAanmeldingen.TabIndex = 2;
+            this.spcAanmeldingen.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.spcAanmeldingen_SplitterMoved);
             // 
             // chtDiensten
             // 
@@ -193,6 +200,7 @@
             this.chtDiensten.Size = new System.Drawing.Size(443, 295);
             this.chtDiensten.TabIndex = 0;
             this.chtDiensten.Text = "chart1";
+            this.chtDiensten.Click += new System.EventHandler(this.chtDiensten_Click);
             // 
             // chtVoorzieningen
             // 
@@ -212,6 +220,7 @@
             this.chtVoorzieningen.Size = new System.Drawing.Size(477, 295);
             this.chtVoorzieningen.TabIndex = 0;
             this.chtVoorzieningen.Text = "chart1";
+            this.chtVoorzieningen.Click += new System.EventHandler(this.chtVoorzieningen_Click);
             // 
             // spcWachttijd
             // 
@@ -229,8 +238,9 @@
             // 
             this.spcWachttijd.Panel2.Controls.Add(this.chtWachttijdVoorziening);
             this.spcWachttijd.Size = new System.Drawing.Size(960, 271);
-            this.spcWachttijd.SplitterDistance = 464;
+            this.spcWachttijd.SplitterDistance = 463;
             this.spcWachttijd.TabIndex = 3;
+            this.spcWachttijd.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.spcWachttijd_SplitterMoved);
             // 
             // chtWachttijdDienst
             // 
@@ -247,9 +257,10 @@
             series3.Legend = "Legend1";
             series3.Name = "Series1";
             this.chtWachttijdDienst.Series.Add(series3);
-            this.chtWachttijdDienst.Size = new System.Drawing.Size(445, 265);
+            this.chtWachttijdDienst.Size = new System.Drawing.Size(444, 265);
             this.chtWachttijdDienst.TabIndex = 0;
             this.chtWachttijdDienst.Text = "chart1";
+            this.chtWachttijdDienst.Click += new System.EventHandler(this.chtWachttijdDienst_Click);
             // 
             // chtWachttijdVoorziening
             // 
@@ -266,9 +277,10 @@
             series4.Legend = "Legend1";
             series4.Name = "Series1";
             this.chtWachttijdVoorziening.Series.Add(series4);
-            this.chtWachttijdVoorziening.Size = new System.Drawing.Size(471, 265);
+            this.chtWachttijdVoorziening.Size = new System.Drawing.Size(472, 265);
             this.chtWachttijdVoorziening.TabIndex = 1;
             this.chtWachttijdVoorziening.Text = "chart1";
+            this.chtWachttijdVoorziening.Click += new System.EventHandler(this.chtWachttijdVoorziening_Click);
             // 
             // FrmStatistics
             // 

@@ -29,6 +29,18 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.pnlSidebar = new System.Windows.Forms.Panel();
             this.btnNewAanmelding = new System.Windows.Forms.Label();
             this.pnlCopyright = new System.Windows.Forms.Panel();
@@ -177,6 +189,20 @@
             this.btnReturnToDienstenCons = new System.Windows.Forms.Label();
             this.btnReturnToDienstOverzicht = new System.Windows.Forms.Label();
             this.lblDetailConsulent = new System.Windows.Forms.Label();
+            this.splContainerAanmeldingen = new System.Windows.Forms.SplitContainer();
+            this.spcAanmeldingen = new System.Windows.Forms.SplitContainer();
+            this.chtDiensten = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chtVoorzieningen = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.spcWachttijd = new System.Windows.Forms.SplitContainer();
+            this.chtWachttijdDienst = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chtWachttijdVoorziening = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.lblAanmeldingen = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.dtpTot = new System.Windows.Forms.DateTimePicker();
+            this.dtpVan = new System.Windows.Forms.DateTimePicker();
+            this.btnStatToepassen = new System.Windows.Forms.Label();
+            this.btnStatReset = new System.Windows.Forms.Label();
             this.pnlSidebar.SuspendLayout();
             this.pnlCopyright.SuspendLayout();
             this.pnlLogo.SuspendLayout();
@@ -194,12 +220,29 @@
             this.pnlMinderjarige.SuspendLayout();
             this.pnlEditAanmelding.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOverzichtMj)).BeginInit();
+            this.pnlStatistieken.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDienstAlgemeen)).BeginInit();
             this.pnlDienstDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetailDienst)).BeginInit();
             this.pnlAddNewConsulent.SuspendLayout();
             this.pnlDienstConsulent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsulentAanmeldingen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splContainerAanmeldingen)).BeginInit();
+            this.splContainerAanmeldingen.Panel1.SuspendLayout();
+            this.splContainerAanmeldingen.Panel2.SuspendLayout();
+            this.splContainerAanmeldingen.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spcAanmeldingen)).BeginInit();
+            this.spcAanmeldingen.Panel1.SuspendLayout();
+            this.spcAanmeldingen.Panel2.SuspendLayout();
+            this.spcAanmeldingen.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chtDiensten)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chtVoorzieningen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spcWachttijd)).BeginInit();
+            this.spcWachttijd.Panel1.SuspendLayout();
+            this.spcWachttijd.Panel2.SuspendLayout();
+            this.spcWachttijd.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chtWachttijdDienst)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chtWachttijdVoorziening)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlSidebar
@@ -1244,11 +1287,11 @@
             this.clmOMJDienst,
             this.clmOMJDatumAanmelding,
             this.clmOMJDatumOpneming});
-            this.dgvOverzichtMj.Location = new System.Drawing.Point(26, 75);
+            this.dgvOverzichtMj.Location = new System.Drawing.Point(26, 90);
             this.dgvOverzichtMj.Name = "dgvOverzichtMj";
             this.dgvOverzichtMj.ReadOnly = true;
             this.dgvOverzichtMj.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOverzichtMj.Size = new System.Drawing.Size(739, 368);
+            this.dgvOverzichtMj.Size = new System.Drawing.Size(739, 353);
             this.dgvOverzichtMj.TabIndex = 2;
             this.dgvOverzichtMj.DoubleClick += new System.EventHandler(this.dgvOverzichtMj_DoubleClick);
             // 
@@ -1303,7 +1346,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(26, 22);
+            this.label13.Location = new System.Drawing.Point(26, 35);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(197, 21);
             this.label13.TabIndex = 0;
@@ -1312,12 +1355,21 @@
             // pnlStatistieken
             // 
             this.pnlStatistieken.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlStatistieken.Controls.Add(this.btnStatReset);
+            this.pnlStatistieken.Controls.Add(this.btnStatToepassen);
+            this.pnlStatistieken.Controls.Add(this.splContainerAanmeldingen);
+            this.pnlStatistieken.Controls.Add(this.lblAanmeldingen);
+            this.pnlStatistieken.Controls.Add(this.label28);
+            this.pnlStatistieken.Controls.Add(this.label29);
+            this.pnlStatistieken.Controls.Add(this.dtpTot);
+            this.pnlStatistieken.Controls.Add(this.dtpVan);
             this.pnlStatistieken.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlStatistieken.Location = new System.Drawing.Point(184, 48);
             this.pnlStatistieken.Name = "pnlStatistieken";
             this.pnlStatistieken.Size = new System.Drawing.Size(785, 566);
             this.pnlStatistieken.TabIndex = 7;
             this.pnlStatistieken.Visible = false;
+            this.pnlStatistieken.VisibleChanged += new System.EventHandler(this.pnlStatistieken_VisibleChanged);
             // 
             // btnResetZoeken
             // 
@@ -1716,49 +1768,43 @@
             this.dataGridViewTextBoxColumn7,
             this.dataGridViewTextBoxColumn8,
             this.dataGridViewTextBoxColumn9});
-            this.dgvConsulentAanmeldingen.Location = new System.Drawing.Point(25, 88);
+            this.dgvConsulentAanmeldingen.Location = new System.Drawing.Point(25, 90);
             this.dgvConsulentAanmeldingen.MultiSelect = false;
             this.dgvConsulentAanmeldingen.Name = "dgvConsulentAanmeldingen";
             this.dgvConsulentAanmeldingen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvConsulentAanmeldingen.Size = new System.Drawing.Size(739, 368);
+            this.dgvConsulentAanmeldingen.Size = new System.Drawing.Size(739, 366);
             this.dgvConsulentAanmeldingen.TabIndex = 9;
             // 
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.HeaderText = "Minderjarige";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.HeaderText = "Voorziening";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.HeaderText = "Consulten";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn7
             // 
             this.dataGridViewTextBoxColumn7.HeaderText = "Dienst";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn8
             // 
             this.dataGridViewTextBoxColumn8.HeaderText = "Datum Aanmelding";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
             this.dataGridViewTextBoxColumn8.Width = 150;
             // 
             // dataGridViewTextBoxColumn9
             // 
             this.dataGridViewTextBoxColumn9.HeaderText = "Datum Opneming";
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
             this.dataGridViewTextBoxColumn9.Width = 150;
             // 
             // btnReturnToDienstenCons
@@ -1797,6 +1843,204 @@
             this.lblDetailConsulent.TabIndex = 15;
             this.lblDetailConsulent.Text = ">";
             // 
+            // splContainerAanmeldingen
+            // 
+            this.splContainerAanmeldingen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splContainerAanmeldingen.Location = new System.Drawing.Point(6, 59);
+            this.splContainerAanmeldingen.Name = "splContainerAanmeldingen";
+            this.splContainerAanmeldingen.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splContainerAanmeldingen.Panel1
+            // 
+            this.splContainerAanmeldingen.Panel1.Controls.Add(this.spcAanmeldingen);
+            // 
+            // splContainerAanmeldingen.Panel2
+            // 
+            this.splContainerAanmeldingen.Panel2.Controls.Add(this.spcWachttijd);
+            this.splContainerAanmeldingen.Size = new System.Drawing.Size(776, 504);
+            this.splContainerAanmeldingen.SplitterDistance = 223;
+            this.splContainerAanmeldingen.TabIndex = 12;
+            // 
+            // spcAanmeldingen
+            // 
+            this.spcAanmeldingen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.spcAanmeldingen.Location = new System.Drawing.Point(3, 3);
+            this.spcAanmeldingen.Name = "spcAanmeldingen";
+            // 
+            // spcAanmeldingen.Panel1
+            // 
+            this.spcAanmeldingen.Panel1.Controls.Add(this.chtDiensten);
+            // 
+            // spcAanmeldingen.Panel2
+            // 
+            this.spcAanmeldingen.Panel2.Controls.Add(this.chtVoorzieningen);
+            this.spcAanmeldingen.Size = new System.Drawing.Size(770, 217);
+            this.spcAanmeldingen.SplitterDistance = 369;
+            this.spcAanmeldingen.TabIndex = 2;
+            // 
+            // chtDiensten
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chtDiensten.ChartAreas.Add(chartArea1);
+            this.chtDiensten.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend1.Name = "Legend1";
+            this.chtDiensten.Legends.Add(legend1);
+            this.chtDiensten.Location = new System.Drawing.Point(0, 0);
+            this.chtDiensten.Name = "chtDiensten";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chtDiensten.Series.Add(series1);
+            this.chtDiensten.Size = new System.Drawing.Size(369, 217);
+            this.chtDiensten.TabIndex = 0;
+            this.chtDiensten.Text = "chart1";
+            // 
+            // chtVoorzieningen
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chtVoorzieningen.ChartAreas.Add(chartArea2);
+            this.chtVoorzieningen.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend2.Name = "Legend1";
+            this.chtVoorzieningen.Legends.Add(legend2);
+            this.chtVoorzieningen.Location = new System.Drawing.Point(0, 0);
+            this.chtVoorzieningen.Name = "chtVoorzieningen";
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chtVoorzieningen.Series.Add(series2);
+            this.chtVoorzieningen.Size = new System.Drawing.Size(397, 217);
+            this.chtVoorzieningen.TabIndex = 0;
+            this.chtVoorzieningen.Text = "chart1";
+            // 
+            // spcWachttijd
+            // 
+            this.spcWachttijd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.spcWachttijd.Location = new System.Drawing.Point(3, 3);
+            this.spcWachttijd.Name = "spcWachttijd";
+            // 
+            // spcWachttijd.Panel1
+            // 
+            this.spcWachttijd.Panel1.Controls.Add(this.chtWachttijdDienst);
+            // 
+            // spcWachttijd.Panel2
+            // 
+            this.spcWachttijd.Panel2.Controls.Add(this.chtWachttijdVoorziening);
+            this.spcWachttijd.Size = new System.Drawing.Size(770, 271);
+            this.spcWachttijd.SplitterDistance = 371;
+            this.spcWachttijd.TabIndex = 3;
+            // 
+            // chtWachttijdDienst
+            // 
+            chartArea3.Name = "ChartArea1";
+            this.chtWachttijdDienst.ChartAreas.Add(chartArea3);
+            this.chtWachttijdDienst.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend3.Name = "Legend1";
+            this.chtWachttijdDienst.Legends.Add(legend3);
+            this.chtWachttijdDienst.Location = new System.Drawing.Point(0, 0);
+            this.chtWachttijdDienst.Name = "chtWachttijdDienst";
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chtWachttijdDienst.Series.Add(series3);
+            this.chtWachttijdDienst.Size = new System.Drawing.Size(371, 271);
+            this.chtWachttijdDienst.TabIndex = 0;
+            this.chtWachttijdDienst.Text = "chart1";
+            // 
+            // chtWachttijdVoorziening
+            // 
+            chartArea4.Name = "ChartArea1";
+            this.chtWachttijdVoorziening.ChartAreas.Add(chartArea4);
+            this.chtWachttijdVoorziening.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend4.Name = "Legend1";
+            this.chtWachttijdVoorziening.Legends.Add(legend4);
+            this.chtWachttijdVoorziening.Location = new System.Drawing.Point(0, 0);
+            this.chtWachttijdVoorziening.Name = "chtWachttijdVoorziening";
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chtWachttijdVoorziening.Series.Add(series4);
+            this.chtWachttijdVoorziening.Size = new System.Drawing.Size(395, 271);
+            this.chtWachttijdVoorziening.TabIndex = 1;
+            this.chtWachttijdVoorziening.Text = "chart1";
+            // 
+            // lblAanmeldingen
+            // 
+            this.lblAanmeldingen.AutoSize = true;
+            this.lblAanmeldingen.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAanmeldingen.Location = new System.Drawing.Point(9, 40);
+            this.lblAanmeldingen.Name = "lblAanmeldingen";
+            this.lblAanmeldingen.Size = new System.Drawing.Size(198, 16);
+            this.lblAanmeldingen.TabIndex = 19;
+            this.lblAanmeldingen.Text = "Statistieken i.v.m. Aanmeldingen    -";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(234, 12);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(64, 16);
+            this.label28.TabIndex = 16;
+            this.label28.Text = "tot en met";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Location = new System.Drawing.Point(7, 12);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(131, 16);
+            this.label29.TabIndex = 15;
+            this.label29.Text = "Selecteer periode: Van";
+            // 
+            // dtpTot
+            // 
+            this.dtpTot.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpTot.Location = new System.Drawing.Point(304, 9);
+            this.dtpTot.Name = "dtpTot";
+            this.dtpTot.Size = new System.Drawing.Size(97, 20);
+            this.dtpTot.TabIndex = 14;
+            // 
+            // dtpVan
+            // 
+            this.dtpVan.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpVan.Location = new System.Drawing.Point(136, 9);
+            this.dtpVan.Name = "dtpVan";
+            this.dtpVan.Size = new System.Drawing.Size(92, 20);
+            this.dtpVan.TabIndex = 13;
+            // 
+            // btnStatToepassen
+            // 
+            this.btnStatToepassen.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStatToepassen.Location = new System.Drawing.Point(413, 8);
+            this.btnStatToepassen.Name = "btnStatToepassen";
+            this.btnStatToepassen.Size = new System.Drawing.Size(100, 23);
+            this.btnStatToepassen.TabIndex = 20;
+            this.btnStatToepassen.Text = "Toepassen";
+            this.btnStatToepassen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnStatToepassen.Click += new System.EventHandler(this.btnStatToepassen_Click);
+            this.btnStatToepassen.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
+            this.btnStatToepassen.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
+            // 
+            // btnStatReset
+            // 
+            this.btnStatReset.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStatReset.Location = new System.Drawing.Point(526, 8);
+            this.btnStatReset.Name = "btnStatReset";
+            this.btnStatReset.Size = new System.Drawing.Size(100, 23);
+            this.btnStatReset.TabIndex = 21;
+            this.btnStatReset.Text = "Reset";
+            this.btnStatReset.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnStatReset.Click += new System.EventHandler(this.btnStatReset_Click);
+            this.btnStatReset.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
+            this.btnStatReset.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
+            // 
             // FrmMainNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1804,11 +2048,11 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(45)))), ((int)(((byte)(55)))));
             this.ClientSize = new System.Drawing.Size(969, 634);
+            this.Controls.Add(this.pnlStatistieken);
             this.Controls.Add(this.pnlDiensten);
             this.Controls.Add(this.pnlMinderjarige);
             this.Controls.Add(this.pnlNewAanmelding);
             this.Controls.Add(this.pnlVoorzieningen);
-            this.Controls.Add(this.pnlStatistieken);
             this.Controls.Add(this.pnlFooter);
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.pnlSidebar);
@@ -1846,6 +2090,8 @@
             this.pnlEditAanmelding.ResumeLayout(false);
             this.pnlEditAanmelding.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOverzichtMj)).EndInit();
+            this.pnlStatistieken.ResumeLayout(false);
+            this.pnlStatistieken.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDienstAlgemeen)).EndInit();
             this.pnlDienstDetail.ResumeLayout(false);
             this.pnlDienstDetail.PerformLayout();
@@ -1855,6 +2101,22 @@
             this.pnlDienstConsulent.ResumeLayout(false);
             this.pnlDienstConsulent.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsulentAanmeldingen)).EndInit();
+            this.splContainerAanmeldingen.Panel1.ResumeLayout(false);
+            this.splContainerAanmeldingen.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splContainerAanmeldingen)).EndInit();
+            this.splContainerAanmeldingen.ResumeLayout(false);
+            this.spcAanmeldingen.Panel1.ResumeLayout(false);
+            this.spcAanmeldingen.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.spcAanmeldingen)).EndInit();
+            this.spcAanmeldingen.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chtDiensten)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chtVoorzieningen)).EndInit();
+            this.spcWachttijd.Panel1.ResumeLayout(false);
+            this.spcWachttijd.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.spcWachttijd)).EndInit();
+            this.spcWachttijd.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chtWachttijdDienst)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chtWachttijdVoorziening)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2009,5 +2271,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.Label btnReturnToDienstenCons;
+        private System.Windows.Forms.SplitContainer splContainerAanmeldingen;
+        private System.Windows.Forms.SplitContainer spcAanmeldingen;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chtDiensten;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chtVoorzieningen;
+        private System.Windows.Forms.SplitContainer spcWachttijd;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chtWachttijdDienst;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chtWachttijdVoorziening;
+        private System.Windows.Forms.Label lblAanmeldingen;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.DateTimePicker dtpTot;
+        private System.Windows.Forms.DateTimePicker dtpVan;
+        private System.Windows.Forms.Label btnStatReset;
+        private System.Windows.Forms.Label btnStatToepassen;
     }
 }
