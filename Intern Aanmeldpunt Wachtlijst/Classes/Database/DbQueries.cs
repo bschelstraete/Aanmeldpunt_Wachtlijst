@@ -386,7 +386,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
                 return consulentLijst;
         }
 
-        public void AddNewConsulent(Consulent consulent, Dienst dienst)
+        public void AddNewConsulent(string voornaam, string familienaam, Dienst dienst)
         {
             int ID = GetAllConsulenten().Last().ID + 1;
             string commandText = "INSERT INTO Consulent "
@@ -398,8 +398,8 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Database
                 {
                     command.CommandText = commandText;
                     command.Parameters.Add(new SqlParameter("ID", ID));
-                    command.Parameters.Add(new SqlParameter("naam", consulent.Naam));
-                    command.Parameters.Add(new SqlParameter("voornaam", consulent.Voornaam));
+                    command.Parameters.Add(new SqlParameter("naam", familienaam));
+                    command.Parameters.Add(new SqlParameter("voornaam", voornaam));
 
                     connection.Open();
                     command.ExecuteNonQuery();

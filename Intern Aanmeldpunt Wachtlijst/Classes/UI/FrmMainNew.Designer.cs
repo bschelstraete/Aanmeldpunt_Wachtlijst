@@ -48,7 +48,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.pnlNewAanmelding = new System.Windows.Forms.Panel();
-            this.btnResetZoeken = new System.Windows.Forms.Panel();
+            this.pnlOverzichtAanmeldingen = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.dgvAanmeldingen = new System.Windows.Forms.DataGridView();
             this.clmNaamMJ = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -132,7 +132,7 @@
             this.lblMJAantal = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.pnlStatistieken = new System.Windows.Forms.Panel();
-            this.label24 = new System.Windows.Forms.Label();
+            this.btnResetZoeken = new System.Windows.Forms.Label();
             this.lblDienstGemiddeld = new System.Windows.Forms.Label();
             this.lblDienstAlgemeen = new System.Windows.Forms.Label();
             this.dgvDienstAlgemeen = new System.Windows.Forms.DataGridView();
@@ -144,21 +144,30 @@
             this.btnDetailDienst = new System.Windows.Forms.Label();
             this.pnlDienstDetail = new System.Windows.Forms.Panel();
             this.btnDetailConsulent = new System.Windows.Forms.Label();
-            this.lblDetailDiensAverage = new System.Windows.Forms.Label();
+            this.lblDetailDienstAverage = new System.Windows.Forms.Label();
             this.lblDetailDienstAanmelding = new System.Windows.Forms.Label();
             this.dgvDetailDienst = new System.Windows.Forms.DataGridView();
             this.btnReturnToDienst = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label25 = new System.Windows.Forms.Label();
+            this.lblDetailDienst = new System.Windows.Forms.Label();
             this.btnAddConsulent = new System.Windows.Forms.Label();
+            this.pnlAddNewConsulent = new System.Windows.Forms.Panel();
+            this.label25 = new System.Windows.Forms.Label();
+            this.txtNewConsVoornaam = new System.Windows.Forms.TextBox();
+            this.txtNewConsFamilienaam = new System.Windows.Forms.TextBox();
+            this.txtNewConsDienst = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.btnSaveConsulent = new System.Windows.Forms.Label();
+            this.btnCancelConsulent = new System.Windows.Forms.Label();
             this.pnlSidebar.SuspendLayout();
             this.pnlCopyright.SuspendLayout();
             this.pnlLogo.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             this.pnlNewAanmelding.SuspendLayout();
-            this.btnResetZoeken.SuspendLayout();
+            this.pnlOverzichtAanmeldingen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAanmeldingen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.erpAanmelding)).BeginInit();
             this.pnlFooter.SuspendLayout();
@@ -173,6 +182,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDienstAlgemeen)).BeginInit();
             this.pnlDienstDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetailDienst)).BeginInit();
+            this.pnlAddNewConsulent.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlSidebar
@@ -404,8 +414,8 @@
             // 
             this.pnlNewAanmelding.AutoScroll = true;
             this.pnlNewAanmelding.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlNewAanmelding.Controls.Add(this.label24);
             this.pnlNewAanmelding.Controls.Add(this.btnResetZoeken);
+            this.pnlNewAanmelding.Controls.Add(this.pnlOverzichtAanmeldingen);
             this.pnlNewAanmelding.Controls.Add(this.label11);
             this.pnlNewAanmelding.Controls.Add(this.label2);
             this.pnlNewAanmelding.Controls.Add(this.btnClearAanmelding);
@@ -432,17 +442,14 @@
             this.pnlNewAanmelding.TabIndex = 3;
             this.pnlNewAanmelding.Click += new System.EventHandler(this.pnlNewAanmelding_Click);
             // 
-            // btnResetZoeken
+            // pnlOverzichtAanmeldingen
             // 
-            this.btnResetZoeken.Controls.Add(this.label12);
-            this.btnResetZoeken.Controls.Add(this.dgvAanmeldingen);
-            this.btnResetZoeken.Location = new System.Drawing.Point(6, 277);
-            this.btnResetZoeken.Name = "btnResetZoeken";
-            this.btnResetZoeken.Size = new System.Drawing.Size(752, 369);
-            this.btnResetZoeken.TabIndex = 66;
-            this.btnResetZoeken.Click += new System.EventHandler(this.btnResetZoeken_Click);
-            this.btnResetZoeken.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
-            this.btnResetZoeken.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
+            this.pnlOverzichtAanmeldingen.Controls.Add(this.label12);
+            this.pnlOverzichtAanmeldingen.Controls.Add(this.dgvAanmeldingen);
+            this.pnlOverzichtAanmeldingen.Location = new System.Drawing.Point(6, 277);
+            this.pnlOverzichtAanmeldingen.Name = "pnlOverzichtAanmeldingen";
+            this.pnlOverzichtAanmeldingen.Size = new System.Drawing.Size(752, 369);
+            this.pnlOverzichtAanmeldingen.TabIndex = 66;
             // 
             // label12
             // 
@@ -1294,15 +1301,18 @@
             this.pnlStatistieken.TabIndex = 7;
             this.pnlStatistieken.Visible = false;
             // 
-            // label24
+            // btnResetZoeken
             // 
-            this.label24.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(651, 76);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(100, 23);
-            this.label24.TabIndex = 67;
-            this.label24.Text = "Reset";
-            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnResetZoeken.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnResetZoeken.Location = new System.Drawing.Point(651, 76);
+            this.btnResetZoeken.Name = "btnResetZoeken";
+            this.btnResetZoeken.Size = new System.Drawing.Size(100, 23);
+            this.btnResetZoeken.TabIndex = 67;
+            this.btnResetZoeken.Text = "Reset";
+            this.btnResetZoeken.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnResetZoeken.Click += new System.EventHandler(this.btnResetZoeken_Click);
+            this.btnResetZoeken.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
+            this.btnResetZoeken.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
             // 
             // lblDienstGemiddeld
             // 
@@ -1340,6 +1350,7 @@
             this.dgvDienstAlgemeen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDienstAlgemeen.Size = new System.Drawing.Size(748, 365);
             this.dgvDienstAlgemeen.TabIndex = 7;
+            this.dgvDienstAlgemeen.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDienstAlgemeen_CellDoubleClick);
             // 
             // btnReturnToAlgemeenDienst
             // 
@@ -1393,9 +1404,10 @@
             // 
             // pnlDienstDetail
             // 
+            this.pnlDienstDetail.Controls.Add(this.pnlAddNewConsulent);
             this.pnlDienstDetail.Controls.Add(this.btnAddConsulent);
-            this.pnlDienstDetail.Controls.Add(this.label25);
-            this.pnlDienstDetail.Controls.Add(this.lblDetailDiensAverage);
+            this.pnlDienstDetail.Controls.Add(this.lblDetailDienst);
+            this.pnlDienstDetail.Controls.Add(this.lblDetailDienstAverage);
             this.pnlDienstDetail.Controls.Add(this.lblDetailDienstAanmelding);
             this.pnlDienstDetail.Controls.Add(this.dgvDetailDienst);
             this.pnlDienstDetail.Controls.Add(this.btnReturnToDienst);
@@ -1405,26 +1417,29 @@
             this.pnlDienstDetail.Name = "pnlDienstDetail";
             this.pnlDienstDetail.Size = new System.Drawing.Size(785, 566);
             this.pnlDienstDetail.TabIndex = 11;
+            this.pnlDienstDetail.VisibleChanged += new System.EventHandler(this.pnlDienstDetail_VisibleChanged);
             // 
             // btnDetailConsulent
             // 
             this.btnDetailConsulent.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.btnDetailConsulent.Location = new System.Drawing.Point(22, 516);
+            this.btnDetailConsulent.Location = new System.Drawing.Point(22, 525);
             this.btnDetailConsulent.Name = "btnDetailConsulent";
             this.btnDetailConsulent.Size = new System.Drawing.Size(158, 21);
             this.btnDetailConsulent.TabIndex = 11;
             this.btnDetailConsulent.Text = "Detail consulent";
             this.btnDetailConsulent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnDetailConsulent.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
+            this.btnDetailConsulent.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
             // 
-            // lblDetailDiensAverage
+            // lblDetailDienstAverage
             // 
-            this.lblDetailDiensAverage.AutoSize = true;
-            this.lblDetailDiensAverage.Font = new System.Drawing.Font("Century Gothic", 10F);
-            this.lblDetailDiensAverage.Location = new System.Drawing.Point(19, 118);
-            this.lblDetailDiensAverage.Name = "lblDetailDiensAverage";
-            this.lblDetailDiensAverage.Size = new System.Drawing.Size(282, 19);
-            this.lblDetailDiensAverage.TabIndex = 15;
-            this.lblDetailDiensAverage.Text = "Gemiddeld aantal dagen in wachtlijst: ";
+            this.lblDetailDienstAverage.AutoSize = true;
+            this.lblDetailDienstAverage.Font = new System.Drawing.Font("Century Gothic", 10F);
+            this.lblDetailDienstAverage.Location = new System.Drawing.Point(19, 118);
+            this.lblDetailDienstAverage.Name = "lblDetailDienstAverage";
+            this.lblDetailDienstAverage.Size = new System.Drawing.Size(282, 19);
+            this.lblDetailDienstAverage.TabIndex = 15;
+            this.lblDetailDienstAverage.Text = "Gemiddeld aantal dagen in wachtlijst: ";
             // 
             // lblDetailDienstAanmelding
             // 
@@ -1461,6 +1476,9 @@
             this.btnReturnToDienst.Size = new System.Drawing.Size(157, 21);
             this.btnReturnToDienst.TabIndex = 12;
             this.btnReturnToDienst.Text = "Overzicht diensten";
+            this.btnReturnToDienst.Click += new System.EventHandler(this.btnReturnToDienst_Click);
+            this.btnReturnToDienst.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
+            this.btnReturnToDienst.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -1482,15 +1500,15 @@
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             this.dataGridViewTextBoxColumn4.Width = 200;
             // 
-            // label25
+            // lblDetailDienst
             // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.label25.Location = new System.Drawing.Point(181, 29);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(20, 21);
-            this.label25.TabIndex = 16;
-            this.label25.Text = ">";
+            this.lblDetailDienst.AutoSize = true;
+            this.lblDetailDienst.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.lblDetailDienst.Location = new System.Drawing.Point(181, 29);
+            this.lblDetailDienst.Name = "lblDetailDienst";
+            this.lblDetailDienst.Size = new System.Drawing.Size(20, 21);
+            this.lblDetailDienst.TabIndex = 16;
+            this.lblDetailDienst.Text = ">";
             // 
             // btnAddConsulent
             // 
@@ -1501,8 +1519,104 @@
             this.btnAddConsulent.TabIndex = 17;
             this.btnAddConsulent.Text = "Nieuwe Consulent";
             this.btnAddConsulent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnAddConsulent.Click += new System.EventHandler(this.btnAddConsulent_Click);
             this.btnAddConsulent.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
             this.btnAddConsulent.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
+            // 
+            // pnlAddNewConsulent
+            // 
+            this.pnlAddNewConsulent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(253)))));
+            this.pnlAddNewConsulent.Controls.Add(this.btnCancelConsulent);
+            this.pnlAddNewConsulent.Controls.Add(this.btnSaveConsulent);
+            this.pnlAddNewConsulent.Controls.Add(this.label27);
+            this.pnlAddNewConsulent.Controls.Add(this.label26);
+            this.pnlAddNewConsulent.Controls.Add(this.txtNewConsDienst);
+            this.pnlAddNewConsulent.Controls.Add(this.txtNewConsFamilienaam);
+            this.pnlAddNewConsulent.Controls.Add(this.txtNewConsVoornaam);
+            this.pnlAddNewConsulent.Controls.Add(this.label25);
+            this.pnlAddNewConsulent.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlAddNewConsulent.Location = new System.Drawing.Point(493, 0);
+            this.pnlAddNewConsulent.Name = "pnlAddNewConsulent";
+            this.pnlAddNewConsulent.Size = new System.Drawing.Size(292, 566);
+            this.pnlAddNewConsulent.TabIndex = 18;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(21, 31);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(97, 21);
+            this.label25.TabIndex = 0;
+            this.label25.Text = "Voornaam:";
+            // 
+            // txtNewConsVoornaam
+            // 
+            this.txtNewConsVoornaam.Location = new System.Drawing.Point(136, 32);
+            this.txtNewConsVoornaam.Name = "txtNewConsVoornaam";
+            this.txtNewConsVoornaam.Size = new System.Drawing.Size(122, 20);
+            this.txtNewConsVoornaam.TabIndex = 5;
+            // 
+            // txtNewConsFamilienaam
+            // 
+            this.txtNewConsFamilienaam.Location = new System.Drawing.Point(136, 75);
+            this.txtNewConsFamilienaam.Name = "txtNewConsFamilienaam";
+            this.txtNewConsFamilienaam.Size = new System.Drawing.Size(122, 20);
+            this.txtNewConsFamilienaam.TabIndex = 6;
+            // 
+            // txtNewConsDienst
+            // 
+            this.txtNewConsDienst.Enabled = false;
+            this.txtNewConsDienst.Location = new System.Drawing.Point(136, 116);
+            this.txtNewConsDienst.Name = "txtNewConsDienst";
+            this.txtNewConsDienst.Size = new System.Drawing.Size(122, 20);
+            this.txtNewConsDienst.TabIndex = 7;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(4, 74);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(114, 21);
+            this.label26.TabIndex = 8;
+            this.label26.Text = "Familienaam:";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(56, 115);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(62, 21);
+            this.label27.TabIndex = 9;
+            this.label27.Text = "Dienst:";
+            // 
+            // btnSaveConsulent
+            // 
+            this.btnSaveConsulent.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveConsulent.Location = new System.Drawing.Point(41, 177);
+            this.btnSaveConsulent.Name = "btnSaveConsulent";
+            this.btnSaveConsulent.Size = new System.Drawing.Size(97, 21);
+            this.btnSaveConsulent.TabIndex = 10;
+            this.btnSaveConsulent.Text = "Opslaan";
+            this.btnSaveConsulent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnSaveConsulent.Click += new System.EventHandler(this.btnSaveConsulent_Click);
+            this.btnSaveConsulent.MouseEnter += new System.EventHandler(this.btnEditConfirm_Hover);
+            this.btnSaveConsulent.MouseLeave += new System.EventHandler(this.btnEditConfirm_Hover);
+            // 
+            // btnCancelConsulent
+            // 
+            this.btnCancelConsulent.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelConsulent.Location = new System.Drawing.Point(158, 177);
+            this.btnCancelConsulent.Name = "btnCancelConsulent";
+            this.btnCancelConsulent.Size = new System.Drawing.Size(97, 21);
+            this.btnCancelConsulent.TabIndex = 11;
+            this.btnCancelConsulent.Text = "Annuleren";
+            this.btnCancelConsulent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnCancelConsulent.Click += new System.EventHandler(this.btnCancelConsulent_Click);
+            this.btnCancelConsulent.MouseEnter += new System.EventHandler(this.btnEditCancel_Hover);
+            this.btnCancelConsulent.MouseLeave += new System.EventHandler(this.btnEditCancel_Hover);
             // 
             // FrmMainNew
             // 
@@ -1511,9 +1625,9 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(45)))), ((int)(((byte)(55)))));
             this.ClientSize = new System.Drawing.Size(969, 634);
+            this.Controls.Add(this.pnlNewAanmelding);
             this.Controls.Add(this.pnlDiensten);
             this.Controls.Add(this.pnlVoorzieningen);
-            this.Controls.Add(this.pnlNewAanmelding);
             this.Controls.Add(this.pnlStatistieken);
             this.Controls.Add(this.pnlMinderjarige);
             this.Controls.Add(this.pnlFooter);
@@ -1534,8 +1648,8 @@
             this.pnlHeader.PerformLayout();
             this.pnlNewAanmelding.ResumeLayout(false);
             this.pnlNewAanmelding.PerformLayout();
-            this.btnResetZoeken.ResumeLayout(false);
-            this.btnResetZoeken.PerformLayout();
+            this.pnlOverzichtAanmeldingen.ResumeLayout(false);
+            this.pnlOverzichtAanmeldingen.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAanmeldingen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.erpAanmelding)).EndInit();
             this.pnlFooter.ResumeLayout(false);
@@ -1557,6 +1671,8 @@
             this.pnlDienstDetail.ResumeLayout(false);
             this.pnlDienstDetail.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetailDienst)).EndInit();
+            this.pnlAddNewConsulent.ResumeLayout(false);
+            this.pnlAddNewConsulent.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1597,7 +1713,7 @@
         private System.Windows.Forms.TextBox txtVoornaamMJ;
         private System.Windows.Forms.ComboBox cbbAanmelder;
         private System.Windows.Forms.TextBox txtNaamMJ;
-        private System.Windows.Forms.Panel btnResetZoeken;
+        private System.Windows.Forms.Panel pnlOverzichtAanmeldingen;
         private System.Windows.Forms.DataGridView dgvAanmeldingen;
         private System.Windows.Forms.ErrorProvider erpAanmelding;
         private System.Windows.Forms.Label label12;
@@ -1666,7 +1782,7 @@
         private System.Windows.Forms.Label btnDetailVAanpassen;
         private System.Windows.Forms.Label lblDetailVAverageWachttijd;
         private System.Windows.Forms.Label lblDetailVAantal;
-        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label btnResetZoeken;
         private System.Windows.Forms.Label lblDienstGemiddeld;
         private System.Windows.Forms.Label lblDienstAlgemeen;
         private System.Windows.Forms.DataGridView dgvDienstAlgemeen;
@@ -1677,8 +1793,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmAlgemeenAverage;
         private System.Windows.Forms.Label btnDetailDienst;
         private System.Windows.Forms.Panel pnlDienstDetail;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label lblDetailDiensAverage;
+        private System.Windows.Forms.Label lblDetailDienst;
+        private System.Windows.Forms.Label lblDetailDienstAverage;
         private System.Windows.Forms.Label lblDetailDienstAanmelding;
         private System.Windows.Forms.DataGridView dgvDetailDienst;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
@@ -1687,5 +1803,14 @@
         private System.Windows.Forms.Label btnReturnToDienst;
         private System.Windows.Forms.Label btnDetailConsulent;
         private System.Windows.Forms.Label btnAddConsulent;
+        private System.Windows.Forms.Panel pnlAddNewConsulent;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label btnCancelConsulent;
+        private System.Windows.Forms.Label btnSaveConsulent;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TextBox txtNewConsDienst;
+        private System.Windows.Forms.TextBox txtNewConsFamilienaam;
+        private System.Windows.Forms.TextBox txtNewConsVoornaam;
     }
 }

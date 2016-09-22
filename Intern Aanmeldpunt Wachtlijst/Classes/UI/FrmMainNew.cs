@@ -698,7 +698,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         {
             lblDetailVoorziening.Text = "> " + ((List<MinderjarigeAanmeldpunt>)dgvOverzichtVoorziening.SelectedRows[0].Tag)[0].Aanmeldpunt.Naam;
             lblDetailVAantal.Text = "Aantal aanmeldingen: " + ((List<MinderjarigeAanmeldpunt>)dgvOverzichtVoorziening.SelectedRows[0].Tag).Count().ToString();
-            lblDetailVAverageWachttijd.Text = "Gemiddeld aantal dagen in wachtlijst: " + controller.GetAverageWachtijdMinderjarigen((List<MinderjarigeAanmeldpunt>)dgvOverzichtVoorziening.SelectedRows[0].Tag).ToString("0");
+            lblDetailVAverageWachttijd.Text = "Gemiddeld aantal dagen in registratielijst: " + controller.GetAverageWachtijdMinderjarigen((List<MinderjarigeAanmeldpunt>)dgvOverzichtVoorziening.SelectedRows[0].Tag).ToString("0");
             InitDatagridDetailVoorziening();
         }
 
@@ -820,14 +820,15 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
 
         private void InitPnlDiensten()
         {
+            pnlDienstDetail.Visible = false;
             InitDienstLabels();
             InitDgvDienstAlgemeen();
         }
 
         private void InitDienstLabels()
         {
-            lblDienstAlgemeen.Text = "Aantal aanmeldingen: " + "dagen";
-            lblDienstGemiddeld.Text = "Gemiddeld aantal dagen in wachtlijst: " + "dagen";
+            lblDienstAlgemeen.Text = "Aantal aanmeldingen: " + alleAanmeldingen.Count();
+            lblDienstGemiddeld.Text = "Gemiddeld aantal dagen in registratielijst: " + controller.GetAverageWachtijdMinderjarigen(alleAanmeldingen).ToString("0.00") + " dagen";
         }
 
         private void InitDgvDienstAlgemeen()
@@ -850,10 +851,115 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
 
         private void btnDetailDienst_Click(object sender, EventArgs e)
         {
-
+            if(dgvDienstAlgemeen.SelectedRows.Count > 0)
+            {
+                pnlDienstDetail.Visible = true;
+            }
         }
 
+        private void dgvDienstAlgemeen_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnDetailDienst_Click(null, null);
+        }
+
+
         //Begin Detail Diensten
+        private void btnReturnToDienst_Click(object sender, EventArgs e)
+        {
+            pnlDienstDetail.Visible = false;
+        }
+
+        private void pnlDienstDetail_VisibleChanged(object sender, EventArgs e)
+        {
+            if (pnlDienstDetail.Visible)
+            {
+                InitDetailDiensten();
+            }
+        }
+
+        private void InitDetailDiensten()
+        {
+            pnlAddNewConsulent.Visible = false;
+            List<Consulent> consulentenInDienst = (List <Consulent>)dgvDienstAlgemeen.SelectedRows[0].Tag;
+            InitDetailDienstenLabels(consulentenInDienst);
+            InitDetailDienstenDatagridView(consulentenInDienst);
+        }
+
+        private void InitDetailDienstenLabels(List<Consulent> consulentenInDienst)
+        {
+            lblDetailDienst.Text = "> " + controller.GetDienstVanConsulent(consulentenInDienst.FirstOrDefault().ID).Naam;
+            List<MinderjarigeAanmeldpunt> aanmeldingen = controller.GetMinderjarigenInDienst(controller.GetDienstVanConsulent(consulentenInDienst.FirstOrDefault().ID).ID);
+            lblDetailDienstAanmelding.Text = "Aantal aanmeldingen: " + aanmeldingen.Count();
+            lblDetailDienstAverage.Text = "Gemiddeld aantal dagen in registratielijst: " + controller.GetAverageWachtijdMinderjarigen(aanmeldingen).ToString("0.00") + " dagen";
+        }
+
+        private void InitDetailDienstenDatagridView(List<Consulent> consulentenInDienst)
+        {
+            int rowCount = 0;
+            dgvDetailDienst.Rows.Clear();
+            foreach (Consulent cons in consulentenInDienst)
+            {
+                List<MinderjarigeAanmeldpunt> aanmeldingen = controller.GetMinderjarigenAangemeldDoor(cons.ID);
+                string consNaam = cons.Naam + " " + cons.Voornaam;
+                int totAanmeldingen = aanmeldingen.Count();
+                double averWachttijd = controller.GetAverageWachtijdMinderjarigen(aanmeldingen);
+
+                string[] row = { consNaam, totAanmeldingen.ToString(), averWachttijd.ToString("0.00") };
+                dgvDetailDienst.Rows.Add(row);
+                dgvDetailDienst.Rows[rowCount].Tag = cons;
+                rowCount++;
+            }
+        }
+
+        private void btnAddConsulent_Click(object sender, EventArgs e)
+        {
+            List<Consulent> consList = (List<Consulent>)dgvDienstAlgemeen.SelectedRows[0].Tag;
+            txtNewConsDienst.Text = controller.GetDienstVanConsulent(consList.FirstOrDefault().ID).ToString();
+            pnlAddNewConsulent.Visible = true;
+        }
+
+        private void btnCancelConsulent_Click(object sender, EventArgs e)
+        {
+            pnlAddNewConsulent.Visible = false;
+            txtNewConsDienst.Text = "";
+            txtNewConsFamilienaam.Text = "";
+            txtNewConsVoornaam.Text = "";
+        }
+
+        private void btnSaveConsulent_Click(object sender, EventArgs e)
+        {
+            erpAanmelding.Clear();
+
+            if (String.IsNullOrEmpty(txtNewConsVoornaam.Text))
+            {
+                erpAanmelding.SetError(txtNewConsVoornaam, "Gelieve een waarde in te vullen");
+            }
+            else if(String.IsNullOrEmpty(txtNewConsFamilienaam.Text))
+            {
+                erpAanmelding.SetError(txtNewConsFamilienaam, "Gelieve een waarde in te vullen");
+            }
+            else
+            {
+                try
+                {
+                    string voornaam = txtNewConsVoornaam.Text;
+                    string familienaam = txtNewConsFamilienaam.Text;
+                    List<Consulent> consList = (List<Consulent>)dgvDienstAlgemeen.SelectedRows[0].Tag;
+                    Dienst dienst = controller.GetDienstVanConsulent(consList.FirstOrDefault().ID);
+
+                    controller.AddNewConsulent(voornaam, familienaam, dienst);
+
+                    MessageBox.Show("Opgeslagen!");
+                }
+                catch(SqlException )
+                {
+                    MessageBox.Show("Er ging iets verkeerd tijdens het opslaan, probeer later opnieuw");
+                }
+
+            }
+        }
+
+
 
         //End Detail Diensten
 

@@ -78,7 +78,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
 
         private void CreateNew(Consulent newConsulent, Dienst dienst)
         {
-            controller.AddNewConsulent(newConsulent, dienst);
+            //controller.AddNewConsulent(newConsulent, dienst);
             MessageBox.Show("Nieuwe consulent succesvol toegevoegd!", "Consulent toevoegen");
         }
 

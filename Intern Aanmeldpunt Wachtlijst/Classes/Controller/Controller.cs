@@ -209,9 +209,9 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.Controller
             NotifyObserverDeletedAanmelding();
         }
 
-        public void AddNewConsulent(Consulent consulent, Dienst dienst)
+        public void AddNewConsulent(string voornaam, string familienaam, Dienst dienst)
         {
-            dbQueries.AddNewConsulent(consulent, dienst);
+            dbQueries.AddNewConsulent(voornaam, familienaam, dienst);
             NotifyObserverDeletedAanmelding();
         }
 
