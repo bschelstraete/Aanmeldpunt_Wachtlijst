@@ -37,7 +37,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
 
         public FrmMainNew()
         {
-            InitializeComponent(); 
+            InitializeComponent();
             InitContainerPanels();
             InitSidebarButtons();
             InitSidebar();
@@ -73,8 +73,8 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         {
             InitDataGrid(dgvAanmeldingen, alleAanmeldingen);
             InitDataGrid(dgvOverzichtMj, alleAanmeldingen);
-            InitDatagridOVerzichtVoorziening();          
-            
+            InitDatagridOVerzichtVoorziening();
+
         }
 
         private void InitSidebarButtons()
@@ -429,7 +429,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
 
         private void btnMJAanmeldingAanpassen_Click(object sender, EventArgs e)
         {
-            if(dgvOverzichtMj.SelectedRows.Count > 0)
+            if (dgvOverzichtMj.SelectedRows.Count > 0)
             {
                 editAanmelding = (MinderjarigeAanmeldpunt)dgvOverzichtMj.SelectedRows[0].Tag;
                 InitAanmeldingAanpassen(editAanmelding);
@@ -525,16 +525,16 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
                             }
                         );
                     }
-                    catch(Exception)
+                    catch (Exception)
                     {
                         lblEditSaved.Text = "Fout in het opslaan!";
                         lblEditSaved.ForeColor = Color.DarkRed;
                         Task.Factory.StartNew(() =>
                             {
-                            System.Timers.Timer timer = new System.Timers.Timer();
-                            timer.Elapsed += OnTimedEvent;
-                            timer.Interval = 10000;
-                            timer.Start();
+                                System.Timers.Timer timer = new System.Timers.Timer();
+                                timer.Elapsed += OnTimedEvent;
+                                timer.Interval = 10000;
+                                timer.Start();
                             }
                          );
                     }
@@ -547,7 +547,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         {
             if (lblEditSaved.InvokeRequired)
             {
-                lblEditSaved.Invoke(new Action (() => lblEditSaved.Text = ""));
+                lblEditSaved.Invoke(new Action(() => lblEditSaved.Text = ""));
             }
             else
                 lblEditSaved.Text = "";
@@ -566,7 +566,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         {
             if (cbbMJDienst.SelectedIndex != -1)
             {
-                if(initDone)
+                if (initDone)
                 {
                     Dienst selectedDienst = (Dienst)cbbMJDienst.SelectedItem;
                     consulentLijst = controller.GetConsulentInDienst(selectedDienst.ID);
@@ -677,7 +677,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         {
             if (dgvOverzichtVoorziening.SelectedRows.Count > 0)
             {
-                if(((List<MinderjarigeAanmeldpunt>)dgvOverzichtVoorziening.SelectedRows[0].Tag).Count() > 0)
+                if (((List<MinderjarigeAanmeldpunt>)dgvOverzichtVoorziening.SelectedRows[0].Tag).Count() > 0)
                 {
                     pnlDetailVoorziening.Visible = true;
                 }
@@ -688,7 +688,7 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
 
         private void pnlDetailVoorziening_VisibleChanged(object sender, EventArgs e)
         {
-            if(pnlDetailVoorziening.Visible == true)
+            if (pnlDetailVoorziening.Visible == true)
             {
                 InitPnlDetailVoorziening();
             }
@@ -807,5 +807,56 @@ namespace Intern_Aanmeldpunt_Wachtlijst.Classes.UI
         //End Detail Voorziening
 
         //End Overzicht voorziening
+
+        //Begin Overzicht Diensten
+
+        private void pnlDiensten_VisibleChanged(object sender, EventArgs e)
+        {
+            if (pnlDiensten.Visible)
+            {
+                InitPnlDiensten();
+            }
+        }
+
+        private void InitPnlDiensten()
+        {
+            InitDienstLabels();
+            InitDgvDienstAlgemeen();
+        }
+
+        private void InitDienstLabels()
+        {
+            lblDienstAlgemeen.Text = "Aantal aanmeldingen: " + "dagen";
+            lblDienstGemiddeld.Text = "Gemiddeld aantal dagen in wachtlijst: " + "dagen";
+        }
+
+        private void InitDgvDienstAlgemeen()
+        {
+            dgvDienstAlgemeen.Rows.Clear();
+            int rowCount = 0;
+
+            foreach (Dienst dienst in dienstLijst)
+            {
+                List<MinderjarigeAanmeldpunt> aanmeldingen = controller.GetMinderjarigenInDienst(dienst.ID);
+                List<Consulent> consulentInDienst = controller.GetConsulentInDienst(dienst.ID);
+                int nrAanmeldingen = aanmeldingen.Count();
+                double averageWachttijd = controller.GetAverageWachtijdMinderjarigen(aanmeldingen);
+                string[] row = { dienst.Naam, consulentInDienst.Count().ToString(), nrAanmeldingen.ToString(), averageWachttijd.ToString("0.00")};
+                dgvDienstAlgemeen.Rows.Add(row);
+                dgvDienstAlgemeen.Rows[rowCount].Tag = consulentInDienst;
+                rowCount++;
+            }
+        }
+
+        private void btnDetailDienst_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //Begin Detail Diensten
+
+        //End Detail Diensten
+
+        //End Overzicht Diensten
     }
 }

@@ -133,6 +133,26 @@
             this.label13 = new System.Windows.Forms.Label();
             this.pnlStatistieken = new System.Windows.Forms.Panel();
             this.label24 = new System.Windows.Forms.Label();
+            this.lblDienstGemiddeld = new System.Windows.Forms.Label();
+            this.lblDienstAlgemeen = new System.Windows.Forms.Label();
+            this.dgvDienstAlgemeen = new System.Windows.Forms.DataGridView();
+            this.btnReturnToAlgemeenDienst = new System.Windows.Forms.Label();
+            this.clmAlgemeenDienst = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmAlgemeenConsulenten = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmAlgemeenDienstAanmeldingen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmAlgemeenAverage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnDetailDienst = new System.Windows.Forms.Label();
+            this.pnlDienstDetail = new System.Windows.Forms.Panel();
+            this.btnDetailConsulent = new System.Windows.Forms.Label();
+            this.lblDetailDiensAverage = new System.Windows.Forms.Label();
+            this.lblDetailDienstAanmelding = new System.Windows.Forms.Label();
+            this.dgvDetailDienst = new System.Windows.Forms.DataGridView();
+            this.btnReturnToDienst = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label25 = new System.Windows.Forms.Label();
+            this.btnAddConsulent = new System.Windows.Forms.Label();
             this.pnlSidebar.SuspendLayout();
             this.pnlCopyright.SuspendLayout();
             this.pnlLogo.SuspendLayout();
@@ -142,6 +162,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvAanmeldingen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.erpAanmelding)).BeginInit();
             this.pnlFooter.SuspendLayout();
+            this.pnlDiensten.SuspendLayout();
             this.pnlVoorzieningen.SuspendLayout();
             this.pnlDetailVoorziening.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetailVoorziening)).BeginInit();
@@ -149,6 +170,9 @@
             this.pnlMinderjarige.SuspendLayout();
             this.pnlEditAanmelding.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOverzichtMj)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDienstAlgemeen)).BeginInit();
+            this.pnlDienstDetail.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetailDienst)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlSidebar
@@ -659,11 +683,18 @@
             // pnlDiensten
             // 
             this.pnlDiensten.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlDiensten.Controls.Add(this.pnlDienstDetail);
+            this.pnlDiensten.Controls.Add(this.btnDetailDienst);
+            this.pnlDiensten.Controls.Add(this.lblDienstGemiddeld);
+            this.pnlDiensten.Controls.Add(this.lblDienstAlgemeen);
+            this.pnlDiensten.Controls.Add(this.dgvDienstAlgemeen);
+            this.pnlDiensten.Controls.Add(this.btnReturnToAlgemeenDienst);
             this.pnlDiensten.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDiensten.Location = new System.Drawing.Point(184, 48);
             this.pnlDiensten.Name = "pnlDiensten";
             this.pnlDiensten.Size = new System.Drawing.Size(785, 566);
             this.pnlDiensten.TabIndex = 4;
+            this.pnlDiensten.VisibleChanged += new System.EventHandler(this.pnlDiensten_VisibleChanged);
             // 
             // pnlVoorzieningen
             // 
@@ -1273,6 +1304,206 @@
             this.label24.Text = "Reset";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblDienstGemiddeld
+            // 
+            this.lblDienstGemiddeld.AutoSize = true;
+            this.lblDienstGemiddeld.Font = new System.Drawing.Font("Century Gothic", 10F);
+            this.lblDienstGemiddeld.Location = new System.Drawing.Point(18, 133);
+            this.lblDienstGemiddeld.Name = "lblDienstGemiddeld";
+            this.lblDienstGemiddeld.Size = new System.Drawing.Size(282, 19);
+            this.lblDienstGemiddeld.TabIndex = 9;
+            this.lblDienstGemiddeld.Text = "Gemiddeld aantal dagen in wachtlijst: ";
+            // 
+            // lblDienstAlgemeen
+            // 
+            this.lblDienstAlgemeen.AutoSize = true;
+            this.lblDienstAlgemeen.Font = new System.Drawing.Font("Century Gothic", 10F);
+            this.lblDienstAlgemeen.Location = new System.Drawing.Point(18, 111);
+            this.lblDienstAlgemeen.Name = "lblDienstAlgemeen";
+            this.lblDienstAlgemeen.Size = new System.Drawing.Size(170, 19);
+            this.lblDienstAlgemeen.TabIndex = 8;
+            this.lblDienstAlgemeen.Text = "Aantal aanmeldingen: ";
+            // 
+            // dgvDienstAlgemeen
+            // 
+            this.dgvDienstAlgemeen.AllowUserToAddRows = false;
+            this.dgvDienstAlgemeen.AllowUserToDeleteRows = false;
+            this.dgvDienstAlgemeen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDienstAlgemeen.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clmAlgemeenDienst,
+            this.clmAlgemeenConsulenten,
+            this.clmAlgemeenDienstAanmeldingen,
+            this.clmAlgemeenAverage});
+            this.dgvDienstAlgemeen.Location = new System.Drawing.Point(18, 157);
+            this.dgvDienstAlgemeen.Name = "dgvDienstAlgemeen";
+            this.dgvDienstAlgemeen.ReadOnly = true;
+            this.dgvDienstAlgemeen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDienstAlgemeen.Size = new System.Drawing.Size(748, 365);
+            this.dgvDienstAlgemeen.TabIndex = 7;
+            // 
+            // btnReturnToAlgemeenDienst
+            // 
+            this.btnReturnToAlgemeenDienst.AutoSize = true;
+            this.btnReturnToAlgemeenDienst.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.btnReturnToAlgemeenDienst.Location = new System.Drawing.Point(18, 44);
+            this.btnReturnToAlgemeenDienst.Name = "btnReturnToAlgemeenDienst";
+            this.btnReturnToAlgemeenDienst.Size = new System.Drawing.Size(157, 21);
+            this.btnReturnToAlgemeenDienst.TabIndex = 5;
+            this.btnReturnToAlgemeenDienst.Text = "Overzicht diensten";
+            // 
+            // clmAlgemeenDienst
+            // 
+            this.clmAlgemeenDienst.HeaderText = "Dienst";
+            this.clmAlgemeenDienst.Name = "clmAlgemeenDienst";
+            this.clmAlgemeenDienst.ReadOnly = true;
+            // 
+            // clmAlgemeenConsulenten
+            // 
+            this.clmAlgemeenConsulenten.HeaderText = "Consulenten in dienst";
+            this.clmAlgemeenConsulenten.Name = "clmAlgemeenConsulenten";
+            this.clmAlgemeenConsulenten.ReadOnly = true;
+            this.clmAlgemeenConsulenten.Width = 200;
+            // 
+            // clmAlgemeenDienstAanmeldingen
+            // 
+            this.clmAlgemeenDienstAanmeldingen.HeaderText = "Aantal aanmeldingen";
+            this.clmAlgemeenDienstAanmeldingen.Name = "clmAlgemeenDienstAanmeldingen";
+            this.clmAlgemeenDienstAanmeldingen.ReadOnly = true;
+            this.clmAlgemeenDienstAanmeldingen.Width = 200;
+            // 
+            // clmAlgemeenAverage
+            // 
+            this.clmAlgemeenAverage.HeaderText = "Gemiddelde wachttijd (dagen)";
+            this.clmAlgemeenAverage.Name = "clmAlgemeenAverage";
+            this.clmAlgemeenAverage.ReadOnly = true;
+            this.clmAlgemeenAverage.Width = 200;
+            // 
+            // btnDetailDienst
+            // 
+            this.btnDetailDienst.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.btnDetailDienst.Location = new System.Drawing.Point(17, 531);
+            this.btnDetailDienst.Name = "btnDetailDienst";
+            this.btnDetailDienst.Size = new System.Drawing.Size(158, 21);
+            this.btnDetailDienst.TabIndex = 10;
+            this.btnDetailDienst.Text = "Detail dienst";
+            this.btnDetailDienst.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnDetailDienst.Click += new System.EventHandler(this.btnDetailDienst_Click);
+            this.btnDetailDienst.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
+            this.btnDetailDienst.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
+            // 
+            // pnlDienstDetail
+            // 
+            this.pnlDienstDetail.Controls.Add(this.btnAddConsulent);
+            this.pnlDienstDetail.Controls.Add(this.label25);
+            this.pnlDienstDetail.Controls.Add(this.lblDetailDiensAverage);
+            this.pnlDienstDetail.Controls.Add(this.lblDetailDienstAanmelding);
+            this.pnlDienstDetail.Controls.Add(this.dgvDetailDienst);
+            this.pnlDienstDetail.Controls.Add(this.btnReturnToDienst);
+            this.pnlDienstDetail.Controls.Add(this.btnDetailConsulent);
+            this.pnlDienstDetail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDienstDetail.Location = new System.Drawing.Point(0, 0);
+            this.pnlDienstDetail.Name = "pnlDienstDetail";
+            this.pnlDienstDetail.Size = new System.Drawing.Size(785, 566);
+            this.pnlDienstDetail.TabIndex = 11;
+            // 
+            // btnDetailConsulent
+            // 
+            this.btnDetailConsulent.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.btnDetailConsulent.Location = new System.Drawing.Point(22, 516);
+            this.btnDetailConsulent.Name = "btnDetailConsulent";
+            this.btnDetailConsulent.Size = new System.Drawing.Size(158, 21);
+            this.btnDetailConsulent.TabIndex = 11;
+            this.btnDetailConsulent.Text = "Detail consulent";
+            this.btnDetailConsulent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblDetailDiensAverage
+            // 
+            this.lblDetailDiensAverage.AutoSize = true;
+            this.lblDetailDiensAverage.Font = new System.Drawing.Font("Century Gothic", 10F);
+            this.lblDetailDiensAverage.Location = new System.Drawing.Point(19, 118);
+            this.lblDetailDiensAverage.Name = "lblDetailDiensAverage";
+            this.lblDetailDiensAverage.Size = new System.Drawing.Size(282, 19);
+            this.lblDetailDiensAverage.TabIndex = 15;
+            this.lblDetailDiensAverage.Text = "Gemiddeld aantal dagen in wachtlijst: ";
+            // 
+            // lblDetailDienstAanmelding
+            // 
+            this.lblDetailDienstAanmelding.AutoSize = true;
+            this.lblDetailDienstAanmelding.Font = new System.Drawing.Font("Century Gothic", 10F);
+            this.lblDetailDienstAanmelding.Location = new System.Drawing.Point(19, 96);
+            this.lblDetailDienstAanmelding.Name = "lblDetailDienstAanmelding";
+            this.lblDetailDienstAanmelding.Size = new System.Drawing.Size(170, 19);
+            this.lblDetailDienstAanmelding.TabIndex = 14;
+            this.lblDetailDienstAanmelding.Text = "Aantal aanmeldingen: ";
+            // 
+            // dgvDetailDienst
+            // 
+            this.dgvDetailDienst.AllowUserToAddRows = false;
+            this.dgvDetailDienst.AllowUserToDeleteRows = false;
+            this.dgvDetailDienst.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDetailDienst.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4});
+            this.dgvDetailDienst.Location = new System.Drawing.Point(19, 142);
+            this.dgvDetailDienst.Name = "dgvDetailDienst";
+            this.dgvDetailDienst.ReadOnly = true;
+            this.dgvDetailDienst.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDetailDienst.Size = new System.Drawing.Size(748, 365);
+            this.dgvDetailDienst.TabIndex = 13;
+            // 
+            // btnReturnToDienst
+            // 
+            this.btnReturnToDienst.AutoSize = true;
+            this.btnReturnToDienst.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.btnReturnToDienst.Location = new System.Drawing.Point(19, 29);
+            this.btnReturnToDienst.Name = "btnReturnToDienst";
+            this.btnReturnToDienst.Size = new System.Drawing.Size(157, 21);
+            this.btnReturnToDienst.TabIndex = 12;
+            this.btnReturnToDienst.Text = "Overzicht diensten";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Consulent";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Aantal aanmeldingen";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 200;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Gemiddelde wachttijd (dagen)";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 200;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.label25.Location = new System.Drawing.Point(181, 29);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(20, 21);
+            this.label25.TabIndex = 16;
+            this.label25.Text = ">";
+            // 
+            // btnAddConsulent
+            // 
+            this.btnAddConsulent.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.btnAddConsulent.Location = new System.Drawing.Point(608, 114);
+            this.btnAddConsulent.Name = "btnAddConsulent";
+            this.btnAddConsulent.Size = new System.Drawing.Size(158, 21);
+            this.btnAddConsulent.TabIndex = 17;
+            this.btnAddConsulent.Text = "Nieuwe Consulent";
+            this.btnAddConsulent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnAddConsulent.MouseEnter += new System.EventHandler(this.btnContainer_Hover);
+            this.btnAddConsulent.MouseLeave += new System.EventHandler(this.btnContainer_Hover);
+            // 
             // FrmMainNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1280,9 +1511,9 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(45)))), ((int)(((byte)(55)))));
             this.ClientSize = new System.Drawing.Size(969, 634);
-            this.Controls.Add(this.pnlNewAanmelding);
             this.Controls.Add(this.pnlDiensten);
             this.Controls.Add(this.pnlVoorzieningen);
+            this.Controls.Add(this.pnlNewAanmelding);
             this.Controls.Add(this.pnlStatistieken);
             this.Controls.Add(this.pnlMinderjarige);
             this.Controls.Add(this.pnlFooter);
@@ -1309,6 +1540,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.erpAanmelding)).EndInit();
             this.pnlFooter.ResumeLayout(false);
             this.pnlFooter.PerformLayout();
+            this.pnlDiensten.ResumeLayout(false);
+            this.pnlDiensten.PerformLayout();
             this.pnlVoorzieningen.ResumeLayout(false);
             this.pnlVoorzieningen.PerformLayout();
             this.pnlDetailVoorziening.ResumeLayout(false);
@@ -1320,6 +1553,10 @@
             this.pnlEditAanmelding.ResumeLayout(false);
             this.pnlEditAanmelding.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOverzichtMj)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDienstAlgemeen)).EndInit();
+            this.pnlDienstDetail.ResumeLayout(false);
+            this.pnlDienstDetail.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetailDienst)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1430,5 +1667,25 @@
         private System.Windows.Forms.Label lblDetailVAverageWachttijd;
         private System.Windows.Forms.Label lblDetailVAantal;
         private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label lblDienstGemiddeld;
+        private System.Windows.Forms.Label lblDienstAlgemeen;
+        private System.Windows.Forms.DataGridView dgvDienstAlgemeen;
+        private System.Windows.Forms.Label btnReturnToAlgemeenDienst;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmAlgemeenDienst;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmAlgemeenConsulenten;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmAlgemeenDienstAanmeldingen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmAlgemeenAverage;
+        private System.Windows.Forms.Label btnDetailDienst;
+        private System.Windows.Forms.Panel pnlDienstDetail;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label lblDetailDiensAverage;
+        private System.Windows.Forms.Label lblDetailDienstAanmelding;
+        private System.Windows.Forms.DataGridView dgvDetailDienst;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.Label btnReturnToDienst;
+        private System.Windows.Forms.Label btnDetailConsulent;
+        private System.Windows.Forms.Label btnAddConsulent;
     }
 }
